@@ -1,2 +1,2 @@
 # dotfiles
-All my settings (dotfiles)
+'Stow' the directories to use the settings
