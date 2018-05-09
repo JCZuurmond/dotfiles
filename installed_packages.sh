@@ -21,7 +21,8 @@ sudo apt-get install vim //
 	i3status //
 	i3//
     	python3.6 //
-	zathura
+	zathura //
+	ascpi  // 			# To see battery info
 
 
 pip3 install numpy //
