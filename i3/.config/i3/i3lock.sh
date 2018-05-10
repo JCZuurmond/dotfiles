@@ -30,10 +30,10 @@ case "$1" in
         lock && sudo pm-suspend
         ;;
     reboot)
-        sudo reboot
+        reboot
         ;;
     poweroff)
-        sudo poweroff
+        poweroff
         ;;
     *)
         echo "Usage: $0 {lock|logout|suspend|reboot|shutdown}"
