@@ -25,7 +25,7 @@ set $ws10 10:kappa
 workspace_auto_back_and_forth yes
 
 # for i3lock
-set $i3lock /home/don/.config/i3/i3lock.sh
+set $i3lock $HOME/.config/i3/i3lock.sh
 
 ####
 # Start up programs 
@@ -42,7 +42,8 @@ exec --no-startup-id redshift -l 52.35:4.87 -t 4000:3000
 exec --no-startup-id xautolock -time 10 -locker '$i3lock lock'
 #exec --no-startup-id xss-lock -- /home/don/.config/i3/i3lock.sh lock
 
-exec --no-startup-id i3-msg 'workspace $ws1; exec /usr/bin/firefox'
+exec --no-startup-id i3-msg 'workspace $ws1; exec /usr/bin/firefox; workspace $ws1'
+exec --no-startup-id i3-msg 'workspace $ws10; exec $HOME/.local/bin/telegram; workspace $ws1'
 
 #####
 ## Fn key combinations
@@ -60,6 +61,17 @@ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight +10
 # i3lock
 bindsym XF86Sleep exec --no-startup-id $i3lock suspend
 bindsym $mod+Escape exec --no-startup-id $i3lock lock
+
+####
+## Assign workspaces
+####
+
+assign [class="Firefox"] $ws1
+assign [class="Telegram"] $ws10
+
+####
+##
+####
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
