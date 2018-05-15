@@ -76,6 +76,9 @@ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight +10
 bindsym XF86Sleep exec --no-startup-id $i3lock suspend
 bindsym $mod+Escape exec --no-startup-id $i3lock lock
 
+# Open Zathura
+bindsym $mod+z exec --no-startup-id zathura
+
 ####
 ## Assign workspaces
 ####
