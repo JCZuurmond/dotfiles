@@ -24,6 +24,18 @@ set $ws9 9:lota
 set $ws10 10:kappa
 workspace_auto_back_and_forth yes
 
+# Second screen workspaces
+set $sws1 1:yi
+set $sws2 2:er
+set $sws3 3:san
+set $sws4 4:si
+set $sws5 5:wu
+set $sws6 6:liu
+set $sws7 7:qi
+set $sws8 8:ba
+set $sws9 9:jiu
+set $sws10 10:shi
+
 # for i3lock
 set $i3lock $HOME/.config/i3/i3lock.sh
 
@@ -44,6 +56,8 @@ exec --no-startup-id xautolock -time 10 -locker '$i3lock lock'
 
 exec --no-startup-id i3-msg 'workspace $ws1; exec /usr/bin/firefox; workspace $ws1'
 exec --no-startup-id i3-msg 'workspace $ws10; exec $HOME/.local/bin/telegram; workspace $ws1'
+
+exec i3 --force-xinerama -V >>~/.i3/i3log 2>&1
 
 #####
 ## Fn key combinations
@@ -68,6 +82,29 @@ bindsym $mod+Escape exec --no-startup-id $i3lock lock
 
 assign [class="Firefox"] $ws1
 assign [class="Telegram"] $ws10
+
+workspace $ws1 output eDP1
+workspace $ws2 output eDP1
+workspace $ws3 output eDP1
+workspace $ws4 output eDP1
+workspace $ws5 output eDP1
+workspace $ws6 output eDP1
+workspace $ws7 output eDP1
+workspace $ws8 output eDP1
+workspace $ws9 output eDP1
+workspace $ws10 output eDP1
+
+# Second work spaces use xrandr to find the screen name
+workspace $sws1 output DP1
+workspace $sws2 output DP1
+workspace $sws3 output DP1
+workspace $sws4 output DP1
+workspace $sws5 output DP1
+workspace $sws6 output DP1
+workspace $sws7 output DP1
+workspace $sws8 output DP1
+workspace $sws9 output DP1
+workspace $sws10 output DP1
 
 ####
 ##
@@ -177,6 +214,30 @@ bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
+
+# switch to workspace
+bindsym $mod+Control+1 workspace $sws1
+bindsym $mod+Control+2 workspace $sws2
+bindsym $mod+Control+3 workspace $sws3
+bindsym $mod+Control+4 workspace $sws4
+bindsym $mod+Control+5 workspace $sws5
+bindsym $mod+Control+6 workspace $sws6
+bindsym $mod+Control+7 workspace $sws7
+bindsym $mod+Control+8 workspace $sws8
+bindsym $mod+Control+9 workspace $sws9
+bindsym $mod+Control+0 workspace $sws10
+
+# move focused container to workspace
+bindsym $mod+Control+Shift+1 move container to workspace $sws1; workspace $sws1
+bindsym $mod+Control+Shift+2 move container to workspace $sws2; workspace $sws2
+bindsym $mod+Control+Shift+3 move container to workspace $sws3; workspace $sws3
+bindsym $mod+Control+Shift+4 move container to workspace $sws4; workspace $sws4
+bindsym $mod+Control+Shift+5 move container to workspace $sws5; workspace $sws5
+bindsym $mod+Control+Shift+6 move container to workspace $sws6; workspace $sws6
+bindsym $mod+Control+Shift+7 move container to workspace $sws7; workspace $sws7
+bindsym $mod+Control+Shift+8 move container to workspace $sws8; workspace $sws8
+bindsym $mod+Control+Shift+9 move container to workspace $sws9; workspace $sws9
+bindsym $mod+Control+Shift+0 move container to workspace $sws10; workspace $sws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
