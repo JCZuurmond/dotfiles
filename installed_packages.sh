@@ -25,7 +25,8 @@ sudo apt-get install vim //
 	ascpi  // 			# To see battery info
 	xdotools // 			# script to do stuff like moving mouse
 	cmake // 			# https://cmake.org/
-	pkg-config 
+	pkg-config //
+	dropbox
 
 pip3 install numpy //
 	scipy //
