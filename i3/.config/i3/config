@@ -55,7 +55,7 @@ exec --no-startup-id xautolock -time 10 -locker '$i3lock lock' -corners 000- -co
 #exec --no-startup-id xss-lock -- /home/don/.config/i3/i3lock.sh lock
 
 exec --no-startup-id i3-msg 'workspace $ws1; exec /usr/bin/firefox; workspace $ws1'
-exec --no-startup-id i3-msg 'workspace $ws10; exec $HOME/.local/bin/telegram; workspace $ws1'
+#exec --no-startup-id i3-msg 'workspace $ws10; exec $HOME/.local/bin/telegram; workspace $ws1'
 
 exec --no-startup-id i3 --force-xinerama -V >>~/.i3/i3log 2>&1
 
