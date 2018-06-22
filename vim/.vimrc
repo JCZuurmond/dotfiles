@@ -1,20 +1,12 @@
-"set runtimepath+=~/.vim_runtime
-
-"source ~/.vim_runtime/basic/vimrcs.vim
-"source ~/.vim_runtime/vimrcs/filetypes.vim
-"source ~/.vim_runtime/vimrcs/plugins_config.vim
-"source ~/.vim_runtime/vimrcs/extended.vim
-
-"try
-"source ~/.vim_runtime/my_configs.vim
-"catch
-"endtr
-
+"Vim package manager, install with:
+"curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin('~/.vim/plugged')
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
     Plug 'altercation/vim-colors-solarized'
     Plug 'nvie/vim-flake8'
+    Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 " Jump to the next field
@@ -30,9 +22,12 @@ set t_Co=16
 set background=dark
 colorscheme solarized
 
-
 " Set maximum line length to 80, spell, and line number on
-au BufRead,BufNewFile *.{py,md,markdown,mdown,mkd,mkdn,txt,tex,dot} setl tw=80 spell number tabstop=4 softtabstop=0 expandtab smarttab shiftwidth=4
+au BufRead,BufNewFile *.{py,md,markdown,sh,mdown,mkd,mkdn,txt,tex,dot} setl tw=80 spell number tabstop=4 softtabstop=0 expandtab smarttab shiftwidth=4
+"au BufRead,BufNewFile * setl tw=80 spell number tabstop=4 softtabstop=0 expandtab smarttab shiftwidth=4
+
+" Automatically remove trailing white spaces
+autocmd BufWritePre *.py %s/\s\+$//e
 
 "Practice to not use arrows
 nnoremap <Left> :echo "No left for you!"<CR>
@@ -47,7 +42,6 @@ inoremap <Up> <C-o>:echo "No up for you!"<CR>
 nnoremap <Down> :echo "No down for you!"<CR>
 vnoremap <Down> :<C-u>echo "No down for you!"<CR>
 inoremap <Down> <C-o>:echo "No down for you!"<CR>
-
 
 " disables error sounds
 set visualbell
