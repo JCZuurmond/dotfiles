@@ -53,6 +53,8 @@ pip3 install numpy //
 
 pip3.6 nbstripout
 
+pip2.7 install ssh-tunnel
+
 sudo apt-apt-repository ppa:webupd8team/atom
     ppa:atareao/telegram
     ppa:deadsnakes/ppa
