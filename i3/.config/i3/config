@@ -84,6 +84,10 @@ bindsym $mod+Escape exec --no-startup-id $i3lock lock
 # Open Zathura
 bindsym $mod+z exec --no-startup-id zathura
 
+# Screenshot
+bindsym --release Print exec "scrot -b -u ~/Downloads/scrot-$(date -Iseconds).png -e 'xclip -selection clipboard -t image/png -i $f'"
+bindsym --release Shift+Print exec "scrot -b -s ~/Downloads/scrot-$(date -Iseconds).png -e 'xclip -selection clipboard -t image/png -i $f'"
+
 ####
 ## Assign workspaces
 ####
