@@ -52,5 +52,8 @@ set visualbell
 :command W w
 :command Q q
 
+" Mapping
+map <F2> i<CR><ESC>
+
 " Set Docstring guide to Google 
 let g:ultisnips_python_style="google"
