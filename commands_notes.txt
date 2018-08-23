@@ -1,8 +1,2 @@
 # To automatically create a pdf from a Latex file when saving
 latexmk -bibtex -pdf -interaction=nonstopmode -pvc main.tex
-
-# print git tree in terminal
-git log --graph --pretty=oneline --abbrev-commit
-
-# Number of lines in csv
-cat filename.csv | xargs -l echo | wc -l
