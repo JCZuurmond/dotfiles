@@ -1,2 +1,0 @@
-# To automatically create a pdf from a Latex file when saving
-latexmk -bibtex -pdf -interaction=nonstopmode -pvc main.tex
