@@ -2,7 +2,8 @@ apt-get -y install vim //
 	redshift //
     stow //
     scrot //                 # screenshot
-    xclip                    # copy screenshot to clipboard
+    xclip //                   # copy screenshot to clipboard
+    zathura
 
 pip3 install --no-cache-dir flake8
 
