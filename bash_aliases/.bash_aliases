@@ -1,2 +1,2 @@
-alias count_lines='~/dotfiles/bin/count_lines.sh'
-alias second_screen='~/dotfiles/bin/secondary_screen.sh'
+alias count_lines='~/dotfiles/local/bin/count_lines.sh'
+alias second_screen='~/dotfiles/local/bin/secondary_screen.sh'
