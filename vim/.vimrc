@@ -7,12 +7,14 @@ call plug#begin('~/.vim/plugged')
     Plug 'altercation/vim-colors-solarized'
     Plug 'nvie/vim-flake8'
     Plug 'terryma/vim-multiple-cursors'
+    Plug 'tpope/vim-fugitive'
 call plug#end()
 
 " Jump to the next field
 let g:UltiSnipsExpandTrigger="<tab>" " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsEditSplit="vertical"
 
 "set color scheme to solarized
 syntax on
@@ -23,7 +25,7 @@ set background=dark
 colorscheme solarized
 
 " Set maximum line length to 80, spell, and line number on
-au BufRead,BufNewFile *.{py,md,markdown,sh,mdown,mkd,mkdn,txt,tex,dot} setl tw=79 spell number tabstop=4 softtabstop=0 expandtab smarttab shiftwidth=4
+au BufRead,BufNewFile *.{py,yml,md,markdown,sh,mdown,mkd,mkdn,txt,tex,dot} setl tw=79 spell number tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4
 "au BufRead,BufNewFile * setl tw=80 spell number tabstop=4 softtabstop=0 expandtab smarttab shiftwidth=4
 
 " Automatically remove trailing white spaces
@@ -57,3 +59,6 @@ map <F2> i<CR><ESC>
 
 " Set Docstring guide to Google 
 let g:ultisnips_python_style="google"
+
+" Diff opt vertical
+set diffopt=vertical
