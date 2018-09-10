@@ -39,22 +39,32 @@ set $sws10 10:shi
 # for i3lock
 set $i3lock $HOME/.config/i3/i3lock.sh
 
+# Set screens
+set $prim_screen eDP-1 --dpi 220
+set $sec_screen DP-3
+
 ####
 # Start up programs 
 ####
 
+# eDP1 as primary screen
+exec --no-startup-id xrandr --output $prim_screen --primary
+
 # Natural scroll
-#exec synclient VertScroll=-79 synclient HorizScroll=-79
+#exec --no-startup-id synclient VertScrollDelta=-79 HorizScrollDelta=-79 HorizTwoFingerScroll=1
+
+# Gnome settings
 exec --no-startup-id gnome-settings-daemon
 
-# start redshift
+# Start redshift
 exec --no-startup-id redshift -l 52.35:4.87 -t 4000:3000
 
 # i3lock
 exec --no-startup-id xautolock -time 10 -locker '$i3lock lock' -corners 000- -cornersize 100
+# Old i3lock
 #exec --no-startup-id xss-lock -- /home/don/.config/i3/i3lock.sh lock
 
-exec --no-startup-id i3-msg 'workspace $ws1; exec /usr/bin/firefox; workspace $ws1'
+# Telegram in last workspace
 #exec --no-startup-id i3-msg 'workspace $ws10; exec $HOME/.local/bin/telegram; workspace $ws1'
 
 exec --no-startup-id i3 --force-xinerama -V >>~/.i3/i3log 2>&1
@@ -62,7 +72,12 @@ exec --no-startup-id i3 --force-xinerama -V >>~/.i3/i3log 2>&1
 # Start network manager applet and make sure eDP1 is primary screen to show 
 # icon in the i3 status bar
 exec --no-startup-id nm-applet
-exec --no-startup-id xrandr --output eDP1 --primary
+
+# Keyboard settings
+exec --no-startup-id setxkbmap -variant altgr-intl -layout us -option lv3:ralt_switch -option compose:rctrl
+
+# Go to first work space
+exec --no-startup-id i3-msg 'workspace $ws1'
 
 #####
 ## Fn key combinations
@@ -93,7 +108,7 @@ bindsym --release Shift+Print exec "scrot -b -s ~/Downloads/scrot-$(date -Isecon
 ####
 
 assign [class="Firefox"] $ws1
-assign [class="Telegram"] $ws10
+assign [class="Slack"] $ws10
 
 workspace $ws1 output eDP1
 workspace $ws2 output eDP1
@@ -107,16 +122,16 @@ workspace $ws9 output eDP1
 workspace $ws10 output eDP1
 
 # Second work spaces use xrandr to find the screen name
-workspace $sws1 output DP1
-workspace $sws2 output DP1
-workspace $sws3 output DP1
-workspace $sws4 output DP1
-workspace $sws5 output DP1
-workspace $sws6 output DP1
-workspace $sws7 output DP1
-workspace $sws8 output DP1
-workspace $sws9 output DP1
-workspace $sws10 output DP1
+workspace $sws1 output $sec_screen
+workspace $sws2 output $sec_screen
+workspace $sws3 output $sec_screen
+workspace $sws4 output $sec_screen
+workspace $sws5 output $sec_screen
+workspace $sws6 output $sec_screen
+workspace $sws7 output $sec_screen
+workspace $sws8 output $sec_screen
+workspace $sws9 output $sec_screen
+workspace $sws10 output $sec_screen
 
 ####
 ##
@@ -307,9 +322,3 @@ bar {
         status_command i3status
         tray_output primary
 }
-
-
-
-
-
-
