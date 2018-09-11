@@ -40,8 +40,8 @@ set $sws10 10:shi
 set $i3lock $HOME/.config/i3/i3lock.sh
 
 # Set screens
-set $prim_screen eDP-1 --dpi 220
-set $sec_screen DP-3
+set $prim_screen eDP1 --dpi 220
+set $sec_screen DP1
 
 ####
 # Start up programs 
