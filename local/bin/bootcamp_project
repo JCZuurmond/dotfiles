@@ -1,0 +1,40 @@
+#!/bin/bash
+
+mkdir $1
+touch "$1/__main__.py"
+touch "$1/__init__.py"
+
+mkdir tests
+touch tests/__main__.py
+touch tests/__init__.py
+
+touch requirements.txt
+
+echo 'venv/
+.pytest_cache
+.idea
+__pycache__
+build/
+builds/
+dist/
+*.ipynb
+*.swp
+.pytest_cache/v/cache/nodeids' > .gitignore
+
+
+echo 'image: python:3.6
+
+stages:
+  - unittest
+
+test:
+  stage: unittest
+  script:
+    - pip3.6 install --upgrade pip
+    - pip3.6 install -r requirements.txt
+    - python setup.py develop
+    - pytest
+    - flake8 $1 --count' > .gitlab-ci.yml
+
+git add -A
+git commit -m 'set-up basic project structure'
