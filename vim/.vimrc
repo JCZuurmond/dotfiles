@@ -25,8 +25,7 @@ set background=dark
 colorscheme solarized
 
 " Set maximum line length to 80, spell, and line number on
-au BufRead,BufNewFile * setl spell tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4
-au BufRead,BufNewFile *.{py} setl number tw=79
+au BufRead,BufNewFile *.{py} setl number tw=79 spell tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4
 "au BufRead,BufNewFile * setl tw=80 spell number tabstop=4 softtabstop=0 expandtab smarttab shiftwidth=4
 
 " Automatically remove trailing white spaces
@@ -63,3 +62,6 @@ let g:ultisnips_python_style="google"
 
 " Diff opt vertical
 set diffopt=vertical
+
+" Toggle paste modus
+set pastetoggle=<F3>
