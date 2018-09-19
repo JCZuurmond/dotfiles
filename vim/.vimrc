@@ -66,6 +66,3 @@ set pastetoggle=<F3>
 
 " Diff opt vertical
 set diffopt=vertical
-
-" Toggle paste modus
-set pastetoggle=<F3>
