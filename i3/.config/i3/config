@@ -40,8 +40,12 @@ set $sws10 10:shi
 set $i3lock $HOME/.config/i3/i3lock.sh
 
 # Set screens
-set $prim_screen eDP1 --dpi 220
+# Home
+set $prim_screen eDP1
 set $sec_screen DP1
+# Work
+#set $prim_screen eDP-1 --dpi 220
+#set $sec_screen DP-3
 
 ####
 # Start up programs 
@@ -110,16 +114,16 @@ bindsym --release Shift+Print exec "scrot -b -s ~/Downloads/scrot-$(date -Isecon
 assign [class="Firefox"] $ws1
 assign [class="Slack"] $ws10
 
-workspace $ws1 output eDP1
-workspace $ws2 output eDP1
-workspace $ws3 output eDP1
-workspace $ws4 output eDP1
-workspace $ws5 output eDP1
-workspace $ws6 output eDP1
-workspace $ws7 output eDP1
-workspace $ws8 output eDP1
-workspace $ws9 output eDP1
-workspace $ws10 output eDP1
+workspace $ws1 output $prim_screen 
+workspace $ws2 output $prim_screen 
+workspace $ws3 output $prim_screen 
+workspace $ws4 output $prim_screen 
+workspace $ws5 output $prim_screen 
+workspace $ws6 output $prim_screen 
+workspace $ws7 output $prim_screen 
+workspace $ws8 output $prim_screen 
+workspace $ws9 output $prim_screen 
+workspace $ws10 output $prim_screen 
 
 # Second work spaces use xrandr to find the screen name
 workspace $sws1 output $sec_screen
