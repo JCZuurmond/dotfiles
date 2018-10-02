@@ -10,7 +10,7 @@ lock() {
     (( $# )) && { icon=$1; }
     
     scrot "$tmpbg"
-    convert "$tmpbg" -scale 5% -scale 2000% "$tmpbg"
+    convert "$tmpbg" -scale 3.2% -scale 3125% "$tmpbg"
     #convert "$tmpbg" "$icon" -gravity center -composite -matte "$tmpbg"
     i3lock -i "$tmpbg"
 }
