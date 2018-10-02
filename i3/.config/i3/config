@@ -114,6 +114,7 @@ bindsym --release Shift+Print exec "scrot -b -s ~/Downloads/scrot-$(date -Isecon
 ####
 
 assign [class="Firefox"] $ws1
+assign [class="Thunderbird"] $ws9
 assign [class="Slack"] $ws10
 
 workspace $ws1 output $prim_screen 
