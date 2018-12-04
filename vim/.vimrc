@@ -31,6 +31,8 @@ au BufRead,BufNewFile *.{py} setl number tw=79 spell tabstop=4 softtabstop=4 exp
 " Automatically remove trailing white spaces
 autocmd BufWritePre *.py %s/\s\+$//e
 
+au BufRead,BufNewFile *.{md} setl tw=79 spell 
+
 "Practice to not use arrows
 nnoremap <Left> :echo "No left for you!"<CR>
 vnoremap <Left> :<C-u>echo "No left for you!"<CR>
@@ -58,7 +60,7 @@ set visualbell
 map <F2> i<CR><ESC>
 
 " Set Docstring guide to Google 
-let g:ultisnips_python_style="google"
+let g:ultisnips_python_style="numpy"
 let g:ultisnips_python_quoting_style="single"
 
 " Toggle paste modus
