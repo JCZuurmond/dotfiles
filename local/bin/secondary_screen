@@ -26,16 +26,16 @@ case "$1" in
 		EXTERNAL_LOCATION="--below $INTERNAL_OUTPUT"
 		;;
 	*)
-		EXTERNAL_LOCATION="--left-of $INTERNAL_OUTPUT"
+		EXTERNAL_LOCATION="--right-of $INTERNAL_OUTPUT"
 		;;
 esac
-echo $EXTERNAL_LOCATION
 
-xrandr |grep $EXTERNAL_OUTPUT | grep " connected "
-if [ $? -eq 0 ]; then
-	xrandr --output $INTERNAL_OUTPUT --auto --output $EXTERNAL_OUTPUT --auto $EXTERNAL_LOCATION
-# Alternative command in case of trouble:
-# (sleep 2; xrandr --output $INTERNAL_OUTPUT --auto --output $EXTERNAL_OUTPUT --auto $EXTERNAL_LOCATION) &
+if [ $1 = "off" ]; then
+	xrandr --dpi 220 --output $INTERNAL_OUTPUT --mode 3840x2160 --output $EXTERNAL_OUTPUT --off
+elif xrandr | grep $EXTERNAL_OUTPUT | grep -q " connected "; then
+	echo 'connected'
+	xrandr --dpi 220 --output $INTERNAL_OUTPUT --mode 3840x2160 --output $EXTERNAL_OUTPUT --mode 1920x1080 --scale 2x2 $EXTERNAL_LOCATION --panning 3840x2160+3840+0
 else
-	xrandr --output $INTERNAL_OUTPUT --auto --output $EXTERNAL_OUTPUT --off
+	echo 'not connected'
+	xrandr --dpi 220 --output $INTERNAL_OUTPUT --mode 3840x2160 --output $EXTERNAL_OUTPUT --off
 fi
