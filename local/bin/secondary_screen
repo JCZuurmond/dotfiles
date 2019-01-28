@@ -32,6 +32,8 @@ esac
 
 if [ $1 = "off" ]; then
 	xrandr --dpi 220 --output $INTERNAL_OUTPUT --mode 3840x2160 --output $EXTERNAL_OUTPUT --off
+elif [ $1 = "mirror" ]; then
+	xrandr --dpi 220 --output $INTERNAL_OUTPUT --mode 3840x2160 --output $EXTERNAL_OUTPUT --mode 1920x1080 --scale 2x2 --same-as $INTERNAL_OUTPUT 
 elif xrandr | grep $EXTERNAL_OUTPUT | grep -q " connected "; then
 	echo 'connected'
 	xrandr --dpi 220 --output $INTERNAL_OUTPUT --mode 3840x2160 --output $EXTERNAL_OUTPUT --mode 1920x1080 --scale 2x2 $EXTERNAL_LOCATION --panning 3840x2160+3840+0
