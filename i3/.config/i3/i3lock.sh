@@ -4,7 +4,7 @@
 #BLURTYPE="0x6"
 
 lock() {
-    if [ "$(date +%a | egrep wo|fr)" ] && [ $(date +%H) -gt 15 ] ;
+    if [ "$(date +%a | egrep 'wo|fr')" ] && [ $(date +%H) -gt 15 ] ;
     then
     	icon="$HOME/.beer.png"
     elif [ iw dev | grep Heineken --quiet ]
