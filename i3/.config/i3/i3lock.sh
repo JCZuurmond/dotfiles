@@ -4,9 +4,13 @@
 #BLURTYPE="0x6"
 
 lock() {
-    if iw dev | grep Heineken --quiet; then
+    if [ "$(date +%a | grep wo)" ] && [ $(date +%H) -gt 15 ] ;
+    then
+    	icon="$HOME/.beer.png"
+    elif [ iw dev | grep Heineken --quiet ]
+    then
     	icon="$HOME/.lock_logo_advanced_analytics.png"
-    elif iw dev | grep Xebia --quiet 
+    elif [ iw dev | grep Xebia --quiet ]
     then
     	icon="$HOME/.lock_logo_xccelerated.png"
     elif [ $RANDOM -lt 16383 ] 
