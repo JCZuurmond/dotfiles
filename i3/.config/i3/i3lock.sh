@@ -4,7 +4,13 @@
 #BLURTYPE="0x6"
 
 lock() {
-    if [ $RANDOM -lt 16383 ]; then
+    if iw dev | grep Heineken --quiet; then
+    	icon="$HOME/.lock_logo_advanced_analytics.png"
+    elif iw dev | grep Xebia --quiet 
+    then
+    	icon="$HOME/.lock_logo_xccelerated.png"
+    elif [ $RANDOM -lt 16383 ] 
+    then
     	icon="$HOME/.lock_logo_xccelerated.png"
     else
     	icon="$HOME/.lock_logo_advanced_analytics.png"
