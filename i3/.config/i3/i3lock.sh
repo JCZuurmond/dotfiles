@@ -7,7 +7,7 @@ lock() {
     if [ "$(date +%a | egrep 'wo|fr')" ] && [ $(date +%H) -gt 15 ] ;
     then
     	icon="$HOME/.beer.png"
-    elif [ iw dev | grep Heineken --quiet ]
+    elif [ "$(iw dev | egrep 'GUEST1864|Heineken')" ] ;
     then
     	icon="$HOME/.lock_logo_advanced_analytics.png"
     elif [ iw dev | grep Xebia --quiet ]
