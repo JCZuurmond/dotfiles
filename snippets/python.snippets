@@ -1,0 +1,33 @@
+priority -50
+
+global !p
+
+SINGLE_QUOTES = "'"
+DOUBLE_QUOTES = '"'
+
+def get_quoting_style(snip):
+	style = snip.opt("g:ultisnips_python_quoting_style", "double")
+	if style == 'single':
+		return SINGLE_QUOTES
+	return DOUBLE_QUOTES
+
+endglobal
+
+###########################################################################
+#                            TEXTMATE SNIPPETS                            #
+###########################################################################
+
+snippet log_step "logging step useful for pandas dataframes"
+def log_step(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        logger = logging.getLogger(inspect.stack()[1].function)
+
+        tic = dt.datetime.now()
+        result = func(*args, **kwargs)
+        toc = str(dt.datetime.now() - tic)
+
+        logger.info(f`!p snip.rv = get_quoting_style(snip)`[{func.__name__}] shape={result.shape} time={toc}`!p snip.rv = get_quoting_style(snip)`)
+        return result
+    return wrapper
+endsnippet
