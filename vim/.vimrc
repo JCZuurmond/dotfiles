@@ -15,6 +15,7 @@ let g:UltiSnipsExpandTrigger="<tab>" " better key bindings for UltiSnipsExpandTr
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/dotfiles/snippets"]
 
 "set color scheme to solarized
 syntax on
