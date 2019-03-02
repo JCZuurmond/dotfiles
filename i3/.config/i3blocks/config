@@ -77,8 +77,8 @@ interval=10
 separator=false
 
 [wifi]
-#INTERFACE=wlp3s0
-label=wifi:
+#label=wifi 
+INTERFACE=wlp2s0
 interval=10
 separator=false
 
