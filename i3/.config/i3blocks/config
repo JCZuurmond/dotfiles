@@ -117,8 +117,11 @@ min_width=■■■■■
 # Date Time
 #
 [time]
-command=date '+%Y-%m-%d %H:%M:%S'
+label=⏱ 
+command=date '+%H:%M %Y-%m-%d'
 interval=5
+#separator=false
+#separator_block_width=2
 
 # Generic media player support
 #
