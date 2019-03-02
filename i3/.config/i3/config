@@ -327,6 +327,8 @@ bindsym $mod+Shift+e mode "$mode_system"
 # finds out, if available)
 bar {
 	position top
-	status_command SCRIPT_DIR=~/.config/i3blocks/ i3blocks
+	status_command SCRIPT_DIR=~/.config/i3blocks/ i3blocks -c ~/.config/i3blocks/config
+	# For debugging
+#  	status_command 2>/tmp/i3blocks.err SCRIPT_DIR=~/.config/i3blocks/ i3blocks -vvv -c ~/.config/i3blocks/config | tee /tmp/i3blocks.out
         tray_output primary
 }
