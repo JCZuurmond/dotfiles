@@ -36,8 +36,7 @@ markup=none
 # See the script for details.
 
 [volume]
-#label=♪
-label=VOL
+label=♪ 
 interval=once
 signal=10
 #STEP=5%
@@ -46,12 +45,12 @@ signal=10
 #
 # The type defaults to "mem" if the instance is not specified.
 [memory]
-label=MEM
+label=M 
 separator=false
 interval=30
 
 [memory]
-label=SWAP
+label=S 
 instance=swap
 separator=false
 interval=30
@@ -62,7 +61,7 @@ interval=30
 # The script may be called with a optional argument to set the alert
 # (defaults to 10 for 10%).
 [disk]
-label=HOME
+label=D 
 #DIR=/mnt/data
 interval=30
 
@@ -75,6 +74,7 @@ interval=30
 color=#00FF00
 interval=10
 separator=false
+separator_block_width=3
 
 [wifi]
 #label=wifi 
@@ -91,7 +91,7 @@ interval=5
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
 [cpu_usage]
-label=CPU
+label=CPU 
 interval=10
 min_width=CPU 100.00%
 #separator=false
