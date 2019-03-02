@@ -35,3 +35,6 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 # Termite:
 # https://askubuntu.com/questions/739163/how-to-install-termite
+
+# i3 blocks-contrib
+git clone https://github.com/vivien/i3blocks-contrib ~/.config/i3blocks
