@@ -25,11 +25,13 @@ set background=dark
 colorscheme solarized
 
 " Set maximum line length to 80, spell, and line number on
-au BufRead,BufNewFile *.{py,yml,md,markdown,sh,mdown,mkd,mkdn,txt,tex,dot} setl tw=79 spell number tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4
+au BufRead,BufNewFile *.{py} setl number tw=79 spell tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4
 "au BufRead,BufNewFile * setl tw=80 spell number tabstop=4 softtabstop=0 expandtab smarttab shiftwidth=4
 
 " Automatically remove trailing white spaces
 autocmd BufWritePre *.py %s/\s\+$//e
+
+au BufRead,BufNewFile *.{md} setl tw=79 spell 
 
 "Practice to not use arrows
 nnoremap <Left> :echo "No left for you!"<CR>
@@ -58,7 +60,7 @@ set visualbell
 map <F2> i<CR><ESC>
 
 " Set Docstring guide to Google 
-let g:ultisnips_python_style="google"
+let g:ultisnips_python_style="numpy"
 let g:ultisnips_python_quoting_style="single"
 
 " Toggle paste modus
