@@ -8,6 +8,7 @@ apt-get -y install vim /
     i3 \
     i3status \
     i3lock \
+    i3blocks \
     dmenu \
     xbacklight \
     gnome-settings-daemon \
