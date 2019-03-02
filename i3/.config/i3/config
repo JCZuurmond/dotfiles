@@ -41,14 +41,14 @@ set $i3lock $HOME/.config/i3/i3lock.sh
 
 # Set screens
 # Home
-#set $prim_screen eDP1
-#set $sec_screen DP1
-#set $dpi 
+set $prim_screen eDP1
+set $sec_screen DP1
+set $dpi 
 # Work
-set $dpi --dpi 220
-set $mode --mode 3840x2160
-set $prim_screen eDP-1 
-set $sec_screen DP-3
+#set $dpi --dpi 220
+#set $mode --mode 3840x2160
+#set $prim_screen eDP-1 
+#set $sec_screen DP-3
 
 ####
 # Start up programs 
