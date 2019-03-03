@@ -129,9 +129,10 @@ do
     fi
 
     if [[ "$BLOCK_BUTTON" -eq 1 ]]; then 
-        message="$message ${statuses[$i]} <span foreground=\"$color\">$squares</span>" 
+        #message="$message ${statuses[$i]} <span foreground=\"$color\">$squares</span>${remainings[i]}" 
+        message="<span foreground=\"$color\">$message ${statuses[$i]} ${remainings[i]}</span>" 
     fi
-    message="$message <span foreground=\"$color\">${percentages[$i]}%${remainings[i]}</span>⚡"
+    message="$message <span foreground=\"$color\">${percentages[$i]}%</span>⚡"
 done
 
 echo $message
