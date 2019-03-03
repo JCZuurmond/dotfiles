@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# Red color scheme used for percentages.
+
+PCT="${PERCENTAGE:-0}"
+
+if [ "$PCT" -gt 90 ]; then
+    echo "#FF0000"
+elif [ "$PCT" -gt 80 ]; then
+    echo "#FFAE00"
+elif [ "$PCT" -gt 70 ]; then
+    echo "#FFF600"
+fi
