@@ -70,7 +70,6 @@ PRINTF_COMMAND=printf "⇃%-1.1f ↿%1.1f %s/s\n", rx, wx, unit;
 [cpu_usage]
 label=⛭ 
 interval=10
-min_width=100%
 DECIMALS=0
 
 # Docker
