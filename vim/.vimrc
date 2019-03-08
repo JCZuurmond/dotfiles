@@ -19,9 +19,9 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/dotfiles/snippets"]
 
 "set color scheme to solarized
 syntax on
-let g:solarized_termcolors=256
+let g:solarized_termcolors=16
 let g:solarized_contrast="high"
-set t_Co=256
+set t_Co=16
 set background=dark
 colorscheme solarized
 
