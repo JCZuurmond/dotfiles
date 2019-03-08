@@ -25,6 +25,9 @@ set t_Co=16
 set background=dark
 colorscheme solarized
 
+" Settings for multiple cursors
+let g:multi_cursor_exit_from_insert_mode=0
+
 " Set maximum line length to 80, spell, and line number on
 au BufRead,BufNewFile *.{py} setl number tw=79 spell tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4
 au BufRead,BufNewFile *.{snippets} setl spell tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4
