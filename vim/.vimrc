@@ -2,7 +2,7 @@
 "curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin('~/.vim/plugged')
-    Plug 'SirVer/ultisnips'
+"    Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
     Plug 'altercation/vim-colors-solarized'
     Plug 'nvie/vim-flake8'
@@ -19,21 +19,22 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/dotfiles/snippets"]
 
 "set color scheme to solarized
 syntax on
-let g:solarized_termcolors=256
-let g:solarized_contrast="high"
-set t_Co=256
+let g:solarized_termcolors=16
+let g:solarized_contrast="low"
+set t_Co=16
 set background=dark
 colorscheme solarized
 
 " Set maximum line length to 80, spell, and line number on
-au BufRead,BufNewFile *.{py} setl number tw=79 spell tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4
+au BufRead,BufNewFile *.{py} setl number tw=79 tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4
 au BufRead,BufNewFile *.{snippets} setl spell tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4
+au BufRead,BufNewFile *.{md} setl tw=79 spell 
+au BufRead,BufNewFile *.{html} setl tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 
 "au BufRead,BufNewFile * setl tw=80 spell number tabstop=4 softtabstop=0 expandtab smarttab shiftwidth=4
 
 " Automatically remove trailing white spaces
 autocmd BufWritePre *.py %s/\s\+$//e
 
-au BufRead,BufNewFile *.{md} setl tw=79 spell 
 
 "Practice to not use arrows
 nnoremap <Left> :echo "No left for you!"<CR>
@@ -63,7 +64,7 @@ map <F2> i<CR><ESC>
 
 " Set Docstring guide to Google 
 let g:ultisnips_python_style="numpy"
-let g:ultisnips_python_quoting_style="single"
+let g:ultisnips_python_quoting_style="double"
 
 " Toggle paste modus
 set pastetoggle=<F3>
