@@ -1,0 +1,14 @@
+{
+  "keys": {
+    "command": {
+      "unbind": [
+        "0,0"
+      ],
+      "bind": {
+        "0,0": "jupyter-notebook:restart-kernel",
+        "9,9": "jupyter-notebook:restart-kernel-and-run-all-cells",
+        "8,8": "jupyter-notebook:clear-all-cells-output"
+      }
+    }
+  }
+}
