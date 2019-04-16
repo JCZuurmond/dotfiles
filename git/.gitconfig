@@ -1,6 +1,8 @@
 [user]
     name = Cor Zuurmond
-    email = corzuurmond@xccelerated.io
+
+[include]
+    path = ~/.gitconfig_email
 
 [core]
     # Non-Windows: change CRLF -> LF automatically
