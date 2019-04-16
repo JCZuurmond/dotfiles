@@ -74,3 +74,6 @@ set pastetoggle=<F3>
 
 " Diff opt vertical
 set diffopt=vertical
+
+" Short cuts for git (vim fugititve)
+nnoremap <space>gs :Gstatus<CR>
