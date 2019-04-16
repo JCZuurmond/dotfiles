@@ -9,7 +9,8 @@
     autocrlf = input
     # Ignore file permission changes
     filemode = false
-	editor = vim
+    editor = vim
+    excludesfile = ~/dotfiles/git/.gitignore
 
 [push]
     default = simple
