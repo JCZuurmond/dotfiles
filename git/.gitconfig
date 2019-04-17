@@ -1,8 +1,5 @@
-[user]
-    name = Cor Zuurmond
-
 [include]
-    path = ~/.gitconfig_email
+    path = ~/.gitconfig_user
 
 [core]
     # Non-Windows: change CRLF -> LF automatically
