@@ -24,5 +24,6 @@
     br = branch
     lg = log --graph --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+
 [commit]
-	verbose = true
+    verbose = true
