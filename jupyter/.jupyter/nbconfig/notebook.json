@@ -1,4 +1,9 @@
 {
+  "Cell": {
+    "cm_config": {
+      "lineNumbers": false
+    }
+  },
   "keys": {
     "command": {
       "unbind": [
