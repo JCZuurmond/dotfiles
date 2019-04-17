@@ -9,6 +9,7 @@ INTERNAL_OUTPUT="eDP-1"
 # Home
 #EXTERNAL_OUTPUT="DP1"
 #INTERNAL_OUTPUT="eDP1"
+
 # EXTERNAL_LOCATION may be one of: left, right, above, or below
 #EXTERNAL_LOCATION="left"
  
@@ -32,15 +33,15 @@ esac
 
 if [ $1 = "off" ]; 
 then
-	xrandr --dpi 220 --output $INTERNAL_OUTPUT --mode 3840x2160 --output $EXTERNAL_OUTPUT --off
+    xrandr --dpi 220 --output $INTERNAL_OUTPUT --mode 3840x2160 --output $EXTERNAL_OUTPUT --off
 elif [ $1 = "mirror" ];
 then
-	xrandr --dpi 220 --output $INTERNAL_OUTPUT --mode 3840x2160 --output $EXTERNAL_OUTPUT --mode 1920x1080 --scale 2x2 --same-as $INTERNAL_OUTPUT 
+    xrandr --dpi 220 --output $INTERNAL_OUTPUT --mode 3840x2160 --output $EXTERNAL_OUTPUT --mode 1920x1080 --scale 2x2 --same-as $INTERNAL_OUTPUT 
 elif xrandr | grep $EXTERNAL_OUTPUT | grep -q " connected "; 
 then
 	echo 'connected'
-	xrandr --dpi 220 --output $INTERNAL_OUTPUT --mode 3840x2160 --output $EXTERNAL_OUTPUT --mode 1920x1080 --scale 2x2 $EXTERNAL_LOCATION --panning 3840x2160+3840+0
+	xrandr --output $INTERNAL_OUTPUT --auto --output $EXTERNAL_OUTPUT $EXTERNAL_LOCATION 
 else
 	echo 'not connected'
-	xrandr --dpi 220 --output $INTERNAL_OUTPUT --mode 3840x2160 --output $EXTERNAL_OUTPUT --off
+	xrandr --output $INTERNAL_OUTPUT --auto --output $EXTERNAL_OUTPUT --off
 fi
