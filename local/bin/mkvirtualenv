@@ -1,0 +1,4 @@
+#!/bin/bash
+virtualenv -p /usr/bin/python3.6 venv
+./venv/bin/pip install jupyter pandas numpy matplotlib plotnine
+cp ~/.jupyter/nbconfig/notebook.json venv/etc/jupyter/nbconfig/
