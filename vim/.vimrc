@@ -19,13 +19,14 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/dotfiles/snippets"]
 
 "set color scheme to solarized
 syntax on
-let g:solarized_termcolors=256
+let g:solarized_termcolors=16
 let g:solarized_contrast="high"
-set t_Co=256
+set t_Co=16
 set background=dark
 colorscheme solarized
 
 " Set maximum line length to 80, spell, and line number on
+au BufRead,BufNewFile * setl tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4
 au BufRead,BufNewFile *.{py} setl number tw=79 spell tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4
 au BufRead,BufNewFile *.{snippets} setl spell tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4
 "au BufRead,BufNewFile * setl tw=80 spell number tabstop=4 softtabstop=0 expandtab smarttab shiftwidth=4

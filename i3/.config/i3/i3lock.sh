@@ -24,7 +24,7 @@ lock() {
     (( $# )) && { icon=$1; }
     
     scrot "$tmpbg"
-    convert "$tmpbg" -scale 3.2% -scale 3130% "$tmpbg"
+    convert "$tmpbg" -scale 3.2% -scale 3150% "$tmpbg"
     convert "$tmpbg" "$icon" -gravity center -composite -matte "$tmpbg"
     i3lock -i "$tmpbg"
 }
@@ -54,5 +54,4 @@ case "$1" in
         echo "Usage: $0 {lock|logout|suspend|reboot|shutdown}"
         exit 2
 esac
-.
 exit 0

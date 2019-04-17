@@ -44,6 +44,7 @@ set $i3lock $HOME/.config/i3/i3lock.sh
 #set $prim_screen eDP1
 #set $sec_screen DP1
 #set $dpi 
+
 # Work
 set $dpi --dpi 220
 set $mode --mode 3840x2160
@@ -91,8 +92,8 @@ exec --no-startup-id i3-msg 'workspace $ws1'
 ######
 
 # Adjust volume
-bindsym XF86AudioRaiseVolume exec --no-startup-id pulseaudio-ctl up && killall -SIGUSR1 i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pulseaudio-ctl down && killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pulseaudio-ctl up && pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume exec --no-startup-id pulseaudio-ctl down && pkill -SIGRTMIN+10 i3blocks
 bindsym XF86AudioMute exec --no-startup-id pulseaudio-ctl mute && killall -SIGUSR1 i3status
 
 ## Adjust brightness
@@ -327,6 +328,8 @@ bindsym $mod+Shift+e mode "$mode_system"
 # finds out, if available)
 bar {
 	position top
-        status_command i3status
+	status_command SCRIPT_DIR=~/.config/i3blocks/ i3blocks -c ~/.config/i3blocks/config
+	# For debugging
+#  	status_command 2>/tmp/i3blocks.err SCRIPT_DIR=~/.config/i3blocks/ i3blocks -vvv -c ~/.config/i3blocks/config | tee /tmp/i3blocks.out
         tray_output primary
 }
