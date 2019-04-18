@@ -31,3 +31,12 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 # Rstudio, check(?):
 # https://mikewilliamson.wordpress.com/2016/11/14/installing-r-studio-on-ubuntu-16-10/
+
+# Termite:
+# https://askubuntu.com/questions/739163/how-to-install-termite
+
+# i3 blocks, note install from github not from package manager!
+https://github.com/vivien/i3blocks
+
+# i3 blocks-contrib
+git clone https://github.com/vivien/i3blocks-contrib ~/.config/i3blocks
