@@ -63,5 +63,7 @@ def plot_count_null_col(df, col, exclude_cols=None):
         + p9.theme(axis_text_x=p9.element_text(rotation=45, hjust=1))
         + p9.ylim(0, 1)
         + p9.coord_flip()
+        + p9.labs(title='Number of missing values', x='category' y='height')
+        + p9.theme(figure_size=(10, 4))
     )
 endsnippet
