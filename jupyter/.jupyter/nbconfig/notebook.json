@@ -18,7 +18,14 @@
       "bind": {
         "0,0": "jupyter-notebook:restart-kernel",
         "9,9": "jupyter-notebook:restart-kernel-and-run-all-cells",
-        "8,8": "jupyter-notebook:clear-all-cells-output"
+        "8,8": "jupyter-notebook:clear-all-cells-output",
+        "shift-j": "jupyter-notebook:move-cell-down",
+        "shift-k": "jupyter-notebook:move-cell-up",
+        "r": "jupyter-notebook:change-cell-to-raw",
+        "m": "jupyter-notebook:change-cell-to-markdown",
+        "h": "jupyter-notebook:scroll-cell-top",
+        "m-k": "jupyter-notebook:merge-cell-with-previous-cell",
+        "m-j": "jupyter-notebook:merge-cell-with-next-cell"
       }
     }
   }
