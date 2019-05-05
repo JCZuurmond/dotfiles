@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#FILE=/tmp/screen_locked.png
-#BLURTYPE="0x6"
-
 lock() {
     if [ "$(date +%a | egrep 'wo|fr')" ] && [ $(date +%H) -gt 15 ] ;
     then
@@ -10,7 +7,7 @@ lock() {
     elif [ "$(iw dev | egrep 'GUEST1864|Heineken')" ] ;
     then
     	icon="$HOME/.lock_logo_advanced_analytics.png"
-    elif [ iw dev | grep Xebia --quiet ]
+    elif [ "$(iw dev | egrep 'Xebia')" ] ;
     then
     	icon="$HOME/.lock_logo_xccelerated.png"
     elif [ $RANDOM -lt 16383 ] 
