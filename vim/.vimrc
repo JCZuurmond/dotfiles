@@ -10,6 +10,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-fugitive'
 	Plug 'benmills/vimux'
 	Plug 'christoomey/vim-tmux-navigator'
+	Plug 'alfredodeza/pytest.vim'
 call plug#end()
 
 " Jump to the next field
