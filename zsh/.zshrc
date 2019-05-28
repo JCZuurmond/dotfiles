@@ -13,7 +13,7 @@ source $ZSH/oh-my-zsh.sh
 # Issue with backspace not working
 # https://askubuntu.com/questions/54145/how-to-fix-strange-backspace-behaviour-with-urxvt-zsh
 # https://github.com/thestinger/termite/issues/123
-TERM=xterm
+#TERM=xterm
 
 # History up-down arrow history search
 autoload -U up-line-or-beginning-search
