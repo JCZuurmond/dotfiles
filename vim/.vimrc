@@ -68,15 +68,15 @@ set visualbell
 " Rest of line to next line enter
 map <F2> i<CR><ESC>
 
-" Set Docstring guide to Google 
+" Set docstring guide to Numpy 
 let g:ultisnips_python_style="numpy"
 let g:ultisnips_python_quoting_style="double"
 
 " Toggle paste modus
 set pastetoggle=<F3>
 
-" Diff opt vertical
-set diffopt=vertical
+" Vertical split is preferred
+set diffopt+=vertical
 
 " Short cuts for git (vim fugititve)
 nnoremap <space>gs :Gstatus<CR>
