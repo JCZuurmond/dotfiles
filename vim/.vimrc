@@ -40,7 +40,6 @@ au BufRead,BufNewFile * setl spell tabstop=4 softtabstop=4 shiftwidth=4
 " Automatically remove trailing white spaces
 autocmd BufWritePre *.py %s/\s\+$//e
 
-
 "Practice to not use arrows
 nnoremap <Left> :echo "No left for you!"<CR>
 vnoremap <Left> :<C-u>echo "No left for you!"<CR>
