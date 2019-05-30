@@ -1,0 +1,29 @@
+[include]
+    path = ~/.gitconfig_user
+
+[core]
+    # Non-Windows: change CRLF -> LF automatically
+    autocrlf = input
+    # Ignore file permission changes
+    filemode = false
+    editor = vim
+    excludesfile = ~/dotfiles/git/.gitignore
+
+[push]
+    default = simple
+
+[color]
+    status = auto
+    ui = auto
+    interactive = auto
+
+[alias]
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
+    lg = log --graph --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+
+[commit]
+    verbose = true
