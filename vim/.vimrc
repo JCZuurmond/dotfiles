@@ -8,8 +8,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvie/vim-flake8'
     Plug 'terryma/vim-multiple-cursors'
     Plug 'tpope/vim-fugitive'
-	Plug 'benmills/vimux'
-	Plug 'christoomey/vim-tmux-navigator'
+    Plug 'benmills/vimux'
+    Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 " Jump to the next field
