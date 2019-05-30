@@ -34,7 +34,6 @@ esac
 if [ $1 = "off" ]; 
 then
 	xrandr --output $INTERNAL_OUTPUT --auto --output $EXTERNAL_OUTPUT --off
-elif xrandr | grep $EXTERNAL_OUTPUT | grep -q " connected "; then
 elif [ $1 = "mirror" ];
 then
 	xrandr --output $INTERNAL_OUTPUT --auto --output $EXTERNAL_OUTPUT --same-as $INTERNAL_OUTPUT 
