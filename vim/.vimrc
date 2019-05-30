@@ -32,11 +32,11 @@ let g:multi_cursor_exit_from_insert_mode=0
 
 if has("autocmd")
 	" File settings
-	au BufRead,BufNewFile *.{py} setl number tw=79 ts=4 sts=4 et sta
-	au BufRead,BufNewFile *.{snippets} setl spell ts=4 sts=4 et sta
+	au BufRead,BufNewFile *.{py} setl number tw=79 ts=4 sts=4 sw=4 et sta
+	au BufRead,BufNewFile *.{snippets} setl spell ts=4 sts=4 sw=4 et sta
 	au BufRead,BufNewFile *.{md} setl tw=79 spell 
-	au BufRead,BufNewFile *.{html} setl ts=2 sts=2 et sta
-	au BufRead,BufNewFile * setl spell ts=4 sts=4
+	au BufRead,BufNewFile *.{html} setl ts=2 sts=2 sw=2 et sta
+	au BufRead,BufNewFile * setl spell ts=4 sts=4 sw=4
 
 	" Automatically remove trailing white spaces
 	au BufWritePre *.py %s/\s\+$//e
