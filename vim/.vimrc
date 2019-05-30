@@ -83,3 +83,7 @@ nnoremap <space>gs :Gstatus<CR>
 
 " Set no expand tab for make files
 autocmd FileType make setl noexpandtab
+
+" Maintain undo history between sessions
+set undofile
+set undodir=~/.vim/undodir
