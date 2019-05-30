@@ -5,6 +5,7 @@ ZSH_THEME="gnzh"
 
 plugins=(
 	git
+	archive
 	extract
 )
 

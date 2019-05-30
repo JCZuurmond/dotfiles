@@ -16,6 +16,7 @@ lock() {
     else
     	icon="$HOME/.lock_logo_advanced_analytics.png"
     fi
+
     tmpbg='/tmp/screen.png'
     
     (( $# )) && { icon=$1; }
