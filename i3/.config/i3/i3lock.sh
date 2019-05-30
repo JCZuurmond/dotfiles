@@ -4,16 +4,30 @@
 #BLURTYPE="0x6"
 
 lock() {
-    #con="$HOME/.xlock/icon.png"
+    if [ "$(date +%a | egrep 'wo|fr')" ] && [ $(date +%H) -gt 15 ] ;
+    then
+    	icon="$HOME/.beer.png"
+    elif [ "$(iw dev | egrep 'GUEST1864|Heineken')" ] ;
+    then
+    	icon="$HOME/.lock_logo_advanced_analytics.png"
+    elif [ iw dev | grep Xebia --quiet ]
+    then
+    	icon="$HOME/.lock_logo_xccelerated.png"
+    elif [ $RANDOM -lt 16383 ] 
+    then
+    	icon="$HOME/.lock_logo_xccelerated.png"
+    else
+    	icon="$HOME/.lock_logo_advanced_analytics.png"
+    fi
     tmpbg='/tmp/screen.png'
     
     (( $# )) && { icon=$1; }
     
     scrot "$tmpbg"
-    convert "$tmpbg" -scale 3.2% -scale 3150% "$tmpbg"
-    #convert "$tmpbg" "$icon" -gravity center -composite -matte "$tmpbg"
+    convert "$tmpbg" -scale 3.2% -scale 3130% "$tmpbg"
     i3lock -i "$tmpbg"
 }
+
 
 case "$1" in
     lock)
@@ -39,5 +53,5 @@ case "$1" in
         echo "Usage: $0 {lock|logout|suspend|reboot|shutdown}"
         exit 2
 esac
-
+.
 exit 0
