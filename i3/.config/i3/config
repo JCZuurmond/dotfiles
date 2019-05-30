@@ -64,7 +64,7 @@ exec --no-startup-id xrandr $dpi --output $prim_screen --primary $mode
 exec --no-startup-id gnome-settings-daemon
 
 # Start redshift
-exec --no-startup-id redshift -l 52.35:4.87 -t 4000:3000 -b 0.7
+exec --no-startup-id redshift -l 52.35:4.87 -t 4000:3000 -b 0.9:0.7
 
 # i3lock
 exec --no-startup-id xautolock -time 10 -locker '$i3lock lock' -corners 000- -cornersize 100
