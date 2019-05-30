@@ -1,5 +1,6 @@
 #!/bin/bash
 
+<<<<<<< HEAD
 lock() {
     if [ "$(date +%a | egrep 'wo|fr')" ] && [ $(date +%H) -gt 15 ] ;
     then
