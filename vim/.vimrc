@@ -83,3 +83,6 @@ nnoremap <space>gs :Gstatus<CR>
 
 " Set no expand tab for make files
 autocmd FileType make setl noexpandtab
+
+" Save with `w!!` when 'readonly' is set
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
