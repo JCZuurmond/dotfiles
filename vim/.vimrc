@@ -11,6 +11,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'benmills/vimux'
 	Plug 'christoomey/vim-tmux-navigator'
 	Plug 'alfredodeza/pytest.vim'
+	Plug 'integralist/vim-mypy'
 call plug#end()
 
 " Jump to the next field
