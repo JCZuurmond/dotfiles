@@ -2,14 +2,15 @@
 "curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin('~/.vim/plugged')
-    Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
-    Plug 'altercation/vim-colors-solarized'
-    Plug 'nvie/vim-flake8'
-    Plug 'terryma/vim-multiple-cursors'
-    Plug 'tpope/vim-fugitive'
-    Plug 'benmills/vimux'
-    Plug 'christoomey/vim-tmux-navigator'
+	Plug 'SirVer/ultisnips'
+	Plug 'altercation/vim-colors-solarized'
+	Plug 'nvie/vim-flake8'
+	Plug 'terryma/vim-multiple-cursors'
+	Plug 'tpope/vim-fugitive'
+	Plug 'christoomey/vim-tmux-navigator'
+	Plug 'alfredodeza/pytest.vim'
+	Plug 'scrooloose/nerdtree'
+	Plug 'Xuyuanp/nerdtree-git-plugin'
 	Plug 'michaeljsmith/vim-indent-object'
 call plug#end()
 
@@ -18,7 +19,7 @@ let g:UltiSnipsExpandTrigger="<tab>" " better key bindings for UltiSnipsExpandTr
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/dotfiles/snippets"]
+let g:UltiSnipsSnippetDirectories=[$HOME."/dotfiles/snippets"]
 
 "set color scheme to solarized
 syntax on
@@ -33,17 +34,15 @@ let g:multi_cursor_exit_from_insert_mode=0
 
 if has("autocmd")
 	" File settings
-	au BufRead,BufNewFile *.{py} setl number tw=79 ts=4 sts=4 sw=4 et sta
-	au BufRead,BufNewFile *.{snippets} setl spell ts=4 sts=4 sw=4 et sta
+	au BufRead,BufNewFile *.{py} setl number tw=79 tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4
+	au BufRead,BufNewFile *.{snippets} setl spell tabstop=4 softtabstop=4 smarttab shiftwidth=4
 	au BufRead,BufNewFile *.{md} setl tw=79 spell 
-	au BufRead,BufNewFile *.{html} setl ts=2 sts=2 sw=2 et sta
-	au BufRead,BufNewFile * setl spell ts=4 sts=4 sw=4
+	au BufRead,BufNewFile *.{html} setl tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 
+	au BufRead,BufNewFile make setl noexpandtab 
+	au BufRead,BufNewFile * setl spell tabstop=4 softtabstop=4 shiftwidth=4
 
 	" Automatically remove trailing white spaces
 	au BufWritePre *.py %s/\s\+$//e
-
-	" Set no expand tab for make files
-	au FileType make setl noexpandtab
 endif
 
 "Practice to not use arrows
@@ -72,19 +71,34 @@ set visualbell
 " Rest of line to next line enter
 map <F2> i<CR><ESC>
 
-" Set Docstring guide to Google 
+" Set docstring guide to Numpy 
 let g:ultisnips_python_style="numpy"
 let g:ultisnips_python_quoting_style="double"
 
 " Toggle paste modus
 set pastetoggle=<F3>
 
-" Diff opt vertical
-set diffopt=vertical
+" Vertical split is preferred
+set diffopt+=vertical
 
 " Short cuts for git (vim fugititve)
 nnoremap <space>gs :Gstatus<CR>
+nnoremap <space>gp :Gpush<CR>
 
+" Save with `w!!` when 'readonly' is set
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
+
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
+
+" Pytest
+nmap <silent><Leader>tg :Pytest file<CR>
+nmap <silent><Leader>tf :Pytest function<CR>
+nmap <silent><Leader>tc :Pytest class<CR>
+nmap <silent><Leader>tm :Pytest method<CR>
 
 " Maintain undo history between sessions
 set undofile
@@ -102,3 +116,7 @@ highlight SpecialKey ctermfg=2
 
 " Move when buffers are hidden
 set hidden
+
+" NerdTree
+let NERDTreeShowHidden=1
+au vimenter * NERDTree

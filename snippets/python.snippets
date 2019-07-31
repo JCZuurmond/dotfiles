@@ -33,11 +33,6 @@ def log_step(func):
 endsnippet
 
 
-snippet --- "10 dashes"
-----------
-endsnippet
-
-
 snippet plot_count_null_col "plotnine script to plot the number of null values"
 def plot_count_null_col(df, col, exclude_cols=None):
     exclude_cols = exclude_cols or []
@@ -74,4 +69,8 @@ endsnippet
 
 snippet inp "import numpy as np"
 import numpy as np
+endsnippet
+
+snippet pdb "set pdb trace"
+__import__('pdb').set_trace()
 endsnippet
