@@ -85,3 +85,9 @@ autocmd FileType make setl noexpandtab
 
 " Save with `w!!` when 'readonly' is set
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
+
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
