@@ -35,11 +35,11 @@ au BufRead,BufNewFile *.{py} setl number tw=79 tabstop=4 softtabstop=4 expandtab
 au BufRead,BufNewFile *.{snippets} setl spell tabstop=4 softtabstop=4 smarttab shiftwidth=4
 au BufRead,BufNewFile *.{md} setl tw=79 spell 
 au BufRead,BufNewFile *.{html} setl tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 
+au BufRead,BufNewFile make setl noexpandtab 
 au BufRead,BufNewFile * setl spell tabstop=4 softtabstop=4 shiftwidth=4
 
 " Automatically remove trailing white spaces
 autocmd BufWritePre *.py %s/\s\+$//e
-
 
 "Practice to not use arrows
 nnoremap <Left> :echo "No left for you!"<CR>
@@ -79,9 +79,6 @@ set diffopt+=vertical
 
 " Short cuts for git (vim fugititve)
 nnoremap <space>gs :Gstatus<CR>
-
-" Set no expand tab for make files
-autocmd FileType make setl noexpandtab
 
 " Save with `w!!` when 'readonly' is set
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
