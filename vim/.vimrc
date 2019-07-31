@@ -2,11 +2,11 @@
 "curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin('~/.vim/plugged')
-    Plug 'SirVer/ultisnips'
-    Plug 'altercation/vim-colors-solarized'
-    Plug 'nvie/vim-flake8'
-    Plug 'terryma/vim-multiple-cursors'
-    Plug 'tpope/vim-fugitive'
+	Plug 'SirVer/ultisnips'
+	Plug 'altercation/vim-colors-solarized'
+	Plug 'nvie/vim-flake8'
+	Plug 'terryma/vim-multiple-cursors'
+	Plug 'tpope/vim-fugitive'
 	Plug 'christoomey/vim-tmux-navigator'
 	Plug 'alfredodeza/pytest.vim'
 	Plug 'integralist/vim-mypy'
