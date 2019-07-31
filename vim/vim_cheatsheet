@@ -1,0 +1,55 @@
+# Undo and redo
+
+undo --> u (normal mode) or :u (command mode)
+redo --> Ctrl-r (normal mode) or :red[o] (command mode)
+
+Or
+
+:earlier 2d (go back two days)
+:ea 2m (go back two minutes)
+:later 10s (go forward 10 seconds)
+:lat 3f (go forward three buffer writes)
+
+# Macros
+1. Create register. For example register "a" by running `qa`.
+2. Type your commands
+3. Stop with `q`.
+4. Run register:
+	- @a
+	- @@ (last register)
+	- 3@a (run three times)
+
+## Edit macros
+1. Print macro "a": `"ap`
+2. Edit macro accordingly.
+3. Copy macro into "b" when cursor at the beginning of the line: `"by$`
+
+## Empty macro
+Empty macro "a": `qaq`.
+
+## Other stuff
+- execute macro on some lines: `:6,16norm @v`
+- to end of file: `:10,$notm @i`
+- all lines: `%norm @m`
+- all lines with pattern: `g/pattern/norm @o`
+- In visual mode
+- next 100 lines: `.,+99norm @a`
+
+# Buffers
+Run command in buffers `:bufdo`
+Example:
+	- quit and save all buffers `:bufdo wq`
+	- or `wqa`
+
+# Args
+1. All files containing a 'Bad' in args: `:args `git grep -l Bad``
+2. Replace 'Bad' with 'Good': `:argdo %s/Bad/Good/gc | update`
+
+# Get last visual selection back
+1. Select something.
+2. Unselect.
+3. Get the select back with `gv`.
+
+# Moving around
+1. To next method `]m` or previous `[m`
+2. To next buffer `bn` or previous `bp`
