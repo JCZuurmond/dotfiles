@@ -252,6 +252,8 @@ def write_function_docstring(t, snip):
 	args = get_args(t[2])
 	if args:
 		write_docstring_args(args, snip)
+	else:
+		snip += snip.mkline('', indent='')
 
 	style = get_style(snip)
 
