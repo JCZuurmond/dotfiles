@@ -10,13 +10,7 @@ lock() {
     elif [ "$(iw dev | egrep 'Xebia')" ] ;
     then
     	icon="$HOME/.lock_logo_xccelerated.png"
-    elif [ $RANDOM -lt 16383 ] 
-    then
-    	icon="$HOME/.lock_logo_xccelerated.png"
-    else
-    	icon="$HOME/.lock_logo_advanced_analytics.png"
     fi
-
     tmpbg='/tmp/screen.png'
     
     (( $# )) && { icon=$1; }
