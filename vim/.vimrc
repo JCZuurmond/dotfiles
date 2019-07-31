@@ -88,3 +88,9 @@ nmap <leader>l :set list!<CR>
 
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
+
+" Pytest
+nmap <silent><Leader>tg :Pytest file<CR>
+nmap <silent><Leader>tf :Pytest function<CR>
+nmap <silent><Leader>tc :Pytest class<CR>
+nmap <silent><Leader>tm :Pytest method<CR>
