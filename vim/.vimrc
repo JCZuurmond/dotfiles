@@ -9,6 +9,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'tpope/vim-fugitive'
 	Plug 'christoomey/vim-tmux-navigator'
 	Plug 'alfredodeza/pytest.vim'
+	Plug 'scrooloose/nerdtree'
+	Plug 'Xuyuanp/nerdtree-git-plugin'
 call plug#end()
 
 " Jump to the next field
@@ -94,3 +96,7 @@ nmap <silent><Leader>tg :Pytest file<CR>
 nmap <silent><Leader>tf :Pytest function<CR>
 nmap <silent><Leader>tc :Pytest class<CR>
 nmap <silent><Leader>tm :Pytest method<CR>
+
+" NerdTree
+let NERDTreeShowHidden=1
+au vimenter * NERDTree
