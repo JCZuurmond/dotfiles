@@ -32,7 +32,7 @@ let g:multi_cursor_exit_from_insert_mode=0
 
 " File settings
 au BufRead,BufNewFile *.{py} setl number tw=79 tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4
-au BufRead,BufNewFile *.{snippets} setl spell tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4
+au BufRead,BufNewFile *.{snippets} setl spell tabstop=4 softtabstop=4 smarttab shiftwidth=4
 au BufRead,BufNewFile *.{md} setl tw=79 spell 
 au BufRead,BufNewFile *.{html} setl tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 
 au BufRead,BufNewFile * setl spell tabstop=4 softtabstop=4 shiftwidth=4
