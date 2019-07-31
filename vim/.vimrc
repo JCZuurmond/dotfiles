@@ -3,12 +3,10 @@
 "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin('~/.vim/plugged')
     Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
     Plug 'altercation/vim-colors-solarized'
     Plug 'nvie/vim-flake8'
     Plug 'terryma/vim-multiple-cursors'
     Plug 'tpope/vim-fugitive'
-	Plug 'benmills/vimux'
 	Plug 'christoomey/vim-tmux-navigator'
 	Plug 'alfredodeza/pytest.vim'
 	Plug 'integralist/vim-mypy'
@@ -19,7 +17,7 @@ let g:UltiSnipsExpandTrigger="<tab>" " better key bindings for UltiSnipsExpandTr
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/dotfiles/snippets"]
+let g:UltiSnipsSnippetDirectories=[$HOME."/dotfiles/snippets"]
 
 "set color scheme to solarized
 syntax on
