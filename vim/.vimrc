@@ -99,3 +99,6 @@ set listchars=tab:▸\ ,eol:¬
 "Invisible character colors 
 highlight NonText ctermfg=2
 highlight SpecialKey ctermfg=2
+
+" Move when buffers are hidden
+set hidden
