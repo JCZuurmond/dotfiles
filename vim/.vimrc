@@ -78,6 +78,7 @@ set diffopt+=vertical
 
 " Short cuts for git (vim fugititve)
 nnoremap <space>gs :Gstatus<CR>
+nnoremap <space>gp :Gpush<CR>
 
 " Save with `w!!` when 'readonly' is set
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
