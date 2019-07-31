@@ -43,6 +43,9 @@ if has("autocmd")
 
 	" Automatically remove trailing white spaces
 	au BufWritePre *.py %s/\s\+$//e
+
+	" Open NERD tree on opening vim
+	au vimenter * NERDTree
 endif
 
 "Practice to not use arrows
@@ -119,4 +122,3 @@ set hidden
 
 " NerdTree
 let NERDTreeShowHidden=1
-au vimenter * NERDTree
