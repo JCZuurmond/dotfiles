@@ -215,7 +215,6 @@ def write_numpy_docstring_args(args, snip):
 		for kwarg in kwargs:
 			snip += format_arg(kwarg, NUMPY) 
 			snip += '    TODO'
-	snip.rv += '\n' + snip.mkline('', indent='')
 
 
 def write_init_body(args, parents, snip):
@@ -258,9 +257,11 @@ def write_function_docstring(t, snip):
 	style = get_style(snip)
 
 	if style == NUMPY:
-		snip += 'Returns'
-		snip += '-------'
-		snip += 'TODO'
+		if t[3] != 'None':
+			snip += snip.mkline('', indent='')
+			snip += 'Returns'
+			snip += '-------'
+			snip += '%s : TODO' % t[3]
 	else:
 		snip += format_return(style)
 	snip += triple_quotes(snip)
@@ -515,7 +516,7 @@ endsnippet
 snippet def "function with docstrings" b
 def ${1:function}(`!p
 if snip.indent:
-	snip.rv = 'self' + (", " if len(t[2]) else "")`${2:arg1}):
+	snip.rv = 'self' + (", " if len(t[2]) else "")`${2:arg1}) -> ${3:None}:
 	`!p snip.rv = triple_quotes(snip)` 
 	${4:TODO: Docstring for $1.}`!p write_function_docstring(t, snip) `
 	${5:${VISUAL:pass}}
