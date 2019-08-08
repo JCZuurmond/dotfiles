@@ -73,8 +73,23 @@ class Arg(object):
 		return self.type is not None 
 
 
+def _parse_arg_list(args):
+	parsed_args = []
+	for i in range(len(args)):
+		if ']' in args[i]:
+			continue
+		elif i == len(args) - 1:
+			parsed_args.append(args[i])
+		elif '[' in args[i] and ']' in args[i + 1]:
+			parsed_args.append(args[i] + args[i + 1])
+		else:
+			parsed_args.append(args[i])
+	return parsed_args
+
+
 def get_args(arglist):
-	args = [Arg(arg) for arg in arglist.split(',') if arg]
+	args = _parse_arg_list(arglist.split(','))
+	args = [Arg(arg) for arg in args if arg]
 	args = [arg for arg in args if arg.name != 'self']
 
 	return args
