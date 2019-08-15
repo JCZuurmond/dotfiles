@@ -12,6 +12,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'scrooloose/nerdtree'
 	Plug 'Xuyuanp/nerdtree-git-plugin'
 	Plug 'michaeljsmith/vim-indent-object'
+	Plug 'tpope/vim-git'
 call plug#end()
 
 " Jump to the next field
