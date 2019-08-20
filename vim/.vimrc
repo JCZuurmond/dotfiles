@@ -46,6 +46,9 @@ if has("autocmd")
 	au BufWritePre *.py %s/\s\+$//e
 endif
 
+" Underline misspelled words
+:hi SpellBad cterm=underline
+
 "Practice to not use arrows
 nnoremap <Left> :echo "No left for you!"<CR>
 vnoremap <Left> :<C-u>echo "No left for you!"<CR>
