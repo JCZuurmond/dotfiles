@@ -127,3 +127,6 @@ set hidden
 " NerdTree
 let NERDTreeShowHidden=1
 nnoremap <Leader>nt :NERDTree<CR>
+
+" Enable project specific vimrc
+set exrc
