@@ -44,6 +44,9 @@ if has("autocmd")
 
 	" Automatically remove trailing white spaces
 	au BufWritePre *.py %s/\s\+$//e
+
+	" Set scripts to be executable from the shell
+	au BufWritePost * if getline(1) =~ "^#!" | silent !chmod +x % | endif
 endif
 
 " Underline misspelled words
