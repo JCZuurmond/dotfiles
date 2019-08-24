@@ -81,7 +81,7 @@ def _parse_arg_list(args):
 		elif i == len(args) - 1:
 			parsed_args.append(args[i])
 		elif '[' in args[i] and ']' in args[i + 1]:
-			parsed_args.append(args[i] + args[i + 1])
+			parsed_args.append(','.join(args[i: i+2]))
 		else:
 			parsed_args.append(args[i])
 	return parsed_args
