@@ -111,3 +111,9 @@ setuptools.setup(
     extras_require=extra_requirements,
 )
 endsnippet
+
+snippet @fix "Pytest fixture"
+@pytest.fixture
+def ${1}():
+	${2:pass}
+endsnippet
