@@ -53,3 +53,7 @@ Example:
 # Moving around
 1. To next method `]m` or previous `[m`
 2. To next buffer `bn` or previous `bp`
+
+# Page up and down
+<Ctrl> + b : Page Up
+<Ctrl> + f : Page Down
