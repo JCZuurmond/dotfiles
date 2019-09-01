@@ -74,3 +74,46 @@ endsnippet
 snippet pdb "set pdb trace"
 __import__('pdb').set_trace()
 endsnippet
+
+snippet setup "Setup for project"
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""The setup script."""
+
+
+import setuptools
+
+
+with open('README.md') as readme_file:
+    readme = readme_file.read()
+
+
+requirements = []
+setup_requirements = []
+test_requirements = ['pytest']
+extra_requirements = {}
+
+
+setuptools.setup(
+    name='$1',
+    author='$2',
+    author_email='$3',
+    description='$4',
+    url='TODO',
+    license='Open source',
+    packages=setuptools.find_packages($1),
+    version='0.1.0',
+    install_requires=requirements,
+    setup_requires=setup_requirements,
+    test_suite='tests',
+    tests_require=test_requirements,
+    extras_require=extra_requirements,
+)
+endsnippet
+
+snippet @fix "Pytest fixture"
+@pytest.fixture
+def ${1}():
+	${2:pass}
+endsnippet
