@@ -158,7 +158,7 @@ def format_arg(arg, style):
 	elif style == JEDI:
 		return ":type %s: TODO" % arg
 	elif style == NUMPY:
-		type_ = f' : {arg.type}' if arg.is_typed() else ''
+		type_ = ' : %s' % arg.type if arg.is_typed() else ''
 		out =  "%s%s" % (arg, type_)
 		if arg.is_kwarg(): 
 			out +=  ', optional (default : %s)' % arg.default
