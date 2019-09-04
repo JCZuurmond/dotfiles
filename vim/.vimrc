@@ -3,7 +3,6 @@
 "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin('~/.vim/plugged')
 	Plug 'SirVer/ultisnips'
-	Plug 'altercation/vim-colors-solarized'
 	Plug 'nvie/vim-flake8'
 	Plug 'terryma/vim-multiple-cursors'
 	Plug 'tpope/vim-fugitive'
@@ -13,6 +12,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'Xuyuanp/nerdtree-git-plugin'
 	Plug 'michaeljsmith/vim-indent-object'
 	Plug 'tpope/vim-git'
+	Plug 'sheerun/vim-polyglot'
+	Plug 'trevordmiller/nova-vim'
 call plug#end()
 
 " Jump to the next field
@@ -24,18 +25,14 @@ let g:UltiSnipsSnippetDirectories=[$HOME."/dotfiles/snippets"]
 
 "set color scheme to solarized
 syntax on
-let g:solarized_termcolors=16
-let g:solarized_contrast="high"
-set t_Co=16
-set background=dark
-colorscheme solarized
+colorscheme nova
 
 " Settings for multiple cursors
 let g:multi_cursor_exit_from_insert_mode=0
 
 if has("autocmd")
 	" File settings
-	au BufRead,BufNewFile *.{py} setl number tw=79 tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4 indentkeys-=<:>
+	au BufRead,BufNewFile *.{py} setl number tw=79 tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4 indentkeys-=<:> ruler
 	au BufRead,BufNewFile *.{snippets} setl spell tabstop=4 softtabstop=4 smarttab shiftwidth=4
 	au BufRead,BufNewFile *.{md} setl tw=79 spell 
 	au BufRead,BufNewFile *.{html} setl tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 
@@ -44,10 +41,13 @@ if has("autocmd")
 
 	" Automatically remove trailing white spaces
 	au BufWritePre *.py %s/\s\+$//e
+
+	" Set scripts to be executable from the shell
+	au BufWritePost * if getline(1) =~ "^#!" | silent !chmod +x % | endif
 endif
 
 " Underline misspelled words
-:hi SpellBad cterm=underline
+:hi SpellBad cterm=underline ctermbg=None
 
 "Practice to not use arrows
 nnoremap <Left> :echo "No left for you!"<CR>
@@ -114,9 +114,6 @@ set undodir="$HOME/.vim/undodir"
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
-" Use the same symbols as TextMate for tabstops and EOLs
-set listchars=tab:▸\ ,eol:¬
-
 "Invisible character colors 
 highlight NonText ctermfg=2
 highlight SpecialKey ctermfg=2
@@ -127,3 +124,6 @@ set hidden
 " NerdTree
 let NERDTreeShowHidden=1
 nnoremap <Leader>nt :NERDTree<CR>
+
+" Enable project specific vimrc
+set exrc
