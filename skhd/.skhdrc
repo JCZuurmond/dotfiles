@@ -273,3 +273,10 @@ ctrl + alt - s : chunkc tiling::desktop --layout monocle
 ctrl + alt - d : chunkc tiling::desktop --layout float
 
 ctrl + alt - w : chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/dev_1
+
+# Open applications
+ctrl - f : open -a firefox
+ctrl - b : open -a "Basecamp 3"
+ctrl - m : open -a mail
+ctrl - s : open -a Slack
+ctrl - t : open -a iTerm
