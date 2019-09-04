@@ -1,5 +1,6 @@
 [include]
     path = ~/.gitconfig_user
+    path = ~/.gitconfig_colors
 
 [core]
     # Non-Windows: change CRLF -> LF automatically
