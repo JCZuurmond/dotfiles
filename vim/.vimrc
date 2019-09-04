@@ -13,6 +13,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'Xuyuanp/nerdtree-git-plugin'
 	Plug 'michaeljsmith/vim-indent-object'
 	Plug 'tpope/vim-git'
+	Plug 'sheerun/vim-polyglot'
+	Plug 'trevordmiller/nova-vim'
 call plug#end()
 
 " Jump to the next field
@@ -24,11 +26,7 @@ let g:UltiSnipsSnippetDirectories=[$HOME."/dotfiles/snippets"]
 
 "set color scheme to solarized
 syntax on
-let g:solarized_termcolors=256
-let g:solarized_contrast="high"
-set t_Co=256
-set background=dark
-colorscheme solarized
+colorscheme nova
 
 " Settings for multiple cursors
 let g:multi_cursor_exit_from_insert_mode=0
@@ -50,7 +48,7 @@ if has("autocmd")
 endif
 
 " Underline misspelled words
-:hi SpellBad cterm=underline
+:hi SpellBad cterm=underline ctermbg=None
 
 "Practice to not use arrows
 nnoremap <Left> :echo "No left for you!"<CR>
