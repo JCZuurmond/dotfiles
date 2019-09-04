@@ -114,9 +114,6 @@ set undodir="$HOME/.vim/undodir"
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
-" Use the same symbols as TextMate for tabstops and EOLs
-set listchars=tab:▸\ ,eol:¬
-
 "Invisible character colors 
 highlight NonText ctermfg=2
 highlight SpecialKey ctermfg=2
