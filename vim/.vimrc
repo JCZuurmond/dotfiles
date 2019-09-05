@@ -110,8 +110,8 @@ nmap <silent><Leader>tm :Pytest method<CR>
 
 " Maintain undo history between sessions
 set undofile
-if !isdirectory("$HOME/.vim/undodir")
-	call mkdir("$HOME/.vim/undodir", "p")
+if !isdirectory($HOME."/.vim/undodir")
+	call mkdir($HOME."/.vim/undodir", "p")
 endif
 set undodir="$HOME/.vim/undodir"
 
