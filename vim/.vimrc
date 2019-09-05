@@ -71,10 +71,10 @@ inoremap <Down> <C-o>:echo "No down for you!"<CR>
 set visualbell
 
 " Map capitals to lower case
-:command WQ wq
-:command Wq wq
-:command W w
-:command Q q
+:command! WQ wq
+:command! Wq wq
+:command! W w
+:command! Q q
 
 " Rest of line to next line enter
 map <F2> i<CR><ESC>
