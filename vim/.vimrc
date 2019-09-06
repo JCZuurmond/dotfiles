@@ -52,6 +52,7 @@ endif
 
 " Underline misspelled words
 :hi SpellBad cterm=underline ctermbg=None
+:hi Error cterm=underline ctermbg=None
 
 "Practice to not use arrows
 nnoremap <Left> :echo "No left for you!"<CR>
