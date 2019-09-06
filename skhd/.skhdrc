@@ -64,19 +64,6 @@
 #                                   prepend '\' at the end of the previous line.
 #
 #                                   an EOL character signifies the end of the bind.
-
-# add an on_enter command to the default mode
-# :: default : chunkc border::color 0xff775759
-#
-# defines a new mode 'test' with an on_enter command, that captures keypresses
-# :: test @ : chunkc border::color 0xff24ccaa
-#
-# from 'default' mode, activate mode 'test'
-# cmd - x ; test
-#
-# from 'test' mode, activate mode 'default'
-# test < cmd - x ; default
-#
 # launch a new terminal instance when in either 'default' or 'test' mode
 # default, test < cmd - return : open -na /Applications/Terminal.app
 
@@ -104,6 +91,18 @@
 #    "terminal"
 #    "qutebrowser"
 # ]
+
+# add an on_enter command to the default mode
+:: default : chunkc border::color 0xff775759
+
+# defines a new mode 'resize' with an on_enter command, that captures keypresses
+:: resize @ : chunkc border::color 0xff24ccaa
+
+# from 'default' mode, activate mode 'resize'
+alt - r ; resize
+
+# from 'resize' mode, activate mode 'default'
+resize < escape ; default
 
 # close focused window
 alt - w : chunkc tiling::window --close
