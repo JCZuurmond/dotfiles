@@ -110,11 +110,11 @@ nmap <silent><Leader>tc :Pytest class<CR>
 nmap <silent><Leader>tm :Pytest method<CR>
 
 " Maintain undo history between sessions
-set undofile
 if !isdirectory($HOME."/.vim/undodir")
 	call mkdir($HOME."/.vim/undodir", "p")
 endif
-set undodir="$HOME/.vim/undodir"
+set undofile
+set undodir=~/.vim/undodir
 
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
