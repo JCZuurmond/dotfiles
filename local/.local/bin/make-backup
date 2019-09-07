@@ -1,3 +1,3 @@
 #/usr/bin/bash
 NOW=$(date +"%Y%m%d")
-tar czf ~/Downloads/$NOW_backup.tar.gz --exclude=backup_$NOW.tar.gz --exclude=~/Downloads --exclude=~/Projects ~/
+tar vczf /home/don/Downloads/"$NOW"_backup.tar.gz --exclude=backup_$NOW.tar.gz --exclude=/home/don/Downloads --exclude=/home/don/Projects --exclude=/home/don/.*  /home/don/
