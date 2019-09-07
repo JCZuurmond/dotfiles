@@ -1,7 +1,11 @@
-"Vim package manager, install with:
-"curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-"    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-call plug#begin('~/.vim/plugged')
+" Install vim-plug if  it's not already installed
+if empty(glob('~/.vim/autoload/plug.vim'))
+	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+		\ https://raw.github.com/junegunn/vim-plug/master/plug.vim
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin()
 	Plug 'SirVer/ultisnips'
 	Plug 'nvie/vim-flake8'
 	Plug 'terryma/vim-multiple-cursors'
@@ -37,7 +41,7 @@ if has("autocmd")
 	au BufRead,BufNewFile *.{md} setl tw=79 spell 
 	au BufRead,BufNewFile *.{html} setl tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 
 	au BufRead,BufNewFile make setl noexpandtab 
-	au BufRead,BufNewFile * setl spell tabstop=4 softtabstop=4 shiftwidth=4
+	au BufRead,BufNewFile * setl spell tabstop=4 softtabstop=4 shiftwidth=4 tw=79
 
 	" Automatically remove trailing white spaces
 	au BufWritePre *.py %s/\s\+$//e
@@ -48,6 +52,8 @@ endif
 
 " Underline misspelled words
 :hi SpellBad cterm=underline ctermbg=None
+:hi SpellCap cterm=underline ctermbg=None
+:hi Error cterm=underline ctermbg=None
 
 "Practice to not use arrows
 nnoremap <Left> :echo "No left for you!"<CR>
@@ -67,10 +73,10 @@ inoremap <Down> <C-o>:echo "No down for you!"<CR>
 set visualbell
 
 " Map capitals to lower case
-:command WQ wq
-:command Wq wq
-:command W w
-:command Q q
+:command! WQ wq
+:command! Wq wq
+:command! W w
+:command! Q q
 
 " Rest of line to next line enter
 map <F2> i<CR><ESC>
@@ -105,14 +111,11 @@ nmap <silent><Leader>tc :Pytest class<CR>
 nmap <silent><Leader>tm :Pytest method<CR>
 
 " Maintain undo history between sessions
-set undofile
-if !isdirectory("$HOME/.vim/undodir")
-	call mkdir("$HOME/.vim/undodir", "p")
+if !isdirectory($HOME."/.vim/undodir")
+	call mkdir($HOME."/.vim/undodir", "p")
 endif
-set undodir="$HOME/.vim/undodir"
-
-" Shortcut to rapidly toggle `set list`
-nmap <leader>l :set list!<CR>
+set undofile
+set undodir=~/.vim/undodir
 
 "Invisible character colors 
 highlight NonText ctermfg=2
@@ -131,3 +134,13 @@ set exrc
 " Set backpspace
 " https://vi.stackexchange.com/questions/2162/why-doesnt-the-backspace-key-work-in-insert-mode#2163
 set backspace=indent,eol,start
+
+" Immediately add a closing quote or bracket in insert mode
+inoremap ' ''<esc>i
+inoremap " ""<esc>i
+inoremap ( ()<esc>i
+inoremap { {}<esc>i
+inoremap [ []<esc>i
+
+" Map the leader key to comma
+let mapleader = ','

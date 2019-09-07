@@ -34,3 +34,26 @@ set -g mode-style 'bg=cyan,fg=black'
 set -g message-style 'bg=black,fg=cyan'
 set -g pane-border-style 'bg=black,fg=#1E272C'
 set -g pane-active-border-style 'bg=black,fg=#1E272C'
+
+## >>> conda initialize >>>
+## !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/cor/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+    conda deactivate
+else
+    if [ -f "/Users/cor/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/cor/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/cor/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(anaconda context dir vcs)
+
+# Allows to install pip in global
+gpip() {
+    PIP_REQUIRE_VIRTUALENV = "" pip3 "$@"
+}
