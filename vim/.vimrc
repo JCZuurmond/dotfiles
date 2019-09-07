@@ -117,9 +117,6 @@ endif
 set undofile
 set undodir=~/.vim/undodir
 
-" Shortcut to rapidly toggle `set list`
-nmap <leader>l :set list!<CR>
-
 "Invisible character colors 
 highlight NonText ctermfg=2
 highlight SpecialKey ctermfg=2
