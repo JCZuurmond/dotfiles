@@ -137,3 +137,10 @@ set exrc
 " Set backpspace
 " https://vi.stackexchange.com/questions/2162/why-doesnt-the-backspace-key-work-in-insert-mode#2163
 set backspace=indent,eol,start
+
+" Immediately add a closing quote or bracket in insert mode
+inoremap ' ''<esc>i
+inoremap " ""<esc>i
+inoremap ( ()<esc>i
+inoremap { {}<esc>i
+inoremap [ []<esc>i
