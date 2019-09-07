@@ -141,3 +141,6 @@ inoremap " ""<esc>i
 inoremap ( ()<esc>i
 inoremap { {}<esc>i
 inoremap [ []<esc>i
+
+" Map the leader key to comma
+let mapleader = ','
