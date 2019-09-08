@@ -18,6 +18,7 @@ call plug#begin()
 	Plug 'tpope/vim-git'
 	Plug 'sheerun/vim-polyglot'
 	Plug 'trevordmiller/nova-vim'
+	Plug 'altercation/vim-colors-solarized'
 call plug#end()
 
 " Jump to the next field
@@ -27,7 +28,7 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories=[$HOME."/dotfiles/snippets"]
 
-"set color scheme to solarized
+"set color scheme to nova
 syntax on
 set background=dark
 let g:solarized_termcolors=16
