@@ -50,11 +50,6 @@ if has("autocmd")
 	au BufWritePost * if getline(1) =~ "^#!" | silent !chmod +x % | endif
 endif
 
-" Underline misspelled words
-:hi SpellBad cterm=underline ctermbg=None
-:hi SpellCap cterm=underline ctermbg=None
-:hi Error cterm=underline ctermbg=None
-
 "Practice to not use arrows
 nnoremap <Left> :echo "No left for you!"<CR>
 vnoremap <Left> :<C-u>echo "No left for you!"<CR>
