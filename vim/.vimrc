@@ -20,6 +20,9 @@ call plug#begin()
 	Plug 'trevordmiller/nova-vim'
 	Plug 'altercation/vim-colors-solarized'
 	Plug 'ervandew/supertab'
+
+	let g:plug_timeout = 300	" Increase vim-plug timeout for YouCompleteMe
+	Plug 'Valloric/YouCompleteMe'
 call plug#end()
 
 " Make YCM compatible with UltiSnips (using supertab)
