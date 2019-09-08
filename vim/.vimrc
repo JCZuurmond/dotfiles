@@ -19,6 +19,7 @@ call plug#begin()
 	Plug 'sheerun/vim-polyglot'
 	Plug 'trevordmiller/nova-vim'
 	Plug 'altercation/vim-colors-solarized'
+	Plug 'ervandew/supertab'
 call plug#end()
 
 " Jump to the next field
