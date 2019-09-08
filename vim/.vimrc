@@ -70,7 +70,7 @@ vnoremap <Down> :<C-u>echo "No down for you!"<CR>
 inoremap <Down> <C-o>:echo "No down for you!"<CR>
 
 " disables error sounds
-set visualbell
+set novisualbell
 
 " Map capitals to lower case
 :command! WQ wq
