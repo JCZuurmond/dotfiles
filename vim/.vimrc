@@ -29,7 +29,10 @@ let g:UltiSnipsSnippetDirectories=[$HOME."/dotfiles/snippets"]
 
 "set color scheme to solarized
 syntax on
-colorscheme nova
+set background=dark
+let g:solarized_termcolors=16
+let g:solarized_contrast="high"
+colorscheme solarized
 
 " Settings for multiple cursors
 let g:multi_cursor_exit_from_insert_mode=0
