@@ -51,7 +51,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(anaconda context dir vcs)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv anaconda context dir vcs)
 
 # Allows to install pip in global
 gpip() {
