@@ -57,3 +57,12 @@ Example:
 # Page up and down
 <Ctrl> + b : Page Up
 <Ctrl> + f : Page Down
+
+# Ctags
+ctrl + ] : Go to tag definition
+ctrl + t : Go back in the tag stack
+:tn : next tag
+:tp : previous tag
+:ts : tag select
+g] : open tag menu
+vim -t <tag name> : open file on this tag
