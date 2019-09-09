@@ -59,6 +59,9 @@ if has("autocmd")
 	" Automatically remove trailing white spaces
 	au BufWritePre *.py %s/\s\+$//e
 
+	" Regenerate tags when saving Python files
+	au BufWritePost *.py silent! !ctags -R &
+
 	" Set scripts to be executable from the shell
 	au BufWritePost * if getline(1) =~ "^#!" | silent !chmod +x % | endif
 endif
@@ -154,3 +157,6 @@ inoremap [ []<esc>i
 
 " Map the leader key to comma
 let mapleader = ','
+
+" Look for a tags file recursively in the parent directory
+set tags=tags  
