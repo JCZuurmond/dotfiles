@@ -20,6 +20,7 @@ call plug#begin()
 	Plug 'trevordmiller/nova-vim'
 	Plug 'altercation/vim-colors-solarized'
 	Plug 'ervandew/supertab'
+	Plug 'davidhalter/jedi-vim'
 
 	let g:plug_timeout = 300	" Increase vim-plug timeout for YouCompleteMe
 	Plug 'Valloric/YouCompleteMe'
@@ -122,6 +123,9 @@ nmap <silent><Leader>tg :Pytest file<CR>
 nmap <silent><Leader>tf :Pytest function<CR>
 nmap <silent><Leader>tc :Pytest class<CR>
 nmap <silent><Leader>tm :Pytest method<CR>
+
+" YCM
+noremap <leader>] :YcmCompleter GoTo<cr>
 
 " Maintain undo history between sessions
 if !isdirectory($HOME."/.vim/undodir")
