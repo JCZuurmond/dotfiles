@@ -11,7 +11,6 @@ call plug#begin()
 	Plug 'terryma/vim-multiple-cursors'
 	Plug 'tpope/vim-fugitive'
 	Plug 'christoomey/vim-tmux-navigator'
-	Plug 'alfredodeza/pytest.vim'
 	Plug 'scrooloose/nerdtree'
 	Plug 'Xuyuanp/nerdtree-git-plugin'
 	Plug 'michaeljsmith/vim-indent-object'
