@@ -57,3 +57,5 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv anaconda context dir vcs)
 gpip() {
     PIP_REQUIRE_VIRTUALENV = "" pip3 "$@"
 }
+
+tmux
