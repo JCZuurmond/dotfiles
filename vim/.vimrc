@@ -21,6 +21,8 @@ call plug#begin()
 	Plug 'altercation/vim-colors-solarized'
 	Plug 'ervandew/supertab'
 	Plug 'davidhalter/jedi-vim'
+	Plug 'tpope/vim-dispatch'
+	Plug 'janko/vim-test'
 
 	let g:plug_timeout = 300	" Increase vim-plug timeout for YouCompleteMe
 	Plug 'Valloric/YouCompleteMe'
@@ -37,6 +39,9 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories=[$HOME."/dotfiles/snippets"]
+
+" make test commands execute using dispatch.vim
+let test#strategy = "dispatch"
 
 "set color scheme to nova
 syntax on
@@ -118,11 +123,12 @@ nmap <leader>l :set list!<CR>
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
 
-" Pytest
-nmap <silent><Leader>tg :Pytest file<CR>
-nmap <silent><Leader>tf :Pytest function<CR>
-nmap <silent><Leader>tc :Pytest class<CR>
-nmap <silent><Leader>tm :Pytest method<CR>
+" Vim-test
+nmap <silent><Leader>tn :TestNearest<CR>
+nmap <silent><Leader>tf :TestFile<CR>
+nmap <silent><Leader>ts :TestSuite<CR>
+nmap <silent><Leader>tl :TestLast<CR>
+nmap <silent><Leader>tv :TestVisit<CR>
 
 " YCM
 noremap <leader>] :YcmCompleter GoTo<cr>
