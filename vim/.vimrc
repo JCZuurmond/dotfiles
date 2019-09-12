@@ -22,7 +22,7 @@ call plug#begin()
 	Plug 'davidhalter/jedi-vim'
 	Plug 'tpope/vim-dispatch'
 	Plug 'janko/vim-test'
-	Plug 'vim-scripts/ZoomWin'
+	Plug 'troydm/zoomwintab.vim'
 
 	let g:plug_timeout = 300	" Increase vim-plug timeout for YouCompleteMe
 	Plug 'Valloric/YouCompleteMe'
@@ -134,7 +134,7 @@ nmap <silent><Leader>tv :TestVisit<CR>
 noremap <leader>] :YcmCompleter GoTo<cr>
 
 " ZoomWin
-nnoremap <silent><C-w>z :ZoomWin<CR>
+nnoremap <silent><C-w>z :ZoomWinTabToggle<CR>
 
 " Maintain undo history between sessions
 if !isdirectory($HOME."/.vim/undodir")
