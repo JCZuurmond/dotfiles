@@ -142,6 +142,12 @@ noremap <leader>yd :YcmCompleter GetDoc<cr>
 " ZoomWin
 nnoremap <silent><C-w>z :ZoomWinTabToggle<CR>
 
+" ALE
+nnoremap <F7> :ALEToggle<CR>
+let g:ale_linters = {
+\  'python': ['flake8'],
+\}
+
 " Maintain undo history between sessions
 if !isdirectory($HOME."/.vim/undodir")
 	call mkdir($HOME."/.vim/undodir", "p")
