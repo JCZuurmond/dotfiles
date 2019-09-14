@@ -7,7 +7,6 @@ endif
 
 call plug#begin()
 	Plug 'SirVer/ultisnips'
-	Plug 'nvie/vim-flake8'
 	Plug 'terryma/vim-multiple-cursors'
 	Plug 'tpope/vim-fugitive'
 	Plug 'christoomey/vim-tmux-navigator'
