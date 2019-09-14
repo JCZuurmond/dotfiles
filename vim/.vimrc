@@ -136,6 +136,8 @@ nnoremap <Leader>tv :TestVisit<CR>
 
 " YCM
 noremap <leader>] :YcmCompleter GoTo<cr>
+noremap <leader>yd :YcmCompleter GetDoc<cr>
+:set completeopt="menu"
 
 " ZoomWin
 nnoremap <silent><C-w>z :ZoomWinTabToggle<CR>
