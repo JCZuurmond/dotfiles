@@ -29,6 +29,9 @@ call plug#begin()
 	Plug 'Valloric/YouCompleteMe'
 call plug#end()
 
+" Map the leader key to space
+let mapleader=' '
+
 " Make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
@@ -161,9 +164,6 @@ set exrc
 " Set backpspace
 " https://vi.stackexchange.com/questions/2162/why-doesnt-the-backspace-key-work-in-insert-mode#2163
 set backspace=indent,eol,start
-
-" Map the leader key to comma
-let mapleader = ','
 
 " Look for a tags file recursively in the parent directory
 set tags=tags  
