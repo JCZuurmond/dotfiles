@@ -66,3 +66,13 @@ ctrl + t : Go back in the tag stack
 :ts : tag select
 g] : open tag menu
 vim -t <tag name> : open file on this tag
+
+# Quickfix list
+:copen : open the quickfix list
+k,j, ctrl + f, ctrl + b, /, ? : to navigate
+enter : to open the location
+:cclose : close the window
+:cnext (cn) : to go to the next entry
+:cprevious (cp) : to go to the previous entry
+:cwindow (cw) : to toggle window
+
