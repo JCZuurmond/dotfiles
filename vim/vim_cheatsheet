@@ -76,3 +76,10 @@ enter : to open the location
 :cprevious (cp) : to go to the previous entry
 :cwindow (cw) : to toggle window
 
+# Location list
+Similar to quick fix list, but now with an al
+:lopen
+:lclose
+:lnext
+:lprevious
+:lwindow
