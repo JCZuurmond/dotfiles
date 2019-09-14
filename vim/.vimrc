@@ -128,11 +128,11 @@ nmap <leader>l :set list!<CR>
 set listchars=tab:▸\ ,eol:¬
 
 " Vim-test
-nmap <silent><Leader>tn :TestNearest<CR>
-nmap <silent><Leader>tf :TestFile<CR>
-nmap <silent><Leader>ts :TestSuite<CR>
-nmap <silent><Leader>tl :TestLast<CR>
-nmap <silent><Leader>tv :TestVisit<CR>
+nnoremap <Leader>tn :TestNearest '-sqq'<CR>
+nnoremap <Leader>tf :TestFile<CR>
+nnoremap <Leader>ts :TestSuite<CR>
+nnoremap <Leader>tl :TestLast<CR>
+nnoremap <Leader>tv :TestVisit<CR>
 
 " YCM
 noremap <leader>] :YcmCompleter GoTo<cr>
