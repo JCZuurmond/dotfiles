@@ -23,6 +23,7 @@ call plug#begin()
 	Plug 'janko/vim-test'
 	Plug 'troydm/zoomwintab.vim'
 	Plug 'dense-analysis/ale'
+	Plug 'tpope/vim-unimpaired'
 
 	let g:plug_timeout = 300	" Increase vim-plug timeout for YouCompleteMe
 	Plug 'Valloric/YouCompleteMe'
