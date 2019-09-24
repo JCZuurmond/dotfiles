@@ -133,6 +133,9 @@ nmap <leader>l :set list!<CR>
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
 
+" Fast edit vimrc
+map <leader>e :e! ~/dotfiles/vim/.vimrc<cr>
+
 " Vim-test
 nnoremap <Leader>tn :TestNearest '-sqq'<CR>
 nnoremap <Leader>tf :TestFile<CR>
