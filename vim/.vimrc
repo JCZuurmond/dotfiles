@@ -36,7 +36,7 @@ call plug#begin()
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 
-    if v:version > 800
+    if v:version > 800 && (has('python') || has('python3'))
 		let g:plug_timeout = 300	" Increase vim-plug timeout for YouCompleteMe
 		Plug 'Valloric/YouCompleteMe'
 	endif
