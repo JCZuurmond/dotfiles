@@ -192,3 +192,6 @@ set clipboard=unnamed
 " Airline settings
 let g:airline_theme='solarized'
 let g:airline_solarized_bg='dark'
+
+" Ignore for CtrlP
+set wildignore+=*/.git/*,*/venv/*,*/*.egg-info/*
