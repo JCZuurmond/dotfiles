@@ -12,7 +12,9 @@ if empty(glob('~/.vim/colors/solarized.vim'))
 endif
 
 call plug#begin()
-	Plug 'SirVer/ultisnips'
+    if has('python') || has('python3')
+		Plug 'SirVer/ultisnips'
+	endif
 	Plug 'terryma/vim-multiple-cursors'
 	Plug 'tpope/vim-fugitive'
 	Plug 'christoomey/vim-tmux-navigator'
