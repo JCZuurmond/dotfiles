@@ -185,3 +185,6 @@ set backspace=indent,eol,start
 
 " Look for a tags file recursively in the parent directory
 set tags=tags  
+
+" Clipboard
+set clipboard=unnamed
