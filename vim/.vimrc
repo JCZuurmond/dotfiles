@@ -77,6 +77,9 @@ if has("autocmd")
 
 	" Set scripts to be executable from the shell
 	au BufWritePost * if getline(1) =~ "^#!" | silent !chmod +x % | endif
+
+	" Source vimrc after writing to it
+	au BufwRitePost ~/.vimrc source ~/.vimrc
 endif
 
 "Practice to not use arrows
