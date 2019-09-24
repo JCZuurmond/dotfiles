@@ -5,6 +5,12 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+" Get solarized color theme
+if empty(glob('~/.vim/colors/solarized.vim'))
+    silent !curl -fLo ~/.vim/colors/solarized.vim --create-dirs 
+        \ https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim
+endif
+
 call plug#begin()
 	Plug 'SirVer/ultisnips'
 	Plug 'terryma/vim-multiple-cursors'
