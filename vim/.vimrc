@@ -25,6 +25,8 @@ call plug#begin()
 	Plug 'dense-analysis/ale'
 	Plug 'tpope/vim-unimpaired'
 	Plug 'kien/ctrlp.vim'
+	Plug 'vim-airline/vim-airline'
+	Plug 'vim-airline/vim-airline-themes'
 
 	let g:plug_timeout = 300	" Increase vim-plug timeout for YouCompleteMe
 	Plug 'Valloric/YouCompleteMe'
