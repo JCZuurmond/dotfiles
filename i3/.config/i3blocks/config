@@ -38,14 +38,14 @@ signal=10
 
 # Disk usage
 [disk]
-label=⛁ 
+label=⛁  
 interval=30
 separator=false
 separator_block_width=3
 
 # Memory usage
 [memory]
-label=⛛ 
+label= ⚙ 
 interval=30
 
 # Network interface monitoring
@@ -68,7 +68,7 @@ PRINTF_COMMAND=printf "⇃%-1.1f ↿%1.1f %s/s\n", rx, wx, unit;
 
 # CPU usage
 [cpu_usage]
-label=⛭ 
+label= ⚙ 
 interval=10
 min_width=100%
 DECIMALS=0
