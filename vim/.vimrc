@@ -77,6 +77,7 @@ if has("autocmd")
 	au BufRead,BufNewFile *.{md} setl tw=79 spell 
 	au BufRead,BufNewFile *.{html} setl tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 
 	au BufRead,BufNewFile make setl noexpandtab 
+	au BufRead,BufNewFile yaml setl number tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 ruler
 	au BufRead,BufNewFile * setl spell tabstop=4 softtabstop=4 shiftwidth=4 tw=79
 
 	" Automatically remove trailing white spaces
