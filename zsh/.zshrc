@@ -58,4 +58,7 @@ gpip() {
     PIP_REQUIRE_VIRTUALENV = "" pip3 "$@"
 }
 
+# Increase number of open Jupyter notebooks
+ulimit -n 4096
+
 tmux
