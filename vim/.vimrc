@@ -15,10 +15,10 @@ call plug#begin()
     if has('python') || has('python3')
 		Plug 'SirVer/ultisnips'
 	endif
-	Plug 'terryma/vim-multiple-cursors'
-	Plug 'tpope/vim-fugitive'
-	Plug 'christoomey/vim-tmux-navigator'
-	Plug 'scrooloose/nerdtree'
+	Plug 'terryma/vim-multiple-cursors'         " multi cursors
+	Plug 'tpope/vim-fugitive'					" git integration
+	Plug 'christoomey/vim-tmux-navigator'       " tmux integration
+	Plug 'scrooloose/nerdtree'                  " show directory of file
 	Plug 'Xuyuanp/nerdtree-git-plugin'
 	Plug 'michaeljsmith/vim-indent-object'
 	Plug 'tpope/vim-git'
@@ -38,7 +38,7 @@ call plug#begin()
 
     if v:version > 800 && (has('python') || has('python3'))
 		let g:plug_timeout = 300	" Increase vim-plug timeout for YouCompleteMe
-		Plug 'Valloric/YouCompleteMe'
+		Plug 'Valloric/YouCompleteMe'			" tab completion stuff
 	endif
 call plug#end()
 
