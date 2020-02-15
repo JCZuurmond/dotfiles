@@ -45,10 +45,18 @@ call plug#end()
 " Map the leader key to space
 let mapleader=' '
 
-" Make YCM compatible with UltiSnips (using supertab)
+" YCM settings
+let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:ycm_auto_trigger = 0
+let g:ycm_key_invoke_completion = '<tab>'
+let g:ycm_min_num_identifier_candidate_chars = 3
+let g:ycm_min_num_of_chars_for_completion = 3
+let g:ycm_max_num_candidates = 10
+noremap <leader>] :YcmCompleter GoTo<cr>
+noremap <leader>yd :YcmCompleter GetDoc<cr>
+:set completeopt="menu"
 
 " Jump to the next field
 let g:UltiSnipsExpandTrigger="<tab>" " better key bindings for UltiSnipsExpandTrigger
