@@ -92,7 +92,7 @@ if has("autocmd")
 	au BufWritePre *.py %s/\s\+$//e
 
 	" Regenerate tags when saving Python files
-	au BufWritePost *.py silent! !ctags -R 2> /dev/null &
+	"au BufWritePost *.py silent! !ctags -R 2> /dev/null &
 
 	" Set scripts to be executable from the shell
 	au BufWritePost * if getline(1) =~ "^#!" | silent !chmod +x % | endif
