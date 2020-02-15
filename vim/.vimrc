@@ -196,8 +196,9 @@ set exrc
 " https://vi.stackexchange.com/questions/2162/why-doesnt-the-backspace-key-work-in-insert-mode#2163
 set backspace=indent,eol,start
 
-" Look for a tags file recursively in the parent directory
+" Tags
 set tags=tags  
+set notagbsearch      " solves tags file not sorted error
 
 " Clipboard
 set clipboard=unnamed
