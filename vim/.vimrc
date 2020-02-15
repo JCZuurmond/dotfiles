@@ -162,12 +162,6 @@ nnoremap <Leader>ts :TestSuite<CR>
 nnoremap <Leader>tl :TestLast<CR>
 nnoremap <Leader>tv :TestVisit<CR>
 
-" YCM
-noremap <leader>] :YcmCompleter GoTo<cr>
-noremap <leader>yd :YcmCompleter GetDoc<cr>
-:set completeopt="menu"
-let g:ycm_auto_trigger=0
-
 " ZoomWin
 nnoremap <silent><C-w>z :ZoomWinTabToggle<CR>
 
