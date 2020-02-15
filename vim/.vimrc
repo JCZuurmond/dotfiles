@@ -95,7 +95,7 @@ if has("autocmd")
 	"au BufWritePost *.py silent! !ctags -R 2> /dev/null &
 
 	" Set scripts to be executable from the shell
-	au BufWritePost * if getline(1) =~ "^#!" | silent !chmod +x % | endif
+	"au BufWritePost * if getline(1) =~ "^#!" | silent !chmod +x % | endif
 
 	" Source vimrc after writing to it
 	au BufwRitePost ~/.vimrc source ~/.vimrc
