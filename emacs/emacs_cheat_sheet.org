@@ -1,0 +1,92 @@
+* Help
+  - `C-h ?` : Help on help
+  - `C-h c <command>` : Help on command
+  - `C-h k <command>` : More help on command
+  - `C-h f`: Describe a function
+  - `C-h v` : Documentation of variables
+  - `C-h a` : Commands with that keyword
+  - `C-h i` : Read included manuals
+  - `C-h r` : Help menu
+  - `C-h m` : Help on mode 
+
+* Customize
+   - `M-x load-theme RET` : Load theme (tab to show list)
+   - `M-x customize-group RET` : Set common options
+   - `M-x customize-face RET` : Change background, foreground, etc
+   - `M-x eval-buffer RET` : To see changes when modified .emacs
+   - `$ emacs -q` : Skips customizations (when shit hits the fan)
+
+* Buffer
+  - `C-x C-b`: List buffers
+  - `C-x s`: Save buffer
+  - `C-x b`: Switch buffer
+  - `C-x k`: Kill buffer
+  - `M-x clean-buffer-list` : Kill buffer list
+
+* Window
+  - `C-x 1`: Only this window
+  - `C-x 2`: Split window horizontally
+  - `C-x 3`: Split window vertically
+  - `C-x o`: Move focus to other window
+  - `C-x 0`: Kill current window
+
+* Package
+  - `M-x list-packages` : To list all packages
+  - `i` : Mark for installation
+  - `d` : Mark for deletion
+  - `u` : Unmark
+  - `x` : Executes
+  - `q` : Quit
+
+* Dired
+  - `C-s` : Search for file
+  - `RET` : Open file or dir
+  - `d` : Mark for deletion
+  - `x` : Execute marks
+  - `+` : Add dir
+  - `C-x C-f` : Add file
+  - `g` : Refresh contents
+  - `!` : Run shell command on file
+  - `C`: Copy file
+  - `m` : Mark (and then use !)
+  - `u`: Unmark
+  - `t`  : Toggle marks
+  - `*/` : Select all files
+  - `A` : Regex on files -> `M-,` to go to next file
+  - `R` : Rename
+
+* Macro
+  - `C-x (` : Start macro
+  - `C-x )` : End macro
+  - `C-x e` : Execute macro -> `e` again execute
+  - `C-x C-k SPC` : Debug macro's
+  - `C-x C-k e` : Edit macro
+  - `C-x C-k n` : Name macro
+  - `M-x insert-kbd-macro` : Insert keyboard macro in ~/.emacs
+
+* Org mode 
+https://orgmode.org/org.html
+
+** Headlines
+    - `TAB` :  (Un)fold headlines
+    - `S-TAB` : (Un)fold all headline
+    - `C-RET`: Add new headline in the same level
+    - `M-LEFT/RIGHT` : Move headline left or right
+    - `C-c C-w`: Move headline
+    - `M-UP/DOWN`: Move headline up or doen
+    - `C-c C-n` : Move to next heading
+    - `C-c C-p` : Move to previous heading
+    - `C-c C-f` : Move to next heading, same level
+    - `C-c C-b` : Move to previous heading, same level
+    - `C-c C-u` : Move backward to higher level heading 
+
+** TODOs
+    - `S-LEFT/RIGHT` : Move TODO state
+   
+** Timing
+   DEADLINE: <2020-02-14 Fri>
+    - `C-c C-s` : Add start
+    - `S-ARROW` : Choose date in small agenda
+    - `C-c C-d` : Add dealine
+    - `S-UP/DOWN` (on date): Move date, e.g. year, moth or day.
+
