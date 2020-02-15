@@ -61,4 +61,7 @@ gpip() {
 # Increase number of open Jupyter notebooks
 ulimit -n 4096
 
-tmux
+#tmux
+#bindkey "^[[200~" pbpaste
+bindkey '^[[200~' bracketed-paste-magic
+
