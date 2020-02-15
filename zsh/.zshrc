@@ -55,7 +55,7 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv anaconda context dir vcs)
 
 # Allows to install pip in global
 gpip() {
-    PIP_REQUIRE_VIRTUALENV = "" pip3 "$@"
+    PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
 }
 
 # Increase number of open Jupyter notebooks
