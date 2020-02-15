@@ -65,3 +65,7 @@ ulimit -n 4096
 #bindkey "^[[200~" pbpaste
 bindkey '^[[200~' bracketed-paste-magic
 
+# load rbenv automatically
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
