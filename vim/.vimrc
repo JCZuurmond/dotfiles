@@ -18,8 +18,6 @@ call plug#begin()
 	Plug 'terryma/vim-multiple-cursors'         " multi cursors
 	Plug 'tpope/vim-fugitive'					" git integration
 	Plug 'christoomey/vim-tmux-navigator'       " tmux integration
-	Plug 'scrooloose/nerdtree'                  " show directory of file
-	Plug 'Xuyuanp/nerdtree-git-plugin'
 	Plug 'michaeljsmith/vim-indent-object'
 	Plug 'tpope/vim-git'
 	Plug 'sheerun/vim-polyglot'
@@ -184,10 +182,6 @@ highlight SpecialKey ctermfg=2
 
 " Move when buffers are hidden
 set hidden
-
-" NerdTree
-let NERDTreeShowHidden=1
-nnoremap <Leader>nt :NERDTree<CR>
 
 " Enable project specific vimrc
 set exrc
