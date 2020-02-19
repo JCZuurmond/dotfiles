@@ -168,6 +168,8 @@ nnoremap <F7> :ALEToggle<CR>
 let g:ale_linters = {
 \  'python': ['flake8'],
 \}
+nnoremap <Leader>lo :lopen<CR>
+nnoremap <Leader>lc :lclose<CR>
 
 " Maintain undo history between sessions
 if !isdirectory($HOME."/.vim/undodir")
