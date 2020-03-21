@@ -15,7 +15,6 @@ call plug#begin()
     if has('python') || has('python3')
 		Plug 'SirVer/ultisnips'					" Snippets
 	endif
-	Plug 'terryma/vim-multiple-cursors'         " multi cursors
 	Plug 'tpope/vim-fugitive'					" git integration
 	Plug 'christoomey/vim-tmux-navigator'       " tmux integration
 	Plug 'michaeljsmith/vim-indent-object'
