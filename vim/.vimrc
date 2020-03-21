@@ -206,3 +206,6 @@ let g:airline_solarized_bg='dark'
 
 " Ignore for CtrlP
 set wildignore+=*/.git/*,*/venv/*,*/*.egg-info/*
+
+" Black settings
+let g:black_linelength=80
