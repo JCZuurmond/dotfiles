@@ -13,26 +13,25 @@ endif
 
 call plug#begin()
     if has('python') || has('python3')
-		Plug 'SirVer/ultisnips'
+		Plug 'SirVer/ultisnips'					" Snippets
 	endif
 	Plug 'terryma/vim-multiple-cursors'         " multi cursors
 	Plug 'tpope/vim-fugitive'					" git integration
 	Plug 'christoomey/vim-tmux-navigator'       " tmux integration
 	Plug 'michaeljsmith/vim-indent-object'
-	Plug 'tpope/vim-git'
+	Plug 'tpope/vim-git'                        " More git stuff
 	Plug 'sheerun/vim-polyglot'
-	Plug 'trevordmiller/nova-vim'
-	Plug 'altercation/vim-colors-solarized'
-	Plug 'ervandew/supertab'
-	Plug 'davidhalter/jedi-vim'
-	Plug 'tpope/vim-dispatch'
-	Plug 'janko/vim-test'
+	Plug 'altercation/vim-colors-solarized'		" Solarized color scheme
+	Plug 'ervandew/supertab'                    " Make tab work with multiple packages
+	Plug 'tpope/vim-dispatch'                   " Run stuff asynchrously
+	Plug 'janko/vim-test'                       " Run tests
 	Plug 'troydm/zoomwintab.vim'
-	Plug 'dense-analysis/ale'
-	Plug 'tpope/vim-unimpaired'
-	Plug 'kien/ctrlp.vim'
-	Plug 'vim-airline/vim-airline'
-	Plug 'vim-airline/vim-airline-themes'
+	Plug 'dense-analysis/ale'                   " Linting
+	Plug 'tpope/vim-unimpaired'					" Smart hot-keys with [ and ]
+	Plug 'ctrlpvim/ctrlp.vim'				    " Fuzzy matching for files
+	Plug 'vim-airline/vim-airline'				" Airline status at bottom
+	Plug 'vim-airline/vim-airline-themes'       " Theme for airline
+	Plug 'psf/black'						    " Black
 
     if v:version > 800 && (has('python') || has('python3'))
 		let g:plug_timeout = 300	" Increase vim-plug timeout for YouCompleteMe
