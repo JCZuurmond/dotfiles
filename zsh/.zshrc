@@ -73,3 +73,6 @@ eval "$(rbenv init -)"
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 source /usr/local/bin/virtualenvwrapper.sh
+
+# Weather
+alias weather-amsterdam='curl v2.wttr.in/Amsterdam'
