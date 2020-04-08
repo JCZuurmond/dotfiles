@@ -207,3 +207,7 @@ set wildignore+=*/.git/*,*/venv/*,*/*.egg-info/*
 
 " Black settings
 let g:black_linelength=80
+
+" Move visual selection 
+vnoremap J :m '>+1<cr>gv=gv 
+vnoremap K :m '<-2<cr>gv=gv
