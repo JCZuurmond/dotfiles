@@ -76,3 +76,6 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 # Weather
 alias weather-amsterdam='curl v2.wttr.in/Amsterdam'
+
+# Opt-out of Azure functions telemetry
+FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
