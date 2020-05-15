@@ -92,6 +92,9 @@ https://orgmode.org/org.html
 
 ** Archive
    - C-c C-x a: Archive tree
+
+** Links
+   - insert as follows: [[target][source] ]
 * Misc
 ** Spell:
    C-M-i : Auto-complete spell
