@@ -173,6 +173,10 @@ let g:ale_linters = {
 nnoremap <Leader>lo :lopen<CR>
 nnoremap <Leader>lc :lclose<CR>
 
+" Black
+nnoremap <Leader>af :Black<CR>
+let g:black_linelengt=80
+
 " Maintain undo history between sessions
 if !isdirectory($HOME."/.vim/undodir")
 	call mkdir($HOME."/.vim/undodir", "p")
