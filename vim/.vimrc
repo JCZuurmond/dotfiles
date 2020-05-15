@@ -81,8 +81,11 @@ if has("autocmd")
 	au BufRead,BufNewFile *.{md} setl tw=79 spell 
 	au BufRead,BufNewFile *.{html} setl tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 
 	au BufRead,BufNewFile make setl noexpandtab 
-	au BufRead,BufNewFile yaml setl number tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 ruler
 	au BufRead,BufNewFile * setl spell tabstop=4 softtabstop=4 shiftwidth=4 tw=79
+
+	" Yaml settings
+	au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml
+	autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 	" Automatically remove trailing white spaces
 	au BufWritePre *.py %s/\s\+$//e
