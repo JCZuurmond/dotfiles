@@ -541,7 +541,7 @@ endsnippet
 snippet deft "test function" b
 def test_${1:function}(`!p
 if snip.indent:
-	snip.rv = 'self' + (", " if len(t[2]) else "")`${2}):
+	snip.rv = 'self' + (", " if len(t[2]) else "")`${2}) -> None:
 	${5:${VISUAL:pass}}
 endsnippet
 
