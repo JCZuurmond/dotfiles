@@ -142,7 +142,6 @@ set diffopt+=vertical
 nnoremap <space>gs :Gstatus<CR>
 nnoremap <space>gp :Gpush<CR>
 nnoremap <space>gd :Gdiff<CR>
-nnoremap <space>gw :w<CR>:Gcommit<CR>i
 
 " Save with `w!!` when 'readonly' is set
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
