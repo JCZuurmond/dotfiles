@@ -173,6 +173,8 @@ let g:ale_linters = {
 \}
 nnoremap <Leader>lo :lopen<CR>
 nnoremap <Leader>lc :lclose<CR>
+nnoremap <Leader>ad :ALEDisable<CR>
+nnoremap <Leader>ae :ALEEnable<CR>
 
 " Black
 nnoremap <Leader>af :Black<CR>
