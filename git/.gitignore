@@ -6,3 +6,4 @@ __pycache__
 tags
 .ruby-version
 .DS_Store
+.env
