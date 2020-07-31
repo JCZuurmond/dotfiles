@@ -31,6 +31,7 @@ call plug#begin()
 	Plug 'vim-airline/vim-airline'				" Airline status at bottom
 	Plug 'vim-airline/vim-airline-themes'       " Theme for airline
 	Plug 'psf/black'						    " Black
+	Plug 'preservim/nerdtree'                   " Directory explorer
 
     if v:version > 800 && (has('python') || has('python3'))
 		let g:plug_timeout = 300	" Increase vim-plug timeout for YouCompleteMe
@@ -183,6 +184,9 @@ if !isdirectory($HOME."/.vim/undodir")
 endif
 set undofile
 set undodir=~/.vim/undodir
+
+" Nerdtree
+nnoremap <Leader>nt :NERDTreeToggle<CR>
 
 "Invisible character colors 
 highlight NonText ctermfg=2
