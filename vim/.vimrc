@@ -226,3 +226,6 @@ let g:black_linelength=79
 " Move visual selection 
 vnoremap J :m '>+1<cr>gv=gv 
 vnoremap K :m '<-2<cr>gv=gv
+
+" Reload current file
+nnoremap <F5> :e %<CR>
