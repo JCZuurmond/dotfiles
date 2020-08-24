@@ -1,9 +1,12 @@
+# vim
 *.swp
+*.swo
+tags
+
 venv/
 __pycache__
 .ipynb_checkpoints
 .mypy_cache
-tags
 .ruby-version
 .DS_Store
 .env
