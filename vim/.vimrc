@@ -80,6 +80,7 @@ if has("autocmd")
 	au BufRead,BufNewFile *.{py} setl number tw=79 tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4 indentkeys-=<:> ruler
 	au BufRead,BufNewFile *.{snippets} setl spell tabstop=4 softtabstop=4 smarttab shiftwidth=4
 	au BufRead,BufNewFile *.{md} setl tw=79 spell  tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4
+	au BufRead,BufNewFile *.{yml} setl number tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 indentkeys-=<:> ruler
 	au BufRead,BufNewFile *.{html} setl tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 
 	au BufRead,BufNewFile *.{json} setl tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 
 	au BufRead,BufNewFile make setl noexpandtab 
