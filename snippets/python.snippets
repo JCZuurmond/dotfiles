@@ -123,3 +123,20 @@ snippet @fix "Pytest fixture"
 def ${1}():
 	${2:pass}
 endsnippet
+
+
+snippet defb "bare function" b
+def ${1:function}(`!p
+if snip.indent:
+	snip.rv = 'self' + (", " if len(t[2]) else "")`${2:arg1}):
+	${0:${VISUAL:pass}}
+endsnippet
+
+
+snippet classb "bare class" b
+class ${1:MyClass}:
+
+	def __init__(self, ${2:arg1}):
+		${0:${VISUAL:pass}}
+endsnippet
+
