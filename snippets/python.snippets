@@ -140,3 +140,7 @@ class ${1:MyClass}:
 		${0:${VISUAL:pass}}
 endsnippet
 
+
+snippet print_secret "Print secret in databriccks" b
+print_secret = lambda scope, secret: print("\f".join([_ for _ in dbutils.secrets.get(scope, secret)]))
+endsnippet
