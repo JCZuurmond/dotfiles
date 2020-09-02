@@ -3,6 +3,10 @@
 *.swo
 tags
 
+# Direnv
+.envrc
+.direnv/
+
 venv/
 __pycache__
 .ipynb_checkpoints
