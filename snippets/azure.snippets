@@ -1,0 +1,14 @@
+snippet remove_all_storage_network_rules "Remove all the network rules on a storage account"
+
+az storage account network-rule list \
+	-n ${1:STORAGE_ACCOUNT_NAME} \
+	-g ${2:STORAGE_ACCOUNT_RESOURCE_GROUP} \
+	--query ipRules[].ipAddressOrRange \
+	-o tsv \
+	| xargs -n 1 az storage account network-rule remove \
+		-n ${1:STORAGE_ACCOUNT_NAME} \
+		-g ${2:STORAGE_ACCOUNT_RESOURCE_GROUP} \
+		-o none \
+		--ip-address 
+
+endsnippet
