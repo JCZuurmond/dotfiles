@@ -32,6 +32,7 @@ call plug#begin()
 	Plug 'vim-airline/vim-airline-themes'       " Theme for airline
 	Plug 'psf/black'						    " Black
 	Plug 'preservim/nerdtree'                   " Directory explorer
+	Plug 'tmhedberg/SimpylFold'					" Simple folding for python
 
     if v:version > 800 && (has('python') || has('python3'))
 		let g:plug_timeout = 300	" Increase vim-plug timeout for YouCompleteMe
@@ -229,3 +230,8 @@ vnoremap K :m '<-2<cr>gv=gv
 
 " Reload current file
 nnoremap <F5> :e %<CR>
+
+" Simply fold settings
+let g:SimpylFold_docstring_preview=1
+let g:SimpylFold_fold_docstring=0
+let g:SimpylFold_fold_import=0
