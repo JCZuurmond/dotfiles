@@ -14,3 +14,9 @@ __pycache__
 .ruby-version
 .DS_Store
 .env
+
+# Terraform
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.tfstate.lock.info
