@@ -105,6 +105,10 @@ if has("autocmd")
 
 	" Source vimrc after writing to it
 	au BufwRitePost ~/.vimrc source ~/.vimrc
+
+	" Jump between methods, in python
+	autocmd FileType python nnoremap <buffer> [[ ?^class\\|^\s*def<CR>
+	autocmd FileType python nnoremap <buffer> ]] /^class\\|^\s*def<CR>
 endif
 
 "Practice to not use arrows
