@@ -511,6 +511,10 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+  (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+  (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+  (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
