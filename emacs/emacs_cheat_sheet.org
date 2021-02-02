@@ -90,3 +90,12 @@ https://orgmode.org/org.html
     - `C-c C-d` : Add dealine
     - `S-UP/DOWN` (on date): Move date, e.g. year, moth or day.
 
+** Archive
+   - C-c C-x a: Archive tree
+
+** Links
+   - insert as follows: [[target][source] ]
+* Misc
+** Spell:
+   C-M-i : Auto-complete spell
+

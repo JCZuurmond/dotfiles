@@ -73,3 +73,24 @@ eval "$(rbenv init -)"
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 source /usr/local/bin/virtualenvwrapper.sh
+export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+
+# Weather
+alias weather-amsterdam='curl v2.wttr.in/Amsterdam'
+
+# Opt-out of Azure functions telemetry
+FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
+
+# Direnv
+eval "$(direnv hook zsh)"
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
