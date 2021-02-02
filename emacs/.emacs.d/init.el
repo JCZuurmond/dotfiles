@@ -25,6 +25,9 @@
 (eval-when-compile
   (require 'use-package))
 
+(setq package-check-signature 'allow-unsigned)
+(add-to-list 'package-unsigned-archives "undo-tree-0.6.3")
+
 ;; ============================
 ;; Install packages
 ;; ============================
@@ -33,6 +36,10 @@
      flycheck                             ;; On the fly syntax checking in python
      py-autopep8                    ;; Run autopep8 on save
      ein                            ;; Emacs Ipython Notebook
+     solarized-theme                ;; color scheme 
+;;     evil-magit                     ;; git
+	 grep-a-lot
+	 evil
      )
    )
 
@@ -83,10 +90,10 @@
   (add-hook 'git-commit-mode-hook 'evil-insert-state))
 
 ;; Evil-magit
-(require 'evil-magit)
-(use-package evil-magit
-  :ensure t
-  :defer t)
+;;(require 'evil-magit)
+;;(use-package evil-magit
+;;  :ensure t
+;;  :defer t)
 
 ;; Flycheck mode
 (add-hook 'flycheck-mode-hook
