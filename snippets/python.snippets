@@ -75,6 +75,10 @@ snippet pdb "set pdb trace"
 __import__('pdb').set_trace()
 endsnippet
 
+snippet ipdb "set ipdb trace"
+__import__('ipdb').set_trace()
+endsnippet
+
 snippet setup "Setup for project"
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
@@ -118,4 +122,25 @@ snippet @fix "Pytest fixture"
 @pytest.fixture
 def ${1}():
 	${2:pass}
+endsnippet
+
+
+snippet defb "bare function" b
+def ${1:function}(`!p
+if snip.indent:
+	snip.rv = 'self' + (", " if len(t[2]) else "")`${2:arg1}):
+	${0:${VISUAL:pass}}
+endsnippet
+
+
+snippet classb "bare class" b
+class ${1:MyClass}:
+
+	def __init__(self, ${2:arg1}):
+		${0:${VISUAL:pass}}
+endsnippet
+
+
+snippet print_secret "Print secret in databriccks" b
+print_secret = lambda scope, secret: print("\f".join([_ for _ in dbutils.secrets.get(scope, secret)]))
 endsnippet

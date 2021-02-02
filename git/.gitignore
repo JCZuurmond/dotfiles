@@ -1,7 +1,22 @@
+# vim
 *.swp
+*.swo
+tags
+
+# Direnv
+.envrc
+.direnv/
+
 venv/
 __pycache__
 .ipynb_checkpoints
 .mypy_cache
-tags
 .ruby-version
+.DS_Store
+.env
+
+# Terraform
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.tfstate.lock.info

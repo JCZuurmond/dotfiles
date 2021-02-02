@@ -31,6 +31,9 @@ call plug#begin()
 	Plug 'vim-airline/vim-airline'				" Airline status at bottom
 	Plug 'vim-airline/vim-airline-themes'       " Theme for airline
 	Plug 'psf/black'						    " Black
+	Plug 'preservim/nerdtree'                   " Directory explorer
+	Plug 'wellle/targets.vim'					" Advanced targets selecting
+	Plug 'tmhedberg/SimpylFold'					" Simple folding for python
 
     if v:version > 800 && (has('python') || has('python3'))
 		let g:plug_timeout = 300	" Increase vim-plug timeout for YouCompleteMe
@@ -78,11 +81,17 @@ if has("autocmd")
 	" File settings
 	au BufRead,BufNewFile *.{py} setl number tw=79 tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4 indentkeys-=<:> ruler
 	au BufRead,BufNewFile *.{snippets} setl spell tabstop=4 softtabstop=4 smarttab shiftwidth=4
-	au BufRead,BufNewFile *.{md} setl tw=79 spell 
+	au BufRead,BufNewFile *.{md} setl tw=79 spell  tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4
+	au BufRead,BufNewFile *.{yml} setl number tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 indentkeys-=<:> ruler
 	au BufRead,BufNewFile *.{html} setl tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 
+	au BufRead,BufNewFile *.{json} setl tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 
 	au BufRead,BufNewFile make setl noexpandtab 
-	au BufRead,BufNewFile yaml setl number tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 ruler
 	au BufRead,BufNewFile * setl spell tabstop=4 softtabstop=4 shiftwidth=4 tw=79
+	au BufRead,BufNewFile *.{sh} setl tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 
+
+	" Yaml settings
+	au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml
+	autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 	" Automatically remove trailing white spaces
 	au BufWritePre *.py %s/\s\+$//e
@@ -96,6 +105,10 @@ if has("autocmd")
 
 	" Source vimrc after writing to it
 	au BufwRitePost ~/.vimrc source ~/.vimrc
+
+	" Jump between methods, in python
+	autocmd FileType python nnoremap <buffer> [[ ?^class\\|^\s*def<CR>
+	autocmd FileType python nnoremap <buffer> ]] /^class\\|^\s*def<CR>
 endif
 
 "Practice to not use arrows
@@ -138,7 +151,6 @@ set diffopt+=vertical
 nnoremap <space>gs :Gstatus<CR>
 nnoremap <space>gp :Gpush<CR>
 nnoremap <space>gd :Gdiff<CR>
-nnoremap <space>gw :w<CR>:Gcommit<CR>i
 
 " Save with `w!!` when 'readonly' is set
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
@@ -165,10 +177,16 @@ nnoremap <silent><C-w>z :ZoomWinTabToggle<CR>
 " ALE
 nnoremap <F7> :ALEToggle<CR>
 let g:ale_linters = {
-\  'python': ['flake8'],
+\  'python': ['flake8', 'mypy'],
 \}
 nnoremap <Leader>lo :lopen<CR>
 nnoremap <Leader>lc :lclose<CR>
+nnoremap <Leader>ad :ALEDisable<CR>
+nnoremap <Leader>ae :ALEEnable<CR>
+
+" Black
+nnoremap <Leader>af :Black<CR>
+let g:black_linelengt=80
 
 " Maintain undo history between sessions
 if !isdirectory($HOME."/.vim/undodir")
@@ -176,6 +194,9 @@ if !isdirectory($HOME."/.vim/undodir")
 endif
 set undofile
 set undodir=~/.vim/undodir
+
+" Nerdtree
+nnoremap <Leader>nt :NERDTreeToggle<CR>
 
 "Invisible character colors 
 highlight NonText ctermfg=2
@@ -206,4 +227,16 @@ let g:airline_solarized_bg='dark'
 set wildignore+=*/.git/*,*/venv/*,*/*.egg-info/*
 
 " Black settings
-let g:black_linelength=80
+let g:black_linelength=79
+
+" Move visual selection 
+vnoremap J :m '>+1<cr>gv=gv 
+vnoremap K :m '<-2<cr>gv=gv
+
+" Reload current file
+nnoremap <F5> :e %<CR>
+
+" Simply fold settings
+let g:SimpylFold_docstring_preview=1
+let g:SimpylFold_fold_docstring=0
+let g:SimpylFold_fold_import=0
