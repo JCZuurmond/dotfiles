@@ -7,7 +7,7 @@ endif
 
 " Get solarized color theme
 if empty(glob('~/.vim/colors/solarized.vim'))
-    silent !curl -fLo ~/.vim/colors/solarized.vim --create-dirs 
+    silent !curl -fLo ~/.vim/colors/solarized.vim --create-dirs
         \ https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim
 endif
 
@@ -27,7 +27,7 @@ call plug#begin()
 	Plug 'troydm/zoomwintab.vim'
 	Plug 'dense-analysis/ale'                   " Linting
 	Plug 'tpope/vim-unimpaired'					" Smart hot-keys with [ and ]
-	Plug 'ctrlpvim/ctrlp.vim'				    " Fuzzy matching for files
+	" Plug 'ctrlpvim/ctrlp.vim'				    " Fuzzy matching for files
 	Plug 'vim-airline/vim-airline'				" Airline status at bottom
 	Plug 'vim-airline/vim-airline-themes'       " Theme for airline
 	Plug 'preservim/nerdtree'                   " Directory explorer
@@ -84,11 +84,11 @@ if has("autocmd")
 	au BufRead,BufNewFile *.{snippets} setl spell tabstop=4 softtabstop=4 smarttab shiftwidth=4
 	au BufRead,BufNewFile *.{md} setl tw=79 spell  tabstop=4 softtabstop=4 expandtab smarttab shiftwidth=4
 	au BufRead,BufNewFile *.{yml} setl number tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 indentkeys-=<:> ruler
-	au BufRead,BufNewFile *.{html} setl tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 
-	au BufRead,BufNewFile *.{json} setl tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 
-	au BufRead,BufNewFile make setl noexpandtab 
+	au BufRead,BufNewFile *.{html} setl tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2
+	au BufRead,BufNewFile *.{json} setl tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2
+	au BufRead,BufNewFile make setl noexpandtab
 	au BufRead,BufNewFile * setl spell tabstop=4 softtabstop=4 shiftwidth=4 tw=79
-	au BufRead,BufNewFile *.{sh} setl tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2 
+	au BufRead,BufNewFile *.{sh} setl tabstop=2 softtabstop=2 expandtab smarttab shiftwidth=2
 
 	" Yaml settings
 	au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml
@@ -138,7 +138,7 @@ set novisualbell
 " Rest of line to next line enter
 map <F2> i<CR><ESC>
 
-" Set docstring guide to Numpy 
+" Set docstring guide to Numpy
 let g:ultisnips_python_style="numpy"
 let g:ultisnips_python_quoting_style="double"
 
@@ -201,7 +201,7 @@ set undodir=~/.vim/undodir
 " Nerdtree
 nnoremap <Leader>nt :NERDTreeToggle<CR>
 
-"Invisible character colors 
+"Invisible character colors
 highlight NonText ctermfg=2
 highlight SpecialKey ctermfg=2
 
@@ -216,7 +216,7 @@ set exrc
 set backspace=indent,eol,start
 
 " Tags
-set tags=tags  
+set tags=tags
 set notagbsearch      " solves tags file not sorted error
 
 " Clipboard
@@ -232,8 +232,8 @@ set wildignore+=*/.git/*,*/venv/*,*/*.egg-info/*
 " Black settings
 let g:black_linelength=79
 
-" Move visual selection 
-vnoremap J :m '>+1<cr>gv=gv 
+" Move visual selection
+vnoremap J :m '>+1<cr>gv=gv
 vnoremap K :m '<-2<cr>gv=gv
 
 " Reload current file
