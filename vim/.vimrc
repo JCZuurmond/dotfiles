@@ -243,3 +243,12 @@ nnoremap <F5> :e %<CR>
 let g:SimpylFold_docstring_preview=1
 let g:SimpylFold_fold_docstring=0
 let g:SimpylFold_fold_import=0
+
+" Fzf
+let g:fzf_layout = { 'down': '20%' }
+nnoremap <leader>fg :GFiles<CR>
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fc :Colors<CR>
+nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>fl :Lines<CR>
+nnoremap <leader>fh :History<CR>
