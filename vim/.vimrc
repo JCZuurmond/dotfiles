@@ -33,6 +33,8 @@ call plug#begin()
 	Plug 'preservim/nerdtree'                   " Directory explorer
 	Plug 'wellle/targets.vim'					" Advanced targets selecting
 	Plug 'tmhedberg/SimpylFold'					" Simple folding for python
+	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }   " fzf is a general-purpose command-line fuzzy finder.
+	Plug 'junegunn/fzf.vim'                     " Fzf vim commands
 
     if v:version > 800 && (has('python') || has('python3'))
 		let g:plug_timeout = 300	" Increase vim-plug timeout for YouCompleteMe
