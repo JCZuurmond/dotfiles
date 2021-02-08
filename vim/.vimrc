@@ -180,6 +180,10 @@ nnoremap <F7> :ALEToggle<CR>
 let g:ale_linters = {
 \  'python': ['flake8', 'mypy'],
 \}
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'python': ['black'],
+\}
 nnoremap <Leader>lo :lopen<CR>
 nnoremap <Leader>lc :lclose<CR>
 nnoremap <Leader>ad :ALEDisable<CR>
