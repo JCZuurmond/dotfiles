@@ -30,7 +30,6 @@ call plug#begin()
 	Plug 'ctrlpvim/ctrlp.vim'				    " Fuzzy matching for files
 	Plug 'vim-airline/vim-airline'				" Airline status at bottom
 	Plug 'vim-airline/vim-airline-themes'       " Theme for airline
-	Plug 'psf/black'						    " Black
 	Plug 'preservim/nerdtree'                   " Directory explorer
 	Plug 'wellle/targets.vim'					" Advanced targets selecting
 	Plug 'tmhedberg/SimpylFold'					" Simple folding for python
