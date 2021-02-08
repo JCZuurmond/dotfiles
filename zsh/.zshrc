@@ -94,3 +94,7 @@ fi
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
+
+# Go settings
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOROOT/bin
