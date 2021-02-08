@@ -188,10 +188,8 @@ nnoremap <Leader>lo :lopen<CR>
 nnoremap <Leader>lc :lclose<CR>
 nnoremap <Leader>ad :ALEDisable<CR>
 nnoremap <Leader>ae :ALEEnable<CR>
-
-" Black
-nnoremap <Leader>af :Black<CR>
-let g:black_linelengt=80
+nnoremap <Leader>af :ALEFix<CR>
+let g:ale_python_black_options='-l 79'
 
 " Maintain undo history between sessions
 if !isdirectory($HOME."/.vim/undodir")
