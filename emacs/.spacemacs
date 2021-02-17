@@ -58,6 +58,7 @@ This function should only modify configuration layer settings."
      version-control
      treemacs
      terraform
+     json)
 
 
    ;; List of additional packages that will be installed without being wrapped
