@@ -58,6 +58,13 @@ This function should only modify configuration layer settings."
      version-control
      treemacs
      terraform
+     (python :variables
+             python-test-runner 'pytest
+             python-formatter 'black
+             python-fill-column 80
+             python-auto-set-local-pyvenv-virtualenv 'on-project-switch
+             python-shell-interpreter "ipython"
+             python-shell-interpreter-args "--simple-prompt -i")
      json)
 
 
