@@ -100,3 +100,5 @@ export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOROOT/bin
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Opt-out of Azure functions telmeterty
+export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
