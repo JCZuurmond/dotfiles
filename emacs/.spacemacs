@@ -65,9 +65,10 @@ This function should only modify configuration layer settings."
              python-fill-column 79
              python-auto-set-local-pyvenv-virtualenv 'on-project-switch
              python-shell-interpreter "ipython"
-     json)
              python-shell-interpreter-args "--simple-prompt -i"
              pyvenv-default-virtual-env-name ".direnv/")
+     (json  :variables
+            json-backend 'lsp))
 
 
    ;; List of additional packages that will be installed without being wrapped
