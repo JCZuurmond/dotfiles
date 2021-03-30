@@ -98,6 +98,7 @@ if has("autocmd")
 	" Automatically remove trailing white spaces
 	au BufWritePre *.py %s/\s\+$//e
 	au BufWritePre *.yml %s/\s\+$//e
+	au BufWritePre *.sh %s/\s\+$//e
 
 	" Regenerate tags when saving Python files
 	"au BufWritePost *.py silent! !ctags -R 2> /dev/null &
