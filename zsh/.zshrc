@@ -51,7 +51,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv anaconda context dir vcs)
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv anaconda status dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 
@@ -104,3 +103,9 @@ export PATH=$PATH:$GOROOT/bin
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # Opt-out of Azure functions telmeterty
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Applications/google-cloud-sdk/path.zsh.inc' ]; then . '/Applications/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Applications/google-cloud-sdk/completion.zsh.inc' ]; then . '/Applications/google-cloud-sdk/completion.zsh.inc'; fi
