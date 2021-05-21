@@ -528,6 +528,12 @@ before packages are loaded."
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-topleft-v1)
   (setq org-directory "~/Dropbox (Xebia)/org/")
   (setq org-default-notes-file (concat org-directory "~/Dropbox (Xebia)/org/0-todo.org"))
+  (setq org-agenda-files
+        '("~/Dropbox (Xebia)/org/0-todo.org"
+          "~/Dropbox (Xebia)/org/1-base.org"
+          "~/Dropbox (Xebia)/org/2-notes.org"
+          "~/Dropbox (Xebia)/org/3-journal.org"
+          "~/Dropbox (Xebia)/org/4-companies.org"))
 
   (setq org-todo-keywords
         '((sequence "TODO(t)" "PROG(p!)" "|" "DONE(d!)" "DONT(x@/!)")))
