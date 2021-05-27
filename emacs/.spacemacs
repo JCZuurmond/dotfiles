@@ -541,7 +541,7 @@ before packages are loaded."
   ;; (setq split-width-threshold nil)
 
   (setq org-directory "~/Dropbox (Xebia)/org/")
-  (setq org-default-notes-file (concat org-directory "~/Dropbox (Xebia)/org/0-todo.org"))
+  (setq org-default-notes-file (concat org-directory "0-todo.org"))
   (setq org-agenda-files
         '("~/Dropbox (Xebia)/org/0-todo.org"
           "~/Dropbox (Xebia)/org/1-base.org"
