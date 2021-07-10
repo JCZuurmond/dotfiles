@@ -43,7 +43,16 @@ This function should only modify configuration layer settings."
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      themes-megapack
-     auto-completion
+     (auto-completion :variables
+                      auto-completion-return-key-behavior 'complete
+                      auto-completion-tab-key-behavior 'cycle
+                      auto-completion-complete-with-key-sequence nil
+                      auto-completion-complete-with-key-sequence-delay 0.1
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-sort-by-usage t
+                      auto-completion-enable-help-tooltip t
+                      auto-completion-private-snippets-directory nil)
+     )
      better-defaults
      emacs-lisp
      git
@@ -71,7 +80,7 @@ This function should only modify configuration layer settings."
              pytest-cmd-flags "-x -s --pdbcls=IPython.core.debugger:Pdb"
              pyvenv-default-virtual-env-name ".direnv/")
      (json  :variables
-            json-backend 'lsp))
+            json-backend 'json-ls))
 
 
    ;; List of additional packages that will be installed without being wrapped
