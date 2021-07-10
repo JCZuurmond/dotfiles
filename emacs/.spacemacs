@@ -52,7 +52,6 @@ This function should only modify configuration layer settings."
                       auto-completion-enable-sort-by-usage t
                       auto-completion-enable-help-tooltip t
                       auto-completion-private-snippets-directory nil)
-     )
      better-defaults
      emacs-lisp
      git
