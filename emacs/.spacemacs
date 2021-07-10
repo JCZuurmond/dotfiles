@@ -563,6 +563,11 @@ before packages are loaded."
         '((sequence "TODO(t)" "PROG(p!)" "|" "DONE(d!)" "DONT(x@/!)")))
 
 
+  (setq yas-snippet-dirs
+    (quote
+     ("~/dotfiles/snippets/emacs/"
+      "~/.emacs.d/private/snippets/"
+      "~/.emacs.d/layers/+completion/auto-completion/local/snippets")))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
