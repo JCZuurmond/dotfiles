@@ -144,3 +144,63 @@ endsnippet
 snippet print_secret "Print secret in databriccks" b
 print_secret = lambda scope, secret: print("\f".join([_ for _ in dbutils.secrets.get(scope, secret)]))
 endsnippet
+
+snippet setup_pyspark "Setup including devops"
+import os
+from glob import glob
+from setuptools import find_packages, setup
+
+BUILD_ID = os.environ.get("BUILD_BUILDID", "0")
+
+with open("README.md") as f:
+    readme = f.read()
+requirements = [
+    "pyspark>=3.0,<3.1",
+]
+setup_requirements = [
+    "pytest-runner",
+]
+tests_requirements = [
+    "pytest==5.4.1",
+    "pytest-spark==0.6.0",
+    "pytest-cov==2.8.1",
+    "pytest-xdist==1.34.0",
+    "pandas==1.0.3",
+]
+extras_requirements = {
+    "dev": [
+        "pre-commit==2.9.0",
+        "flake8==3.7.9",
+        "jupyter==1.0.0",
+        "ipdb==0.13.3",
+    ]
+    + tests_requirements,
+}
+setup(
+    name="package",
+    author="Cor Zuurmond",
+    author_email="<fill in>",
+    version=f"0.1.{BUILD_ID}",
+    description="<fill in>",
+    packages=find_packages(),
+    install_requires=requirements,
+    setup_requires=setup_requirements,
+    tests_require=tests_requirements,
+    extras_require=extras_requirements,
+    entry_points={"console_scripts": ["package=package.__main__:main"]},
+)
+endsnippet
+
+snippet setup_cfg "Setup config"
+[aliases]
+test=pytest
+
+[tool:pytest]
+addopts = --ignore=package/databricks/tests --cov=package --cov-report=xml:test-coverage.xml --junitxml=test-output.xml
+spark_options =
+    spark.app.name: my-pytest-spark-tests
+    spark.executor.instances: 1
+    spark.jars.packages: io.delta:delta-core_2.12:0.7.0,com.databricks:spark-xml_2.12:0.11.0,org.apache.spark:spark-avro_2.12:3.0.1
+    spark.sql.catalogImplementation: in-memory
+    spark.sql.extensions: io.delta.sql.DeltaSparkSessionExtension
+endsnippet
