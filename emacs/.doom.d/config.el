@@ -56,3 +56,6 @@
 ;; they are implemented.
 
 (setq-default enable-local-variables t)
+
+;; Fix highlights in text mode
+(setq-hook! 'text-mode-hook indent-tabs-mode t)
