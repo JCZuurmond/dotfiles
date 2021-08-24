@@ -6,8 +6,8 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "John Doe"
-      user-mail-address "john@doe.com")
+(setq user-full-name "Cor Zuurmond"
+      user-mail-address "corzuurmond@godatadriven.com")
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
