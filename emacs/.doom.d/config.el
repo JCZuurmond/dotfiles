@@ -29,9 +29,19 @@
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'solarized-dark)
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+;; Org
+(setq org-directory "~/Dropbox (Xebia)/org/")
+(setq org-default-notes-file (concat org-directory "0-todo.org"))
+(setq org-agenda-files
+'("~/Dropbox (Xebia)/org/0-todo.org"
+        "~/Dropbox (Xebia)/org/1-base.org"
+        "~/Dropbox (Xebia)/org/2-notes.org"
+        "~/Dropbox (Xebia)/org/3-journal.org"
+        "~/Dropbox (Xebia)/org/4-companies.org"))
+(setq org-agenda-start-with-log-mode t)
+(setq org-log-into-drawer t)
+(setq org-todo-keywords
+        '((sequence "TODO(t)" "PROG(p!)" "|" "DONE(d!)" "DONT(x@/!)")))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
