@@ -30,18 +30,19 @@
 (setq doom-theme 'solarized-dark)
 
 ;; Org
-(setq org-directory "~/Dropbox (Xebia)/org/")
-(setq org-default-notes-file (concat org-directory "0-todo.org"))
-(setq org-agenda-files
-'("~/Dropbox (Xebia)/org/0-todo.org"
-        "~/Dropbox (Xebia)/org/1-base.org"
-        "~/Dropbox (Xebia)/org/2-notes.org"
-        "~/Dropbox (Xebia)/org/3-journal.org"
-        "~/Dropbox (Xebia)/org/4-companies.org"))
-(setq org-agenda-start-with-log-mode t)
-(setq org-log-into-drawer t)
-(setq org-todo-keywords
-        '((sequence "TODO(t)" "PROG(p!)" "|" "DONE(d!)" "DONT(x@/!)")))
+(after! org
+   (setq org-directory "~/Dropbox (Xebia)/org/")
+   (setq org-default-notes-file (concat org-directory "0-todo.org"))
+   (setq org-agenda-files
+   '("~/Dropbox (Xebia)/org/0-todo.org"
+           "~/Dropbox (Xebia)/org/1-base.org"
+           "~/Dropbox (Xebia)/org/2-notes.org"
+           "~/Dropbox (Xebia)/org/3-journal.org"
+           "~/Dropbox (Xebia)/org/4-companies.org"))
+   (setq org-agenda-start-with-log-mode t)
+   (setq org-log-into-drawer t)
+   (setq org-todo-keywords
+           '((sequence "TODO(t)" "PROG(p!)" "|" "DONE(d!)" "DONT(x@/!)"))))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
