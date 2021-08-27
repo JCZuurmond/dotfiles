@@ -70,3 +70,23 @@
 
 ;; Fix highlights in text mode
 (setq-hook! 'text-mode-hook indent-tabs-mode t)
+
+(defcustom python-projectile-environment-directory ".direnv/python-3.7.2"
+  "The python environment within a projectile project"
+  :type 'string
+  :group 'python)
+
+;; Run a hook after local vars are read
+;; Source: https://stackoverflow.com/questions/5147060/how-can-i-access-directory-local-variables-in-my-major-mode-hooks
+(add-hook 'hack-local-variables-hook 'run-local-vars-mode-hook)
+(defun run-local-vars-mode-hook ()
+  "Run a hook for the major-mode after the local variables have been processed."
+  (run-hooks (intern (concat (symbol-name major-mode) "-local-vars-hook"))))
+
+;; Set-up the python shell
+(defun config/python-mode-shell-setup ()
+  (message "project python environment is %s" python-projectile-environment-directory)
+  (setq-local python-shell-virtualenv-root (expand-file-name python-projectile-environment-directory (projectile-project-root))
+              python-pytest-executable (expand-file-name (concat python-projectile-environment-directory "/bin/pytest") (projectile-project-root))))
+
+(add-hook 'python-mode-local-vars-hook 'config/python-mode-shell-setup)
