@@ -6,6 +6,7 @@
 ;; use 'M-x doom/reload'.
 
 (package! solarized-theme)
+(package! terraform-mode)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
