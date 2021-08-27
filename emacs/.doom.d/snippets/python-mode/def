@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: def
+# uuid: def
+# key: def
+# condition: t
+# --
+def ${1:name}($2):
+    \"\"\"$3
+    ${2:$(python-args-to-docstring-numpy)}
+    \"\"\"
+    $0
