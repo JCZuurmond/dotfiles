@@ -151,8 +151,8 @@ set pastetoggle=<F3>
 set diffopt+=vertical
 
 " Short cuts for git (vim fugititve)
-nnoremap <space>gs :Gstatus<CR>
-nnoremap <space>gp :Gpush<CR>
+nnoremap <space>gs :Git<CR>
+nnoremap <space>gp :Git push<CR>
 nnoremap <space>gd :Gdiff<CR>
 
 " Save with `w!!` when 'readonly' is set
