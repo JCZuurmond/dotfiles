@@ -78,10 +78,11 @@
 
 ;; Run a hook after local vars are read
 ;; Source: https://stackoverflow.com/questions/5147060/how-can-i-access-directory-local-variables-in-my-major-mode-hooks
-(add-hook 'hack-local-variables-hook 'run-local-vars-mode-hook)
 (defun run-local-vars-mode-hook ()
   "Run a hook for the major-mode after the local variables have been processed."
   (run-hooks (intern (concat (symbol-name major-mode) "-local-vars-hook"))))
+
+(add-hook 'hack-local-variables-hook 'run-local-vars-mode-hook)
 
 ;; Set-up the python shell
 (defun config/python-mode-shell-setup ()
