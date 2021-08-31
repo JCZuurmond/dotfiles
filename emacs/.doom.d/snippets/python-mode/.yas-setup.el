@@ -1,3 +1,4 @@
+;; Source: https://github.com/AndreaCrotti/yasnippet-snippets/blob/master/snippets/python-mode/.yas-setup.el
 (require 'yasnippet)
 (defvar yas-text)
 
@@ -34,5 +35,4 @@
                        "\nReturns\n-------" formatted-ret)
                  "\n"))))
 
-
-(add-hook 'python-mode-hook #'yasnippet-snippets--fixed-indent)
+;;(add-hook 'python-mode-hook #'yasnippet-snippets--fixed-indent)
