@@ -100,3 +100,5 @@
               python-pytest-executable (expand-file-name (concat python-projectile-environment-directory "/bin/pytest -x -s --pdbcls=IPython.core.debugger:Pdb") (projectile-project-root))))
 
 (add-hook 'python-mode-local-vars-hook 'config/python-mode-shell-setup)
+
+(setq-hook! 'python-mode-hook +format-with 'black)
