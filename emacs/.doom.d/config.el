@@ -97,6 +97,6 @@
 (defun config/python-mode-shell-setup ()
   (message "project python environment is %s" python-projectile-environment-directory)
   (setq-local python-shell-virtualenv-root (expand-file-name python-projectile-environment-directory (projectile-project-root))
-              python-pytest-executable (expand-file-name (concat python-projectile-environment-directory "/bin/pytest") (projectile-project-root))))
+              python-pytest-executable (expand-file-name (concat python-projectile-environment-directory "/bin/pytest -x -s --pdbcls=IPython.core.debugger:Pdb") (projectile-project-root))))
 
 (add-hook 'python-mode-local-vars-hook 'config/python-mode-shell-setup)
