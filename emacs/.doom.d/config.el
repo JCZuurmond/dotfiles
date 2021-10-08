@@ -32,7 +32,7 @@
 ;; Org
 (after! org
    (setq org-directory "~/Nextcloud/org/")
-   (setq org-default-notes-file (concat org-directory "0-todo.org"))
+   (setq org-default-notes-file (concat org-directory "2-notes.org"))
    (setq org-agenda-files
    '("~/Nextcloud/org/0-todo.org"
            "~/Nextcloud/org/1-base.org"
