@@ -7,6 +7,7 @@
 
 (package! solarized-theme)
 (package! terraform-mode)
+(package! flyspell-lazy)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
