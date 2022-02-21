@@ -126,3 +126,4 @@ export PATH="$PATH:/Users/cor/.emacs.d/bin"
 # Set ld flags
 export LDFLAGS="-L/usr/local/opt/openssl/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl/include"
+export PATH="/usr/local/sbin:$PATH"
