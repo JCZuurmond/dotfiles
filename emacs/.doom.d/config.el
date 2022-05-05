@@ -31,15 +31,15 @@
 
 ;; Org
 (after! org
-  (setq org-directory "~/Nextcloud/org/")
+  (setq org-directory "~/Dropbox (Xebia)/org/")
   (setq org-default-notes-file (concat org-directory "2-notes.org"))
   (setq org-agenda-files
-        '("~/Nextcloud/org/0-todo.org"
-          "~/Nextcloud/org/1-base.org"
-          "~/Nextcloud/org/2-notes.org"
-          "~/Nextcloud/org/3-journal.org"
-          "~/Nextcloud/org/4-companies.org"))
-  (setq org-mobile-directory "~/Nextcloud/org")
+        '("~/Dropbox (Xebia)/org/0-todo.org"
+          "~/Dropbox (Xebia)/org/1-base.org"
+          "~/Dropbox (Xebia)/org/2-notes.org"
+          "~/Dropbox (Xebia)/org/3-journal.org"
+          "~/Dropbox (Xebia)/org/4-companies.org"))
+  (setq org-mobile-directory "~/Dropbox (Xebia)/org")
   (setq org-mobile-directory (concat org-directory "from-mobile.org"))
   (setq +org-capture-notes-file "2-notes.org")
   (setq +org-capture-todo-file "0-todo.org")
