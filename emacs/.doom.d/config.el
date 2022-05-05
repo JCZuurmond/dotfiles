@@ -100,8 +100,13 @@
 (defun config/python-mode-shell-setup ()
   (message "project python environment is %s" python-projectile-environment-directory)
   (setq-local python-shell-virtualenv-root (expand-file-name python-projectile-environment-directory (projectile-project-root))
-              python-pytest-executable (expand-file-name (concat python-projectile-environment-directory "/bin/pytest -x -s --pdbcls=IPython.core.debugger:Pdb") (projectile-project-root))))
+              python-pytest-executable (expand-file-name (concat python-projectile-environment-directory "/bin/pytest -x -s --pdbcls=IPython.core.debugger:Pdb") (projectile-project-root))
+              lsp-python-ms-python-executable (expand-file-name (concat python-projectile-environment-directory "/bin/python") (projectile-project-root))
+              lsp-pyright-venv-path (expand-file-name python-projectile-environment-directory (projectile-project-root))
+              lsp-pyright-venv-directory python-projectile-environment-directory))
 
 (add-hook 'python-mode-local-vars-hook 'config/python-mode-shell-setup)
+
+(setq lsp-pylsp-plugins-flake8-ignore ["D101"])
 
 (setq-hook! 'python-mode-hook +format-with 'black)
