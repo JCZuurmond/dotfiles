@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: link-in-tab
+# uuid: link-int-tab
+# key: lit
+# condition: t
+# --
+{:target="_blank"}
