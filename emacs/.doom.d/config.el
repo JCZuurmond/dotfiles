@@ -32,6 +32,9 @@
 ;; Org
 (after! org
   (setq org-directory "~/Dropbox (Xebia)/org/")
+  (setq org-startup-indented nil
+        org-adapt-indentation nil
+        org-hide-leading-stars nil)
   (setq org-default-notes-file (concat org-directory "2-notes.org"))
   (setq org-agenda-files
         '("~/Dropbox (Xebia)/org/0-todo.org"
