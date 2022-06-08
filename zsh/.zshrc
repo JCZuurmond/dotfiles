@@ -127,3 +127,6 @@ export PATH="$PATH:/Users/cor/.emacs.d/bin"
 export LDFLAGS="-L/usr/local/opt/openssl/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl/include"
 export PATH="/usr/local/sbin:$PATH"
+
+# Homebrew
+export HOMEBREW_NO_ANALYTICS=1
