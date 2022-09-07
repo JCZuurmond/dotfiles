@@ -405,24 +405,22 @@
  '(ansi-color-faces-vector
    [default bold shadow italic underline bold bold-italic bold])
  '(blink-cursor-mode nil)
- '(custom-enabled-themes (quote (solarized-dark)))
+ '(custom-enabled-themes '(solarized-dark))
  '(custom-safe-themes
-   (quote
-    ("0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default)))
+   '("0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default))
  '(explicit-shell-file-name nil)
  '(hl-sexp-background-color "#1c1f26")
- '(ido-mode (quote both) nil (ido))
+ '(ido-mode 'both nil (ido))
  '(inhibit-startup-screen t)
  '(menu-bar-mode nil)
- '(org-agenda-files (quote ("/tmp/test.org")))
+ '(org-agenda-files '("/tmp/test.org"))
  '(package-selected-packages
-   (quote
-    (jedi yasnippet-snippets evil-magit ein py-autopep8 elpy material-theme better-defaults multi-term grep-a-lot solarized-theme use-package evil-visual-mark-mode)))
- '(ring-bell-function (quote ignore))
+   '(jedi yasnippet-snippets evil-magit ein py-autopep8 elpy material-theme better-defaults multi-term grep-a-lot solarized-theme use-package evil-visual-mark-mode))
+ '(ring-bell-function 'ignore)
  '(scroll-bar-mode nil)
  '(server-mode t)
  '(tool-bar-mode nil)
- '(uniquify-buffer-name-style (quote post-forward) nil (uniquify)))
+ '(uniquify-buffer-name-style 'post-forward nil (uniquify)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
