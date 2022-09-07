@@ -31,6 +31,9 @@
 
 ;; Org
 (after! org
+  ;; org-subtree-archive failed with following error: org-id-add-location: Wrong type argument: hash-table-p, nil
+  ;; solution: https://github.com/org-roam/org-roam/issues/1526#issuecomment-901663871
+  (org-id-update-id-locations)
   (setq org-directory "~/Dropbox (Xebia)/org/")
   (setq org-startup-indented nil
         org-adapt-indentation nil
