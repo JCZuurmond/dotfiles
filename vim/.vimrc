@@ -254,3 +254,5 @@ nnoremap <leader>fc :Colors<CR>
 nnoremap <leader>fb :Buffers<CR>
 nnoremap <leader>fl :Lines<CR>
 nnoremap <leader>fh :History<CR>
+set rtp+=/opt/homebrew/opt/fzf
+
