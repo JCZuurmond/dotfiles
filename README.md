@@ -1,6 +1,29 @@
 # dotfiles
 'Stow' the directories to use the settings
 
+# Mac
+
+Install:
+- brew
+
+Brew install iterm
+- zsh
+- iterm2
+
+Settings
+- iTerm2 > Preferences > Profiles > Colors > Color Presets > Solarized Dark
+- Keyboard > Modifier Keys > Set Caps Lock to Escape
+
+## Oh-my-zsh
+
+Install power level theme
+git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+
+## Emacs
+
+Follow [install instructions for Doom Emacs](https://github.com/doomemacs/doomemacs/blob/master/docs/getting_started.org)
+
+# Linux
 
 ## (Re)generate i3 config
 
