@@ -74,12 +74,13 @@ ulimit -n 4096
 bindkey '^[[200~' bracketed-paste-magic
 
 # load rbenv automatically
+# https://github.com/rbenv/rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # Virtual env wrapper
 export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 source /usr/local/bin/virtualenvwrapper.sh
 export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 
@@ -90,9 +91,11 @@ alias weather-amsterdam='curl v2.wttr.in/Amsterdam'
 FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
 
 # Direnv
+# brew install direnv
 eval "$(direnv hook zsh)"
 
 # pyenv
+# brew install pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
@@ -124,9 +127,9 @@ export PATH="$PATH:/Users/cor/.emacs.d/bin"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Set ld flags
-export LDFLAGS="-L/usr/local/opt/openssl/lib"
-export CPPFLAGS="-I/usr/local/opt/openssl/include"
-export PATH="/usr/local/sbin:$PATH"
-
-# Homebrew
+export LDFLAGS="-L/usr/local/opt/openssl/lib -L/opt/homebrew/Cellar/unixodbc/2.3.11/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl/include -I/opt/homebrew/Cellar/unixodbc/2.3.11/include -I/opt/homebrew/opt/openjdk@11/include"
+export PATH="/opt/homebrew/opt/openjdk@11/bin:/usr/local/sbin:$PATH"
 export HOMEBREW_NO_ANALYTICS=1
+
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
