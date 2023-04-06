@@ -5,3 +5,4 @@ i3/.config/i3/config
 
 # Emacs
 emacs/.doom.d/custom.el
+emacs/.doom.d/env
