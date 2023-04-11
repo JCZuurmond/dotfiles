@@ -8,6 +8,12 @@
 (package! solarized-theme)
 (package! terraform-mode)
 (package! flyspell-lazy)
+(package! openai
+   :recipe (:host github :repo "emacs-openai/openai" :branch "master"))
+(package! chatgpt
+   :recipe (:host github :repo "emacs-openai/chatgpt"))
+(package! codegpt
+   :recipe (:host github :repo "emacs-openai/codegpt"))
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
