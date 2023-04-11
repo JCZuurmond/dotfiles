@@ -114,3 +114,27 @@
 (setq lsp-pylsp-plugins-flake8-ignore ["D101"])
 
 (setq-hook! 'python-mode-hook +format-with 'black)
+
+;; OpenAI
+(defun openai-get-key ()
+  "Retrieve the OpenAI API key from Azure CLI."
+  (let* ((output (with-output-to-string
+                  (call-process "az" nil standard-output nil
+                                  "account" "get-access-token" "--resource" "https://cognitiveservices.azure.com")))
+          (json (json-read-from-string output)))
+  (cdr (assoc 'accessToken json))))
+
+(defun openai-set-key()
+  "Set the OpenAI API key."
+  (setq openai-key (openai-get-key)))
+
+(after! openai
+  (setq openai-base-url "https://xebia-openai.openai.azure.com/openai/deployments/gpt-35-turbo"
+        openai-completion-max-tokens 1000
+        openai-parameters '(("api-version" . "2023-03-15-preview")))
+  (openai-set-key))
+
+;; Codegpt
+(after! codegpt (
+  setq codegpt-tunnel 'chat
+       codegpt-model "gpt-3.5-turbo"))
