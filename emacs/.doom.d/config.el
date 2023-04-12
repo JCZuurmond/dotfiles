@@ -133,6 +133,6 @@
         openai-parameters '(("api-version" . "2023-03-15-preview"))))
 
 ;; Codegpt
-(after! codegpt (
-  setq codegpt-tunnel 'chat
+(after! codegpt
+  (setq codegpt-tunnel 'chat
        codegpt-model "gpt-3.5-turbo"))
