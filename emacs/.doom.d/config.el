@@ -127,10 +127,10 @@
   (cdr (assoc 'accessToken json))))
 
 (after! openai
-  (setq openai-base-url "https://xebia-openai.openai.azure.com/openai/deployments/gpt-35-turbo"
+  (setq openai-key #'openai-get-key
+        openai-base-url "https://xebia-openai.openai.azure.com/openai/deployments/gpt-35-turbo"
         openai-completion-max-tokens 1000
-        openai-parameters '(("api-version" . "2023-03-15-preview")))
-  (setq openai-key (openai-get-key)))
+        openai-parameters '(("api-version" . "2023-03-15-preview"))))
 
 ;; Codegpt
 (after! codegpt (
