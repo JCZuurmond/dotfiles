@@ -126,15 +126,11 @@
           (json (json-read-from-string output)))
   (cdr (assoc 'accessToken json))))
 
-(defun openai-set-key()
-  "Set the OpenAI API key."
-  (setq openai-key (openai-get-key)))
-
 (after! openai
   (setq openai-base-url "https://xebia-openai.openai.azure.com/openai/deployments/gpt-35-turbo"
         openai-completion-max-tokens 1000
         openai-parameters '(("api-version" . "2023-03-15-preview")))
-  (openai-set-key))
+  (setq openai-key (openai-get-key)))
 
 ;; Codegpt
 (after! codegpt (
