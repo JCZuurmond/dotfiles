@@ -128,7 +128,7 @@
 
 (after! openai
   (setq openai-key #'openai-get-key
-        openai-base-url "https://xebia-openai.openai.azure.com/openai/deployments/gpt-35-turbo"
+        openai-base-url "https://slackgpt-openai.openai.azure.com/openai/deployments/gpt-35-turbo"
         openai-completion-max-tokens 1000
         openai-parameters '(("api-version" . "2023-03-15-preview"))))
 
