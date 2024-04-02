@@ -121,7 +121,7 @@ if [ -f '/Applications/google-cloud-sdk/path.zsh.inc' ]; then . '/Applications/g
 if [ -f '/Applications/google-cloud-sdk/completion.zsh.inc' ]; then . '/Applications/google-cloud-sdk/completion.zsh.inc'; fi
 
 # Emacs
-export PATH="$PATH:/Users/cor/.emacs.d/bin"
+export PATH="$PATH:$HOME/.emacs.d/bin"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
