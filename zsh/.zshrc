@@ -78,10 +78,16 @@ bindkey '^[[200~' bracketed-paste-magic
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
+# Python bin
+export PATH="$PATH:$HOME/Library/Python/3.9/bin/"
+
+# User bin
+export PATH="$PATH:$HOME/bin/"
+
 # Virtual env wrapper
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source /usr/local/bin/virtualenvwrapper.sh
+source $(which virtualenvwrapper.sh)
 export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 
 # Weather
