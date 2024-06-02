@@ -136,3 +136,10 @@
 (after! codegpt
   (setq codegpt-tunnel 'chat
        codegpt-model "gpt-3.5-turbo"))
+
+;; Overwrite the evil-escape-key-sequence
+;; TODO: Document why
+(use-package-hook! evil-escape
+  :post-init
+  (setq evil-escape-key-sequence "qx")
+  t)
