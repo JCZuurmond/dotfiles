@@ -187,13 +187,3 @@
        :config
        ;;literate
        (default +bindings +smartparens))
-
-;; From the [[file:~/.emacs.d/docs/getting_started.org][getting started]]
-;; For more flexibility, the ~use-package-hook!~ is another option, but should be
-;; considered a last resort (because there is usually a better way). It allows you
-;; to disable, append/prepend to and/or overwrite Doom's ~use-package!~ blocks.
-;; These are powered by ~use-package~'s inject-hooks under the hood.
-(use-package-hook! evil-escape
-  :post-init
-  (setq evil-escape-key-sequence "qx")
-  t)
