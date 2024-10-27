@@ -87,8 +87,8 @@ export PATH="$PATH:$HOME/bin/"
 
 # Virtual env wrapper
 export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source $(which virtualenvwrapper.sh)
+export VIRTUALENVWRAPPER_PYTHON=$HOME/.pyenv/shims/python3
+source /usr/local/bin/virtualenvwrapper.sh
 export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 
 # Weather
