@@ -75,8 +75,9 @@ bindkey '^[[200~' bracketed-paste-magic
 
 # load rbenv automatically
 # https://github.com/rbenv/rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# export PATH="$HOME/.rbenv/bin:$PATH"
+# eval "$(rbenv init -)"
+eval "$(rbenv init - zsh)"
 
 # Python bin
 export PATH="$PATH:$HOME/Library/Python/3.9/bin/"
