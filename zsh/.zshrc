@@ -113,8 +113,10 @@ export HOMEBREW_NO_ANALYTICS=1
 # Pyenv
 # - pyenv: https://github.com/pyenv/pyenv
 # - pyenv-virtualenv: https://github.com/pyenv/pyenv-virtualenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 if [ -n "$(which pyenv)" ]; then
-  eval "$(pyenv init)"
+  eval "$(pyenv init - -zsh)"
   eval "$(pyenv virtualenv-init -)"
   export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 fi
