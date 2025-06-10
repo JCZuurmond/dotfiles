@@ -136,6 +136,11 @@ if [ -n "$(which direnv)" ]; then
   # export DIRENV_WARN_TIMEOUT=100s
 fi
 
+# Emacs
+# - Doom emacs: https://github.com/doomemacs/doomemacs
+[[ -d $HOME/.config/emacs/bin ]] && export PATH="$HOME/.config/emacs/bin:$PATH"
+
+
 #	email = cor@Cors-MacBook-Pro.local
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
