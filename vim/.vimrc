@@ -71,7 +71,7 @@ let test#strategy = "dispatch"
 "set color scheme to nova
 syntax on
 set background=dark
-let g:solarized_termcolors=16
+let g:solarized_termcolors=256
 let g:solarized_contrast="high"
 colorscheme solarized
 
