@@ -7,8 +7,8 @@
     # Ignore file permission changes
     filemode = false
     editor = vim
-    excludesfile = ~/dotfiles/git/.gitignore
 	hooksPath = ~/.databricks/githooks
+    excludesfile = ~/github/JCZuurmond/dotfiles/git/.gitignore
 
 [push]
     default = simple
