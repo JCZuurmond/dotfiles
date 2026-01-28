@@ -138,9 +138,22 @@
   (setq codegpt-tunnel 'chat
        codegpt-model "gpt-3.5-turbo"))
 
+
+;; ellama
+;; https://github.com/s-kostyaev/ellama
+(after! ellama
+  (setq codegpt-tunnel 'chat
+       codegpt-model "gpt-3.5-turbo"))
+
+
 ;; Overwrite the evil-escape-key-sequence
 ;; TODO: Document why
 (use-package-hook! evil-escape
   :post-init
   (setq evil-escape-key-sequence "qx")
   t)
+
+;; https://discourse.doomemacs.org/t/what-are-leader-and-localleader-keys/153
+;; Doom Defaults: `SPC' leader key, `SPC m' local leader
+;; Practicalli: Set local leader to `,'
+(setq doom-localleader-key ",")
