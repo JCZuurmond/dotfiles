@@ -7,9 +7,9 @@
 (setq load-prefer-newer t)
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets.
-(setq user-full-name "Cor Zuurmond"
-      user-mail-address "cor.zuurmond@xebia.com")
+;; clients, file templates and snippets. Loaded from git config.
+(setq user-full-name (string-trim (shell-command-to-string "git config user.name"))
+      user-mail-address (string-trim (shell-command-to-string "git config user.email")))
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
