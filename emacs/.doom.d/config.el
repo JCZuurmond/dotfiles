@@ -157,3 +157,18 @@
 ;; Doom Defaults: `SPC' leader key, `SPC m' local leader
 ;; Practicalli: Set local leader to `,'
 (setq doom-localleader-key ",")
+
+;; Claude Code IDE
+(use-package! claude-code-ide
+  :commands (claude-code-ide claude-code-ide-menu)
+  :config
+  (setq claude-code-ide-terminal-backend 'vterm
+        claude-code-ide-window-side 'right
+        claude-code-ide-window-width 90)
+  ;; Enable Emacs MCP tools (LSP, treesitter, imenu, etc.)
+  (claude-code-ide-emacs-tools-setup))
+
+;; Keybinding: SPC o c for "open claude"
+(map! :leader
+      :desc "Claude Code" "o c" #'claude-code-ide
+      :desc "Claude Menu" "o C" #'claude-code-ide-menu)
