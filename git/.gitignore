@@ -23,4 +23,7 @@ terraform.tfstate.backup
 .terraform.tfstate.lock.info
 
 #  Emacs
-.dir-locals.el
+.dir-locals.el.dir-locals.el
+
+# VSCode
+.vscode/
