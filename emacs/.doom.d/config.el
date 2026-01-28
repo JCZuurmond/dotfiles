@@ -172,3 +172,45 @@
 (map! :leader
       :desc "Claude Code" "o c" #'claude-code-ide
       :desc "Claude Menu" "o C" #'claude-code-ide-menu)
+
+;; ============================================================================
+;; Settings migrated from old .emacs.d and .spacemacs configs (commented out)
+;; Uncomment if you find yourself missing these features
+;; ============================================================================
+
+;; -- Magit fullscreen (from .spacemacs) --
+;; Opens magit status in a fullframe window
+;; (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-topleft-v1)
+
+;; -- Org-mode settings (from .spacemacs) --
+;; Prevents org from splitting lines when pressing M-RET
+;; (setq org-M-RET-may-split-line nil)
+
+;; -- Text mode auto-fill (from .spacemacs) --
+;; Automatically wrap text at fill-column in text modes
+;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+;; -- Custom snippet directory (from .spacemacs) --
+;; Add your custom snippets from ~/dotfiles/snippets/emacs/
+;; (after! yasnippet
+;;   (add-to-list 'yas-snippet-dirs "~/dotfiles/snippets/emacs/"))
+
+;; -- Flyspell with aspell (from .emacs.d/init.el) --
+;; Use aspell with British English dictionary
+;; (after! ispell
+;;   (setq ispell-program-name "/usr/local/bin/aspell"
+;;         ispell-dictionary "en_GB"
+;;         ispell-extra-args '("--sug-mode=ultra")))
+
+;; -- Font settings (from .emacs.d/init.el) --
+;; Hack font at size 12
+;; (setq doom-font (font-spec :family "Hack" :size 12))
+
+;; -- Language modes (from .spacemacs) --
+;; You had csv, sql, html, json enabled in Spacemacs.
+;; To enable in Doom, uncomment these in ~/.doom.d/init.el under :lang section:
+;;   - web (for html)
+;;   - json
+;; And add under :lang:
+;;   - data (includes csv, xml, etc.)
+;;   - (sql +lsp)
