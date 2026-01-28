@@ -36,23 +36,45 @@
   ;; org-subtree-archive failed with following error: org-id-add-location: Wrong type argument: hash-table-p, nil
   ;; solution: https://github.com/org-roam/org-roam/issues/1526#issuecomment-901663871
   (org-id-update-id-locations)
+
+  ;; Org directory (ProtonDrive synced)
   (setq org-directory "~/org/")
+
+  ;; Display settings
   (setq org-startup-indented nil
         org-adapt-indentation nil
         org-hide-leading-stars nil
         visual-line-mode t)
-  (setq org-default-notes-file (concat org-directory "2-notes.org"))
-  (setq org-agenda-files
-        (mapcar (lambda (f) (concat org-directory f))
-                '("0-todo.org"
-                  "1-base.org"
-                  "2-notes.org"
-                  "3-journal.org"
-                  "4-companies.org")))
+
+  ;; Default notes file
+  (setq org-default-notes-file (concat org-directory "inbox.org"))
+
+  ;; Agenda files - inbox is the main task file
+  (setq org-agenda-files (list (concat org-directory "inbox.org")))
+
+  ;; Archive location (datetree by year)
+  (setq org-archive-location (concat org-directory "archive.org::datetree/"))
+
+  ;; Agenda settings
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-into-drawer t)
+  (setq org-log-done 'time)
+
+  ;; Todo keywords
   (setq org-todo-keywords
-        '((sequence "TODO(t)" "PROG(p!)" "|" "DONE(d!)" "DONT(x@/!)"))))
+        '((sequence "TODO(t)" "PROG(p!)" "|" "DONE(d!)" "DONT(x@/!)")))
+
+  ;; Capture templates
+  (setq org-capture-templates
+        `(("t" "Todo" entry (file+headline ,(concat org-directory "inbox.org") "Inbox")
+           "* TODO %?\n%U\n" :prepend t)
+          ("n" "Note" entry (file+headline ,(concat org-directory "notes.org") "Inbox")
+           "* %?\n%U\n" :prepend t)))
+
+  ;; Refile targets
+  (setq org-refile-targets `((org-agenda-files :maxlevel . 2)
+                             (,(concat org-directory "notes.org") :maxlevel . 2)
+                             (,(concat org-directory "inbox.org") :maxlevel . 2))))
 
 (defun disable-tabs () (setq indent-tabs-mode nil))
 (defun enable-tabs  ()
