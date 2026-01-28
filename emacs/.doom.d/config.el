@@ -48,8 +48,6 @@
           "~/Dropbox (Xebia)/org/2-notes.org"
           "~/Dropbox (Xebia)/org/3-journal.org"
           "~/Dropbox (Xebia)/org/4-companies.org"))
-  (setq org-mobile-directory "~/Dropbox (Xebia)/Apps/MobileOrg")
-  (setq org-mobile-inbox-for-pull (concat org-directory "from-mobile-new.org"))
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-into-drawer t)
   (setq org-todo-keywords
