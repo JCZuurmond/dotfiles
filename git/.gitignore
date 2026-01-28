@@ -27,3 +27,6 @@ terraform.tfstate.backup
 
 # VSCode
 .vscode/
+
+# Claude
+.claude/
