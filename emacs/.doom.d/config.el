@@ -36,18 +36,19 @@
   ;; org-subtree-archive failed with following error: org-id-add-location: Wrong type argument: hash-table-p, nil
   ;; solution: https://github.com/org-roam/org-roam/issues/1526#issuecomment-901663871
   (org-id-update-id-locations)
-  (setq org-directory "~/Dropbox (Xebia)/org/")
+  (setq org-directory "~/org/")
   (setq org-startup-indented nil
         org-adapt-indentation nil
         org-hide-leading-stars nil
         visual-line-mode t)
   (setq org-default-notes-file (concat org-directory "2-notes.org"))
   (setq org-agenda-files
-        '("~/Dropbox (Xebia)/org/0-todo.org"
-          "~/Dropbox (Xebia)/org/1-base.org"
-          "~/Dropbox (Xebia)/org/2-notes.org"
-          "~/Dropbox (Xebia)/org/3-journal.org"
-          "~/Dropbox (Xebia)/org/4-companies.org"))
+        (mapcar (lambda (f) (concat org-directory f))
+                '("0-todo.org"
+                  "1-base.org"
+                  "2-notes.org"
+                  "3-journal.org"
+                  "4-companies.org")))
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-into-drawer t)
   (setq org-todo-keywords
