@@ -66,10 +66,27 @@
 
   ;; Capture templates
   (setq org-capture-templates
-        `(("t" "Todo" entry (file+headline ,(concat org-directory "inbox.org") "Inbox")
-           "* TODO %?\n%U\n" :prepend t)
+        `(("t" "Todo" plain (file+function ,(concat org-directory "inbox.md") org-capture-goto-inbox-section)
+           "- [ ] %?\n\n" :prepend nil)
           ("n" "Note" entry (file+headline ,(concat org-directory "notes.org") "Inbox")
            "* %?\n%U\n" :prepend t)))
+
+  ;; Function to find the "# Inbox" section in markdown files
+  (defun org-capture-goto-inbox-section ()
+    "Go to the # Inbox section for capture."
+    (goto-char (point-min))
+    (if (re-search-forward "^## Inbox" nil t)
+        (progn
+          (forward-line 1)
+          ;; Skip any existing list items to append at the end
+          (while (and (not (eobp))
+                      (looking-at "^\\(- \\|$\\)"))
+            (forward-line 1))
+          ;; Go back one line if we're at a blank line after list items
+          (when (and (not (bobp))
+                     (save-excursion (forward-line -1) (looking-at "^$")))
+            (forward-line -1)))
+      (error "Could not find '# Inbox' section in inbox.md")))
 
   ;; Refile targets
   (setq org-refile-targets `((org-agenda-files :maxlevel . 2)
