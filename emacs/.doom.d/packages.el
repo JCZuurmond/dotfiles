@@ -39,6 +39,11 @@
 (package! gptel-agent
   :recipe (:host github :repo "karthink/gptel-agent"))
 
+;; Google Gemini CLI integration (uses OAuth, no API key needed)
+(package! gemini-cli
+  :recipe (:host github :repo "linchen2chris/gemini-cli.el"))
+
+
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 

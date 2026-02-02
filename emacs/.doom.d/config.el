@@ -216,7 +216,6 @@
   (setq codegpt-tunnel 'chat
        codegpt-model "gpt-3.5-turbo"))
 
-
 ;; Overwrite the evil-escape-key-sequence
 ;; TODO: Document why
 (use-package-hook! evil-escape
@@ -238,8 +237,6 @@
         claude-code-ide-window-width 90)
   ;; Enable Emacs MCP tools (LSP, treesitter, imenu, etc.)
   (claude-code-ide-emacs-tools-setup))
-
-
 
 ;; GitHub Copilot
 (use-package! copilot
@@ -336,6 +333,22 @@
     (message "%s" output)
     output))
 
+;; Google Gemini CLI integration (uses OAuth, no API key needed)
+;; https://github.com/linchen2chris/gemini-cli.el
+;; Requires: npm install -g @anthropic/gemini-cli
+(use-package! gemini-cli
+  :commands (gemini-cli gemini-cli-send-region gemini-cli-fix-error-at-point)
+  :config
+  (setq gemini-cli-program "gemini"
+        gemini-cli-terminal-backend 'vterm))
+
+;; Keybinding for generative AI chats
+(map! :leader
+      (:prefix ("o" . "open")
+       (:prefix ("c" . "chat")
+        :desc "Claude" "c" #'claude-code-ide
+        :desc "Claude Menu" "C" #'claude-code-ide-menu
+        :desc "Gemini" "g" #'gemini-cli)))
 
 ;; ============================================================================
 ;; Settings migrated from old .emacs.d and .spacemacs configs (commented out)
