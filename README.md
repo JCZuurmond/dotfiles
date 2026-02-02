@@ -1,6 +1,13 @@
 # dotfiles
 'Stow' the directories to use the settings
 
+## Stow
+Stow the following:
+
+``` sh
+$ stow pip
+```
+
 # Mac
 
 Install:
