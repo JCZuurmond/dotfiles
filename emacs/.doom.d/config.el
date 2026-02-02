@@ -46,9 +46,6 @@
         org-hide-leading-stars nil
         visual-line-mode t)
 
-  ;; Default notes file
-  (setq org-default-notes-file (concat org-directory "inbox.org"))
-
   ;; Agenda files - inbox is the main task file
   (setq org-agenda-files (list (concat org-directory "inbox.org")))
 
@@ -68,8 +65,43 @@
   (setq org-capture-templates
         `(("t" "Todo" plain (file+function ,(concat org-directory "inbox.md") org-capture-goto-inbox-section)
            "- [ ] %?\n\n" :prepend nil)
-          ("n" "Note" entry (file+headline ,(concat org-directory "notes.org") "Inbox")
-           "* %?\n%U\n" :prepend t)))
+          ("n" "Note" plain (file org-capture-note-file)
+           ,(concat "---\n"
+                    "title: %(org-capture-get-note-title)\n"
+                    "date: %<%Y-%m-%d>\n"
+                    "author: " user-full-name "\n"
+                    "project: %(or (projectile-project-name) \"none\")\n"
+                    "tags: []\n"
+                    "---\n\n"
+                    "# %(org-capture-get-note-title)\n\n"
+                    "%?")
+           :prepend nil)))
+
+  ;; Generate note filename with YYYYMMDD-<title>.md format
+  (defun org-capture-note-file ()
+    "Generate a filename for a new note in notes/ subfolder."
+    (let* ((title (read-string "Note title: "))
+           (slug (org-capture-sanitize-filename title))
+           (date (format-time-string "%Y%m%d"))
+           (filename (concat org-directory "notes/" date "-" slug ".md")))
+      ;; Store title for use in template
+      (setq org-capture-note-title title)
+      ;; Ensure notes directory exists
+      (make-directory (concat org-directory "notes/") t)
+      filename))
+
+  ;; Convert title to filename-safe slug
+  (defun org-capture-sanitize-filename (title)
+    "Convert TITLE to a filename-safe slug."
+    (let ((slug (downcase title)))
+      (setq slug (replace-regexp-in-string "[^a-z0-9]+" "-" slug))
+      (setq slug (replace-regexp-in-string "^-+\\|-+$" "" slug))
+      slug))
+
+  ;; Retrieve stored note title for use in template
+  (defun org-capture-get-note-title ()
+    "Return the stored note title for capture template."
+    (or org-capture-note-title "Untitled"))
 
   ;; Function to find the "# Inbox" section in markdown files
   (defun org-capture-goto-inbox-section ()
