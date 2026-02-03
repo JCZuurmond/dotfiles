@@ -186,8 +186,7 @@
 (add-hook 'python-mode-local-vars-hook 'config/python-mode-shell-setup)
 
 ;; Pytest settings
-(after! python-pytest
-  (setq python-pytest-arguments '("-x" "-s" "--pdbcls=IPython.core.debugger:Pdb")))
+(setq python-pytest-arguments '("-x" "-s" "--pdbcls=IPython.core.debugger:Pdb"))
 
 (setq lsp-pylsp-plugins-flake8-ignore ["D101"])
 
