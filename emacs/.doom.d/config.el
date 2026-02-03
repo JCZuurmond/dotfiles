@@ -160,11 +160,6 @@
 ;; Fix highlights in text mode
 (setq-hook! 'text-mode-hook indent-tabs-mode t)
 
-(defcustom python-projectile-environment-directory ".direnv/python-3.7.2"
-  "The python environment within a projectile project"
-  :type 'string
-  :group 'python)
-
 ;; Run a hook after local vars are read
 ;; Source: https://stackoverflow.com/questions/5147060/how-can-i-access-directory-local-variables-in-my-major-mode-hooks
 (defun run-local-vars-mode-hook ()
@@ -173,16 +168,26 @@
 
 (add-hook 'hack-local-variables-hook 'run-local-vars-mode-hook)
 
-;; Set-up the python shell
+;; Set-up the python shell with auto-detection from direnv
 (defun config/python-mode-shell-setup ()
-  (message "project python environment is %s" python-projectile-environment-directory)
-  (setq-local python-shell-virtualenv-root (expand-file-name python-projectile-environment-directory (projectile-project-root))
-              python-pytest-executable (expand-file-name (concat python-projectile-environment-directory "/bin/pytest -x -s --pdbcls=IPython.core.debugger:Pdb") (projectile-project-root))
-              lsp-python-ms-python-executable (expand-file-name (concat python-projectile-environment-directory "/bin/python") (projectile-project-root))
-              lsp-pyright-venv-path (expand-file-name python-projectile-environment-directory (projectile-project-root))
-              lsp-pyright-venv-directory python-projectile-environment-directory))
+  "Configure Python environment, auto-detecting from $VIRTUAL_ENV (direnv) when available."
+  (let ((venv-path (or (getenv "VIRTUAL_ENV")
+                       (when (projectile-project-root)
+                         (let ((direnv-venv (expand-file-name ".venv" (projectile-project-root))))
+                           (when (file-directory-p direnv-venv) direnv-venv))))))
+    (when venv-path
+      (message "Python environment: %s" venv-path)
+      (setq-local python-shell-virtualenv-root venv-path
+                  python-pytest-executable (concat venv-path "/bin/pytest")
+                  lsp-python-ms-python-executable (concat venv-path "/bin/python")
+                  lsp-pyright-venv-path (file-name-directory venv-path)
+                  lsp-pyright-venv-directory (file-name-nondirectory venv-path)))))
 
 (add-hook 'python-mode-local-vars-hook 'config/python-mode-shell-setup)
+
+;; Pytest settings
+(after! python-pytest
+  (setq python-pytest-arguments '("-x" "-s" "--pdbcls=IPython.core.debugger:Pdb")))
 
 (setq lsp-pylsp-plugins-flake8-ignore ["D101"])
 
