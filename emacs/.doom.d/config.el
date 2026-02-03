@@ -682,7 +682,7 @@ Uses consult-ripgrep to find and display all `- [ ]` items."
         :desc "Capture note" "c" #'org-roam-capture
         :desc "Toggle buffer" "b" #'org-roam-buffer-toggle
         :desc "Dailies today" "t" #'org-roam-dailies-goto-today
-        :desc "Dailies capture" "d" #'org-roam-dailies-capture-today
+        :desc "Dailies capture" "D" #'org-roam-dailies-capture-today
         ;; Inbox workflow
         :desc "Open inbox" "I" #'zettelkasten-open-inbox
         :desc "Quick task" "q" #'zettelkasten-capture-to-inbox
