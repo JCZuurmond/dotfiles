@@ -242,10 +242,103 @@
   ;; Enable Emacs MCP tools (LSP, treesitter, imenu, etc.)
   (claude-code-ide-emacs-tools-setup))
 
-;; Keybinding: SPC o c for "open claude"
+
+
+;; GitHub Copilot
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . copilot-accept-completion)
+              ("TAB" . copilot-accept-completion)
+              ("C-TAB" . copilot-accept-completion-by-word)
+              ("C-<tab>" . copilot-accept-completion-by-word)
+              ("C-n" . copilot-next-completion)
+              ("C-p" . copilot-previous-completion))
+  :config
+  (setq copilot-indent-offset-warning-disable t))
+
+;; gptel - LLM client with GitHub Copilot and agentic capabilities
+(use-package! gptel
+  :config
+  (require 'gptel-integrations)
+  (require 'gptel-org)
+
+  ;; Set Copilot as the default backend with Claude model
+  (setq gptel-model 'claude-sonnet-4
+        gptel-default-mode 'org-mode
+        gptel-use-curl t
+        gptel-use-tools t
+        gptel-confirm-tool-calls 'always
+        gptel-include-tool-results 'auto
+        gptel-stream t
+        gptel-backend (gptel-make-gh-copilot "Copilot" :stream t)))
+
+;; gptel-agent - Agentic capabilities
+(use-package! gptel-agent
+  :after gptel
+  :config
+  (gptel-agent-update))
+
+;; MCP integration for agentic tool support
+(use-package! mcp
+  :after gptel
+  :custom
+  (mcp-hub-servers
+   `(("duckduckgo" . (:command "uvx" :args ("duckduckgo-mcp-server")))
+     ("fetch" . (:command "uvx" :args ("mcp-server-fetch")))
+     ("filesystem" . (:command "npx"
+                      :args ("-y" "@modelcontextprotocol/server-filesystem" ,(getenv "HOME"))
+                      :roots (,(getenv "HOME"))))
+     ("sequential-thinking" . (:command "npx" :args ("-y" "@modelcontextprotocol/server-sequential-thinking")))
+     ;; Additional MCP servers for enhanced capabilities
+     ("git" . (:command "uvx" :args ("mcp-server-git" "--repository" ,(getenv "HOME"))))
+     ("github" . (:command "npx" :args ("-y" "@modelcontextprotocol/server-github")))
+     ("memory" . (:command "npx" :args ("-y" "@modelcontextprotocol/server-memory")))))
+  :config
+  (require 'mcp-hub)
+  (mcp-hub-start-all-server))
+
+;; Enhanced LLM/Agent keybindings with Claude integration
 (map! :leader
-      :desc "Claude Code" "o c" #'claude-code-ide
-      :desc "Claude Menu" "o C" #'claude-code-ide-menu)
+      (:prefix ("l" . "LLM")
+
+       :desc "Send to LLM" "s" #'gptel-send
+       :desc "Open agentic chat" "c" #'gptel-agent
+       :desc "Claude Code IDE" "C" #'claude-code-ide
+       :desc "Open chat" "A" #'gptel
+       :desc "Menu" "m" #'gptel-menu
+       :desc "Claude Menu" "M" #'claude-code-ide-menu
+       :desc "Tools menu" "t" #'gptel-tools
+       :desc "Rewrite region" "r" #'gptel-rewrite
+       :desc "Add context" "a" #'gptel-add
+       :desc "Add file" "f" #'gptel-add-file
+       :desc "GitHub login" "g" #'gptel-gh-login
+       :desc "MCP hub" "h" #'mcp-hub
+       :desc "Restart MCP servers" "R" #'mcp-hub-restart-all-server))
+
+
+;; Helper functions
+(defun my/gptel-context-list ()
+  "Display current gptel contexts."
+  (interactive)
+  (let ((output ""))
+    (if gptel-context--alist
+        (progn
+          (setq output (format "Found %d contexts:\n" (length gptel-context--alist)))
+          (dolist (context gptel-context--alist)
+            (let* ((buffer (car context))
+                   (overlays (plist-get (cdr context) :overlays))
+                   (buffer-name (buffer-name buffer)))
+              (setq output (concat output (format "Buffer: %s\n" buffer-name)))
+              (dolist (overlay overlays)
+                (setq output (concat output (format "  Region: %d-%d (%d chars)\n"
+                                                   (overlay-start overlay)
+                                                   (overlay-end overlay)
+                                                   (- (overlay-end overlay) (overlay-start overlay)))))))))
+      (setq output "No gptel contexts found."))
+    (message "%s" output)
+    output))
+
 
 ;; ============================================================================
 ;; Settings migrated from old .emacs.d and .spacemacs configs (commented out)

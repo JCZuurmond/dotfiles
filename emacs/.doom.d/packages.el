@@ -20,6 +20,21 @@
 (package! claude-code-ide
   :recipe (:host github :repo "manzaltu/claude-code-ide.el"))
 
+;; GitHub Copilot
+(package! copilot
+  :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
+
+;; gptel - LLM client with GitHub Copilot support and agentic capabilities
+(package! gptel :recipe (:nonrecursive t))
+
+;; MCP (Model Context Protocol) for agentic tool support in gptel
+(package! mcp
+  :recipe (:host github :repo "lizqwerscott/mcp.el" :files ("*.el")))
+
+;; gptel-agent - Agentic capabilities for gptel
+(package! gptel-agent
+  :recipe (:host github :repo "karthink/gptel-agent"))
+
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 
