@@ -31,14 +31,11 @@
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'solarized-dark)
 
-;; Org
+;; Org - minimal config (notes moved to Markdown Zettelkasten below)
 (after! org
-  ;; org-subtree-archive failed with following error: org-id-add-location: Wrong type argument: hash-table-p, nil
-  ;; solution: https://github.com/org-roam/org-roam/issues/1526#issuecomment-901663871
+  ;; Fix for org-id issue with org-roam
+  ;; https://github.com/org-roam/org-roam/issues/1526#issuecomment-901663871
   (org-id-update-id-locations)
-
-  ;; Org directory (ProtonDrive synced)
-  (setq org-directory "~/org/")
 
   ;; Display settings
   (setq org-startup-indented nil
@@ -381,3 +378,347 @@
 ;; And add under :lang:
 ;;   - data (includes csv, xml, etc.)
 ;;   - (sql +lsp)
+
+;; ============================================================================
+;; Markdown Zettelkasten with Obsidian Compatibility (md-roam + org-roam)
+;; Primary note-taking system - replaces org-mode notes
+;; ============================================================================
+
+;; Vault directory (ProtonDrive synced - same location as previous org setup)
+(defvar zettelkasten-directory "~/org/"
+  "Root directory for the Markdown Zettelkasten vault.")
+
+;; Ensure the directory exists
+(unless (file-exists-p zettelkasten-directory)
+  (make-directory zettelkasten-directory t))
+
+;; md-roam configuration (must load before org-roam)
+(use-package! md-roam
+  :after org-roam
+  :config
+  (md-roam-mode 1)
+  ;; Use title-based wikilinks for Obsidian compatibility
+  (setq md-roam-file-extension "md"
+        md-roam-use-title-for-link-descr t))
+
+;; org-roam configuration for Markdown Zettelkasten
+(after! org-roam
+  ;; Core settings
+  (setq org-roam-directory (file-truename zettelkasten-directory)
+        org-roam-file-extensions '("md")
+        org-roam-db-location (concat zettelkasten-directory ".org-roam.db"))
+
+  ;; Timestamp-based filename function
+  (defun zettelkasten-slug (title)
+    "Generate a timestamped filename slug from TITLE.
+Format: YYYYMMDDHHMM-slugified-title.md"
+    (let ((slug (downcase (replace-regexp-in-string
+                           "[^a-zA-Z0-9]+" "-"
+                           (replace-regexp-in-string "^-\\|-$" "" title)))))
+      (format-time-string (concat "%Y%m%d%H%M-" slug))))
+
+  ;; Capture templates for Obsidian-compatible Markdown notes
+  (setq org-roam-capture-templates
+        '(("d" "default" plain "%?"
+           :target (file+head "${slug}.md"
+                              "---\ntitle: \"${title}\"\ndate: %<%Y-%m-%d>\ntags: []\n---\n\n# ${title}\n\n")
+           :unnarrowed t)
+
+          ("t" "todo" plain "- [ ] %?"
+           :target (file+head "inbox.md"
+                              "---\ntitle: \"Inbox\"\ndate: %<%Y-%m-%d>\ntags: [inbox, tasks]\n---\n\n# Inbox\n\n## Tasks\n\n")
+           :unnarrowed t)
+
+          ("n" "note" plain "%?"
+           :target (file+head "${slug}.md"
+                              "---\ntitle: \"${title}\"\ndate: %<%Y-%m-%d>\ntags: [note]\n---\n\n# ${title}\n\n")
+           :unnarrowed t)
+
+          ("f" "fleeting" plain "%?"
+           :target (file+head "${slug}.md"
+                              "---\ntitle: \"${title}\"\ndate: %<%Y-%m-%d>\ntags: [fleeting]\n---\n\n# ${title}\n\n")
+           :unnarrowed t)
+
+          ("l" "literature" plain "%?"
+           :target (file+head "${slug}.md"
+                              "---\ntitle: \"${title}\"\ndate: %<%Y-%m-%d>\ntags: [literature]\nsource: \nauthor: \n---\n\n# ${title}\n\n## Summary\n\n## Key Ideas\n\n## Quotes\n\n## References\n\n")
+           :unnarrowed t)
+
+          ("p" "permanent" plain "%?"
+           :target (file+head "${slug}.md"
+                              "---\ntitle: \"${title}\"\ndate: %<%Y-%m-%d>\ntags: [permanent]\n---\n\n# ${title}\n\n## Idea\n\n## Context\n\n## Connections\n\n")
+           :unnarrowed t)))
+
+  ;; Override the default slug function for timestamped filenames
+  (cl-defmethod org-roam-node-slug ((node org-roam-node))
+    "Generate a timestamped slug for NODE."
+    (let ((title (org-roam-node-title node)))
+      (zettelkasten-slug title)))
+
+  ;; Configure link insertion to use title-based wikilinks
+  (setq org-roam-extract-new-file-path "${slug}.md")
+
+  ;; Daily notes template (for quick captures)
+  (setq org-roam-dailies-directory "daily/")
+  (setq org-roam-dailies-capture-templates
+        '(("d" "default" entry "## %<%H:%M>\n%?"
+           :target (file+head "%<%Y-%m-%d>.md"
+                              "---\ntitle: \"%<%Y-%m-%d>\"\ndate: %<%Y-%m-%d>\ntags: [daily]\n---\n\n# %<%A, %B %d, %Y>\n\n## Tasks\n\n- [ ] \n\n## Notes\n\n")))))
+
+;; Function to insert Obsidian-compatible wikilinks
+(defun zettelkasten-insert-wikilink ()
+  "Insert a title-based wikilink [[Note Title]] for Obsidian compatibility."
+  (interactive)
+  (let* ((node (org-roam-node-read))
+         (title (org-roam-node-title node)))
+    (insert (format "[[%s]]" title))))
+
+;; Function to create wikilinks from selected text
+(defun zettelkasten-link-region-or-insert ()
+  "If region is active, create a wikilink from it. Otherwise, prompt for a note."
+  (interactive)
+  (if (use-region-p)
+      (let ((text (buffer-substring-no-properties (region-beginning) (region-end))))
+        (delete-region (region-beginning) (region-end))
+        (insert (format "[[%s]]" text)))
+    (zettelkasten-insert-wikilink)))
+
+;; ============================================================================
+;; Inbox Workflow for Task Management
+;; ============================================================================
+
+(defvar zettelkasten-inbox-file (concat zettelkasten-directory "inbox.md")
+  "Path to the central inbox file for task capture.")
+
+(defvar zettelkasten-archive-file (concat zettelkasten-directory "archive.md")
+  "Path to the archive file for completed tasks.")
+
+;; Ensure inbox file exists with proper YAML header
+(unless (file-exists-p zettelkasten-inbox-file)
+  (with-temp-file zettelkasten-inbox-file
+    (insert (format "---\ntitle: \"Inbox\"\ndate: %s\ntags: [inbox, tasks]\n---\n\n# Inbox\n\nCapture fleeting thoughts and tasks here.\n\n## Tasks\n\n- [ ] \n\n## Quick Notes\n\n"
+                    (format-time-string "%Y-%m-%d")))))
+
+(defun zettelkasten-open-inbox ()
+  "Open the Zettelkasten inbox file."
+  (interactive)
+  (find-file zettelkasten-inbox-file))
+
+(defun zettelkasten-capture-to-inbox ()
+  "Quickly capture a task to the inbox file."
+  (interactive)
+  (let ((task (read-string "Task: ")))
+    (with-current-buffer (find-file-noselect zettelkasten-inbox-file)
+      (goto-char (point-min))
+      (if (re-search-forward "^## Tasks" nil t)
+          (progn
+            (forward-line 1)
+            (end-of-line)
+            (insert (format "\n- [ ] %s" task)))
+        (goto-char (point-max))
+        (insert (format "\n- [ ] %s" task)))
+      (save-buffer))
+    (message "Task captured: %s" task)))
+
+(defun zettelkasten-capture-note-to-inbox ()
+  "Quickly capture a note to the inbox file."
+  (interactive)
+  (let ((note (read-string "Note: ")))
+    (with-current-buffer (find-file-noselect zettelkasten-inbox-file)
+      (goto-char (point-min))
+      (if (re-search-forward "^## Quick Notes" nil t)
+          (progn
+            (forward-line 1)
+            (end-of-line)
+            (insert (format "\n- %s (%s)" note (format-time-string "%Y-%m-%d %H:%M"))))
+        (goto-char (point-max))
+        (insert (format "\n- %s (%s)" note (format-time-string "%Y-%m-%d %H:%M"))))
+      (save-buffer))
+    (message "Note captured: %s" note)))
+
+(defun zettelkasten-archive-done-task ()
+  "Archive the completed task at point to archive.md with datetree structure."
+  (interactive)
+  (let ((line (thing-at-point 'line t)))
+    (when (string-match "^- \\[x\\] \\(.*\\)$" line)
+      (let* ((task (match-string 1 line))
+             (year (format-time-string "%Y"))
+             (month (format-time-string "%B"))
+             (day (format-time-string "%d")))
+        ;; Delete the line from current buffer
+        (delete-region (line-beginning-position) (1+ (line-end-position)))
+        (save-buffer)
+        ;; Add to archive with datetree
+        (with-current-buffer (find-file-noselect zettelkasten-archive-file)
+          (goto-char (point-min))
+          ;; Ensure YAML header exists
+          (unless (looking-at "^---")
+            (insert "---\ntitle: \"Archive\"\ndate: " (format-time-string "%Y-%m-%d") "\ntags: [archive]\n---\n\n# Archive\n\n"))
+          ;; Find or create year heading
+          (unless (re-search-forward (format "^## %s$" year) nil t)
+            (goto-char (point-max))
+            (insert (format "\n## %s\n" year)))
+          ;; Find or create month heading under year
+          (unless (re-search-forward (format "^### %s$" month) nil t)
+            (end-of-line)
+            (insert (format "\n\n### %s\n" month)))
+          ;; Find or create day heading under month
+          (unless (re-search-forward (format "^#### %s$" day) nil t)
+            (end-of-line)
+            (insert (format "\n\n#### %s\n" day)))
+          ;; Add the task
+          (end-of-line)
+          (insert (format "\n- [x] %s" task))
+          (save-buffer))
+        (message "Archived: %s" task)))))
+
+;; ============================================================================
+;; Task Review: Aggregate all open tasks from the vault
+;; ============================================================================
+
+(defun zettelkasten-review-tasks ()
+  "Search for all open markdown checkboxes across the Zettelkasten vault.
+Uses consult-ripgrep to find and display all `- [ ]` items."
+  (interactive)
+  (let ((default-directory zettelkasten-directory))
+    (consult-ripgrep zettelkasten-directory "- \\[ \\]")))
+
+(defun zettelkasten-tasks-buffer ()
+  "Create a buffer with all open tasks from the Zettelkasten vault."
+  (interactive)
+  (let* ((default-directory zettelkasten-directory)
+         (buffer-name "*Zettelkasten Tasks*")
+         (results (shell-command-to-string
+                   (format "rg --no-heading --line-number '- \\[ \\]' %s"
+                           (shell-quote-argument zettelkasten-directory)))))
+    (with-current-buffer (get-buffer-create buffer-name)
+      (erase-buffer)
+      (insert "# Open Tasks in Zettelkasten\n")
+      (insert (format "Generated: %s\n\n" (format-time-string "%Y-%m-%d %H:%M")))
+      (insert "---\n\n")
+      (if (string-empty-p results)
+          (insert "No open tasks found.\n")
+        (let ((lines (split-string results "\n" t)))
+          (dolist (line lines)
+            (when (string-match "\\(.+\\):\\([0-9]+\\):\\(.*\\)" line)
+              (let ((file (match-string 1 line))
+                    (lnum (match-string 2 line))
+                    (task (string-trim (match-string 3 line))))
+                (insert (format "- **%s:%s**\n  %s\n\n"
+                                (file-name-nondirectory file)
+                                lnum
+                                task)))))))
+      (goto-char (point-min))
+      (markdown-mode)
+      (read-only-mode 1))
+    (switch-to-buffer buffer-name)))
+
+;; Toggle markdown checkbox at point
+(defun zettelkasten-toggle-checkbox ()
+  "Toggle markdown checkbox at point between [ ] and [x]."
+  (interactive)
+  (save-excursion
+    (beginning-of-line)
+    (cond
+     ((looking-at "\\(.*\\)- \\[ \\]")
+      (replace-match "\\1- [x]"))
+     ((looking-at "\\(.*\\)- \\[x\\]")
+      (replace-match "\\1- [ ]")))))
+
+(defvar zettelkasten-archive-directory (concat zettelkasten-directory "archive/")
+  "Path to the archive directory for old notes.")
+
+(defun zettelkasten-archive-note ()
+  "Move the current note file to the archive subdirectory."
+  (interactive)
+  (let* ((current-file (buffer-file-name))
+         (file-name (file-name-nondirectory current-file)))
+    (unless current-file
+      (user-error "Buffer is not visiting a file"))
+    (unless (string-suffix-p ".md" file-name)
+      (user-error "Not a markdown file"))
+    (unless (string-prefix-p (expand-file-name zettelkasten-directory)
+                             (expand-file-name current-file))
+      (user-error "File is not in the Zettelkasten directory"))
+    ;; Don't archive files already in archive
+    (when (string-prefix-p (expand-file-name zettelkasten-archive-directory)
+                           (expand-file-name current-file))
+      (user-error "File is already in archive"))
+    ;; Ensure archive directory exists
+    (unless (file-directory-p zettelkasten-archive-directory)
+      (make-directory zettelkasten-archive-directory t))
+    ;; Move the file
+    (let ((new-path (concat zettelkasten-archive-directory file-name)))
+      (when (file-exists-p new-path)
+        (user-error "File already exists in archive: %s" file-name))
+      (rename-file current-file new-path)
+      (set-visited-file-name new-path)
+      (save-buffer)
+      (message "Archived: %s -> archive/" file-name))))
+
+;; ============================================================================
+;; Keybindings under SPC n r (org-roam leader)
+;; ============================================================================
+
+(map! :leader
+      (:prefix ("n" . "notes")
+       (:prefix ("r" . "roam")
+        :desc "Find node" "f" #'org-roam-node-find
+        :desc "Insert link" "i" #'zettelkasten-insert-wikilink
+        :desc "Link region" "l" #'zettelkasten-link-region-or-insert
+        :desc "Capture note" "c" #'org-roam-capture
+        :desc "Toggle buffer" "b" #'org-roam-buffer-toggle
+        :desc "Dailies today" "t" #'org-roam-dailies-goto-today
+        :desc "Dailies capture" "d" #'org-roam-dailies-capture-today
+        ;; Inbox workflow
+        :desc "Open inbox" "I" #'zettelkasten-open-inbox
+        :desc "Quick task" "q" #'zettelkasten-capture-to-inbox
+        :desc "Quick note" "n" #'zettelkasten-capture-note-to-inbox
+        ;; Task management
+        :desc "Toggle checkbox" "x" #'zettelkasten-toggle-checkbox
+        :desc "Archive done task" "a" #'zettelkasten-archive-done-task
+        :desc "Archive note file" "A" #'zettelkasten-archive-note
+        ;; Task review
+        :desc "Review tasks (rg)" "R" #'zettelkasten-review-tasks
+        :desc "Tasks buffer" "T" #'zettelkasten-tasks-buffer
+        ;; Sync database
+        :desc "Sync database" "s" #'org-roam-db-sync)))
+
+;; ============================================================================
+;; Markdown-mode enhancements for Zettelkasten
+;; ============================================================================
+
+(after! markdown-mode
+  ;; Enable wikilink fontification
+  (setq markdown-enable-wiki-links t
+        markdown-wiki-link-search-type '(project))
+
+  ;; Follow wikilinks in markdown files
+  (defun zettelkasten-follow-wikilink-at-point ()
+    "Follow the wikilink at point, searching for matching title in vault."
+    (interactive)
+    (let* ((link (markdown-link-url))
+           (title (or link (thing-at-point 'symbol t))))
+      (when title
+        ;; Remove [[ and ]] if present
+        (setq title (replace-regexp-in-string "^\\[\\[\\|\\]\\]$" "" title))
+        ;; Search for file with matching title in YAML frontmatter
+        (let* ((files (directory-files-recursively zettelkasten-directory "\\.md$"))
+               (found nil))
+          (dolist (file files)
+            (unless found
+              (with-temp-buffer
+                (insert-file-contents file)
+                (goto-char (point-min))
+                (when (re-search-forward (format "^title:.*\"%s\"" (regexp-quote title)) nil t)
+                  (setq found file)))))
+          (if found
+              (find-file found)
+            ;; If not found, offer to create
+            (when (y-or-n-p (format "Note '%s' not found. Create it? " title))
+              (org-roam-capture- :node (org-roam-node-create :title title))))))))
+
+  ;; Keybinding to follow wikilinks
+  (map! :map markdown-mode-map
+        :n "gf" #'zettelkasten-follow-wikilink-at-point
+        :n "RET" #'zettelkasten-follow-wikilink-at-point))

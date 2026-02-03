@@ -16,6 +16,10 @@
    :recipe (:host github :repo "emacs-openai/codegpt"))
 (package! ellama)
 
+;; Markdown Zettelkasten with Obsidian compatibility
+(package! md-roam
+  :recipe (:host github :repo "nobiot/md-roam"))
+
 ;; Claude Code IDE integration
 (package! claude-code-ide
   :recipe (:host github :repo "manzaltu/claude-code-ide.el"))
