@@ -139,6 +139,8 @@ fi
 # Emacs
 # - Doom emacs: https://github.com/doomemacs/doomemacs
 [[ -d $HOME/.config/emacs/bin ]] && export PATH="$HOME/.config/emacs/bin:$PATH"
+export EDITOR="emacs"
+export VISUAL="emacs"
 
 
 #	email = cor@Cors-MacBook-Pro.local
