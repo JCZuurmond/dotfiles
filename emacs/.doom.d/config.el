@@ -292,6 +292,15 @@
   (require 'mcp-hub)
   (mcp-hub-start-all-server))
 
+;; Google Gemini CLI integration (uses OAuth, no API key needed)
+;; https://github.com/linchen2chris/gemini-cli.el
+;; Requires: npm install -g @anthropic/gemini-cli
+(use-package! gemini-cli
+  :commands (gemini-cli gemini-cli-send-region gemini-cli-fix-error-at-point)
+  :config
+  (setq gemini-cli-program "gemini"
+        gemini-cli-terminal-backend 'vterm))
+
 ;; Enhanced LLM/Agent keybindings with Claude integration
 (map! :leader
       (:prefix ("l" . "LLM")
@@ -306,7 +315,7 @@
        :desc "Rewrite region" "r" #'gptel-rewrite
        :desc "Add context" "a" #'gptel-add
        :desc "Add file" "f" #'gptel-add-file
-       :desc "GitHub login" "g" #'gptel-gh-login
+       :desc "Gemini" "g" #'gemini-cli
        :desc "MCP hub" "h" #'mcp-hub
        :desc "Restart MCP servers" "R" #'mcp-hub-restart-all-server))
 
@@ -332,23 +341,6 @@
       (setq output "No gptel contexts found."))
     (message "%s" output)
     output))
-
-;; Google Gemini CLI integration (uses OAuth, no API key needed)
-;; https://github.com/linchen2chris/gemini-cli.el
-;; Requires: npm install -g @anthropic/gemini-cli
-(use-package! gemini-cli
-  :commands (gemini-cli gemini-cli-send-region gemini-cli-fix-error-at-point)
-  :config
-  (setq gemini-cli-program "gemini"
-        gemini-cli-terminal-backend 'vterm))
-
-;; Keybinding for generative AI chats
-(map! :leader
-      (:prefix ("o" . "open")
-       (:prefix ("c" . "chat")
-        :desc "Claude" "c" #'claude-code-ide
-        :desc "Claude Menu" "C" #'claude-code-ide-menu
-        :desc "Gemini" "g" #'gemini-cli)))
 
 ;; ============================================================================
 ;; Settings migrated from old .emacs.d and .spacemacs configs (commented out)
