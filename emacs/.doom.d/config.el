@@ -285,7 +285,7 @@
                       :roots (,(getenv "HOME"))))
      ("sequential-thinking" . (:command "npx" :args ("-y" "@modelcontextprotocol/server-sequential-thinking")))
      ;; Additional MCP servers for enhanced capabilities
-     ("git" . (:command "uvx" :args ("mcp-server-git" "--repository" ,(getenv "HOME"))))
+     ;; ("git" . (:command "uvx" :args ("mcp-server-git" "--repository" ,(getenv "HOME"))))
      ("github" . (:command "npx" :args ("-y" "@modelcontextprotocol/server-github")))
      ("memory" . (:command "npx" :args ("-y" "@modelcontextprotocol/server-memory")))))
   :config
