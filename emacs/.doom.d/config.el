@@ -69,21 +69,6 @@
 ;;; AI/LLM CONFIGURATION
 ;;; ============================================================================
 
-;; Azure OpenAI integration
-(after! openai
-  (defun openai-get-key ()
-    "Retrieve the OpenAI API key from Azure CLI."
-    (let* ((output (with-output-to-string
-                    (call-process "az" nil standard-output nil
-                                  "account" "get-access-token" "--resource" "https://cognitiveservices.azure.com")))
-           (json (json-read-from-string output)))
-      (cdr (assoc 'accessToken json))))
-
-  (setq openai-key #'openai-get-key
-        openai-base-url "https://slackgpt-openai.openai.azure.com/openai/deployments/gpt-35-turbo"
-        openai-completion-max-tokens 1000
-        openai-parameters '(("api-version" . "2023-03-15-preview"))))
-
 ;; GitHub Copilot
 (use-package! copilot
   :hook (prog-mode . copilot-mode)
