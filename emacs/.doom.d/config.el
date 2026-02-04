@@ -101,6 +101,15 @@
                 llama3.2:latest))
     "Ollama backend for local models.")
 
+  (defvar gptel-backend--anthropic
+    (gptel-make-anthropic "Anthropic"
+      :key (gptel-api-key-from-auth-source "api.anthropic.com")
+      :stream t
+      :models '(claude-sonnet-4-20250514
+                claude-opus-4-20250514
+                claude-haiku-3-5-20241022))
+    "Anthropic backend for Claude API.")
+
   ;; Core gptel configuration
   (setq gptel-model 'claude-sonnet-4
         gptel-default-mode 'org-mode
@@ -125,6 +134,13 @@
     (setq gptel-backend gptel-backend--ollama
           gptel-model 'qwen2.5-coder:7b)
     (message "Switched to Ollama (qwen2.5-coder:7b)"))
+
+  (defun gptel-use-anthropic ()
+    "Switch to Anthropic Claude API backend."
+    (interactive)
+    (setq gptel-backend gptel-backend--anthropic
+          gptel-model 'claude-sonnet-4-20250514)
+    (message "Switched to Anthropic (claude-sonnet-4)")))
 
 ;; gptel-agent for agentic capabilities
 (use-package! gptel-agent
@@ -617,6 +633,7 @@ Projects section is appended to the bottom of the file."
        :desc "Restart MCP" "R" #'mcp-hub-restart-all-server
        :desc "Use Copilot" "1" #'gptel-use-copilot
        :desc "Use Ollama" "2" #'gptel-use-ollama
+       :desc "Use Anthropic" "3" #'gptel-use-anthropic
        (:prefix ("c" . "context")
         :desc "Add region/buffer" "a" #'gptel-add
         :desc "Add file" "f" #'gptel-add-file
