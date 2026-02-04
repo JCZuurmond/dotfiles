@@ -167,20 +167,21 @@
 (defvar zettelkasten-directory "~/org/"
   "Root directory for the Markdown Zettelkasten vault.")
 
-;; Ensure directory exists
-(unless (file-exists-p zettelkasten-directory)
-  (make-directory zettelkasten-directory t))
-
-;; md-roam for Obsidian compatibility
-(use-package! md-roam
-  :after org-roam
-  :config
-  (md-roam-mode 1)
-  (setq md-roam-file-extension "md"
-        md-roam-use-title-for-link-descr t))
-
 ;; org-roam configuration for Zettelkasten
 (after! org-roam
+  ;; Enable md-roam before configuring org-roam
+  (require 'md-roam)
+  (md-roam-mode 1)
+  (setq md-roam-file-extension "md"
+        md-roam-use-title-for-link-descr t)
+
+  ;; Suppress org-element warnings in markdown buffers
+  (advice-add 'org-element-at-point :around
+              (lambda (orig-fn &rest args)
+                (if (derived-mode-p 'markdown-mode)
+                    nil
+                  (apply orig-fn args))))
+
   ;; Core settings
   (setq org-roam-directory (file-truename zettelkasten-directory)
         org-roam-file-extensions '("md")
@@ -199,30 +200,20 @@
     (zettelkasten-slug (org-roam-node-title node)))
 
   ;; Capture templates for different note types
+  ;; Trick below is to keep a small header and most of the template in one
   (setq org-roam-capture-templates
-        '(("d" "default" plain "%?"
-           :target (file+head "${slug}.md"
-                              "---\ntitle: \"${title}\"\ndate: %<%Y-%m-%d>\ntags: []\n---\n\n# ${title}\n\n")
-           :unnarrowed t)
-          ("n" "note" plain "%?"
-           :target (file+head "${slug}.md"
-                              "---\ntitle: \"${title}\"\ndate: %<%Y-%m-%d>\ntags: [note]\n---\n\n# ${title}\n\n")
-           :unnarrowed t)
-          ("l" "literature" plain "%?"
-           :target (file+head "${slug}.md"
-                              "---\ntitle: \"${title}\"\ndate: %<%Y-%m-%d>\ntags: [literature]\nsource: \nauthor: \n---\n\n# ${title}\n\n## Summary\n\n## Key Ideas\n\n## References\n\n")
-           :unnarrowed t)
-          ("p" "permanent" plain "%?"
-           :target (file+head "${slug}.md"
-                              "---\ntitle: \"${title}\"\ndate: %<%Y-%m-%d>\ntags: [permanent]\n---\n\n# ${title}\n\n## Idea\n\n## Context\n\n## Connections\n\n")
+        '(("n" "note" plain
+           "title: \"${title}\"\ndate: %<%Y-%m-%d>\ntags: [note]\n---\n\n# ${title}\n\n%?"
+           :target (file+head "notes/${slug}.md" "---")
            :unnarrowed t)))
 
   ;; Daily notes
   (setq org-roam-dailies-directory "daily/"
         org-roam-dailies-capture-templates
-        '(("d" "default" entry "## %<%H:%M>\n%?"
-           :target (file+head "%<%Y-%m-%d>.md"
-                              "---\ntitle: \"%<%Y-%m-%d>\"\ndate: %<%Y-%m-%d>\ntags: [daily]\n---\n\n# %<%A, %B %d, %Y>\n\n## Tasks\n\n- [ ] \n\n## Notes\n\n")))))
+        '(("d" "default" plain "%?"
+           :target (file+head "%<%y%m%d>.md"
+                              "---\ntitle: \"%<%Y-%m-%d>\"\ndate: %<%Y-%m-%d>\ntags: [daily]\n---\n\n# %<%A, %B %d, %Y>\n\n## Tasks\n\n- [ ] \n\n## Notes\n\n")
+           :unnarrowed t))))
 
 ;; Inbox workflow for task management
 (defvar zettelkasten-inbox-file (concat zettelkasten-directory "inbox.md")
@@ -246,7 +237,7 @@
   (let ((task (read-string "Task: ")))
     (with-current-buffer (find-file-noselect zettelkasten-inbox-file)
       (goto-char (point-min))
-      (if (re-search-forward "^## Tasks" nil t)
+      (if (re-search-forward "^## Inbox" nil t)
           (progn
             (forward-line 1)
             (end-of-line)
@@ -273,6 +264,29 @@
   (let ((default-directory zettelkasten-directory))
     (consult-ripgrep zettelkasten-directory "- \\[ \\]")))
 
+(defun zettelkasten-archive-task ()
+  "Archive the task at point to a dated file in the archive directory."
+  (interactive)
+  (require 'calendar)
+  (let* ((line (buffer-substring-no-properties
+                (line-beginning-position) (line-end-position)))
+         (month (string-to-number (format-time-string "%m")))
+         (year (string-to-number (format-time-string "%Y")))
+         (last-day (calendar-last-day-of-month month year))
+         (archive-file (concat zettelkasten-archive-directory
+                               (format "%04d%02d%02d.md" year month last-day))))
+    (unless (file-directory-p zettelkasten-archive-directory)
+      (make-directory zettelkasten-archive-directory t))
+    (delete-region (line-beginning-position)
+                   (min (1+ (line-end-position)) (point-max)))
+    (save-buffer)
+    (with-current-buffer (find-file-noselect archive-file)
+      (goto-char (point-max))
+      (unless (bolp) (insert "\n"))
+      (insert line "\n")
+      (save-buffer))
+    (message "Archived to %s" (file-name-nondirectory archive-file))))
+
 ;; Wikilink support for Obsidian compatibility
 (defun zettelkasten-insert-wikilink ()
   "Insert a title-based wikilink for Obsidian compatibility."
@@ -288,7 +302,10 @@
 
   (map! :map markdown-mode-map
         :n "gf" #'zettelkasten-follow-wikilink-at-point
-        :n "RET" #'zettelkasten-follow-wikilink-at-point))
+        :n "RET" #'zettelkasten-follow-wikilink-at-point
+        (:localleader
+         :desc "Toggle checkbox" "x" #'zettelkasten-toggle-checkbox
+         :desc "Archive task" "a" #'zettelkasten-archive-task)))
 
 ;;; ============================================================================
 ;;; ORG-MODE (MINIMAL CONFIGURATION)
@@ -338,6 +355,10 @@
        :desc "Gemini" "g" #'gemini-cli
        :desc "MCP hub" "h" #'mcp-hub
        :desc "Restart MCP" "R" #'mcp-hub-restart-all-server))
+
+;; Override default capture to use org-roam
+(map! :leader
+      :desc "Capture (org-roam)" "X" #'org-roam-capture)
 
 ;; Zettelkasten keybindings
 (map! :leader
