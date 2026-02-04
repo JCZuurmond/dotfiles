@@ -88,6 +88,19 @@
   (require 'gptel-integrations)
   (require 'gptel-org)
 
+  ;; Define backends
+  (defvar gptel-backend--copilot
+    (gptel-make-gh-copilot "Copilot" :stream t)
+    "GitHub Copilot backend for cloud models.")
+
+  (defvar gptel-backend--ollama
+    (gptel-make-ollama "Ollama"
+      :host "localhost:11434"
+      :stream t
+      :models '(qwen2.5-coder:32b
+                llama3.2:latest))
+    "Ollama backend for local models.")
+
   ;; Core gptel configuration
   (setq gptel-model 'claude-sonnet-4
         gptel-default-mode 'org-mode
@@ -96,13 +109,57 @@
         gptel-confirm-tool-calls 'always
         gptel-include-tool-results 'auto
         gptel-stream t
-        gptel-backend (gptel-make-gh-copilot "Copilot" :stream t)))
+        gptel-backend gptel-backend--copilot)
+
+  ;; Quick backend switching
+  (defun gptel-use-copilot ()
+    "Switch to GitHub Copilot backend."
+    (interactive)
+    (setq gptel-backend gptel-backend--copilot
+          gptel-model 'claude-sonnet-4)
+    (message "Switched to Copilot (claude-sonnet-4)"))
+
+  (defun gptel-use-ollama ()
+    "Switch to local Ollama backend."
+    (interactive)
+    (setq gptel-backend gptel-backend--ollama
+          gptel-model 'qwen2.5:32b-instruct)
+    (message "Switched to Ollama (qwen2.5:32b-instruct)")))
 
 ;; gptel-agent for agentic capabilities
 (use-package! gptel-agent
   :after gptel
   :config
-  (gptel-agent-update))
+  (gptel-agent-update)
+
+  ;; Project-aware system prompt
+  (defun gptel-agent-project-prompt ()
+    "Generate a system prompt with project context."
+    (let* ((root (projectile-project-root))
+           (project-name (when root (projectile-project-name)))
+           (project-type (when root (projectile-project-type))))
+      (concat
+       "You are an expert software engineer assisting with "
+       (if project-name (format "the %s project" project-name) "a software project") ". "
+       (when project-type (format "This is a %s project. " project-type))
+       "You have access to the codebase through the provided context. "
+       "Be concise, write clean code, and follow the project's existing patterns. "
+       "When modifying code, show only the relevant changes unless asked for full files.")))
+
+  ;; Start agent chat with project context
+  (defun gptel-agent-project ()
+    "Start gptel-agent with project context preloaded."
+    (interactive)
+    (let ((root (projectile-project-root)))
+      (unless root (user-error "Not in a project"))
+      ;; Add project files to context
+      (gptel-context-add-project)
+      ;; Add current buffer if it's a code file
+      (when (derived-mode-p 'prog-mode)
+        (gptel-context-add-buffer))
+      ;; Set project-aware prompt and start agent
+      (setq-local gptel--system-message (gptel-agent-project-prompt))
+      (call-interactively #'gptel-agent))))
 
 ;; Claude Code IDE integration
 (use-package! claude-code-ide
@@ -344,17 +401,25 @@
 (map! :leader
       (:prefix ("l" . "LLM")
        :desc "Send to LLM" "s" #'gptel-send
-       :desc "Open agentic chat" "c" #'gptel-agent
-       :desc "Claude Code IDE" "C" #'claude-code-ide
-       :desc "Open chat" "A" #'gptel
+       :desc "Open agentic chat" "a" #'gptel-agent
+       :desc "Project agent" "p" #'gptel-agent-project
+       :desc "Claude Code IDE" "A" #'claude-code-ide
        :desc "Menu" "m" #'gptel-menu
        :desc "Tools menu" "t" #'gptel-tools
        :desc "Rewrite region" "r" #'gptel-rewrite
-       :desc "Add context" "a" #'gptel-add
-       :desc "Add file" "f" #'gptel-add-file
        :desc "Gemini" "g" #'gemini-cli
        :desc "MCP hub" "h" #'mcp-hub
-       :desc "Restart MCP" "R" #'mcp-hub-restart-all-server))
+       :desc "Restart MCP" "R" #'mcp-hub-restart-all-server
+       :desc "Use Copilot" "1" #'gptel-use-copilot
+       :desc "Use Ollama" "2" #'gptel-use-ollama
+       (:prefix ("c" . "context")
+        :desc "Add region/buffer" "a" #'gptel-add
+        :desc "Add file" "f" #'gptel-add-file
+        :desc "Add current buffer" "b" #'gptel-context-add-buffer
+        :desc "Add project files" "p" #'gptel-context-add-project
+        :desc "Add related files" "r" #'gptel-context-add-related
+        :desc "List context" "l" #'gptel-context-list
+        :desc "Clear all" "c" #'gptel-context-clear)))
 
 ;; Override default capture to use org-roam
 (map! :leader
