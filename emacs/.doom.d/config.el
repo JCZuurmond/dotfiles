@@ -501,6 +501,44 @@ Upserts: updates existing section for project or inserts new one."
                    project-name))
         (save-buffer)))))
 
+(defun zettelkasten-log-project-switch ()
+  "Log current project to daily file on project switch.
+Upserts: only adds project if not already listed."
+  (when-let* ((root (projectile-project-root))
+              (project-name (projectile-project-name)))
+    (let* ((today (format-time-string "%Y-%m-%d"))
+           (daily-file (concat zettelkasten-directory "daily/"
+                               (format-time-string "%y%m%d") ".md"))
+           (section-header "## Projects")
+           (project-entry (format "- [[%s]]" project-name)))
+      ;; Ensure daily file exists
+      (unless (file-exists-p daily-file)
+        (with-temp-file daily-file
+          (insert (format "---\ntitle: \"%s\"\ndate: %s\ntags: [daily]\n---\n\n# %s\n\n## Tasks\n\n- [ ] \n\n## Notes\n\n"
+                          today today (format-time-string "%A, %B %d, %Y")))))
+      ;; Upsert project into daily file
+      (with-current-buffer (find-file-noselect daily-file)
+        (goto-char (point-min))
+        ;; Check if project already logged
+        (unless (search-forward project-entry nil t)
+          (goto-char (point-min))
+          (if (search-forward section-header nil t)
+              ;; Add to existing Projects section
+              (progn
+                (end-of-line)
+                (insert "\n" project-entry))
+            ;; Create new Projects section after frontmatter
+            (if (search-forward "---" nil t)  ; skip first ---
+                (when (search-forward "---" nil t)  ; find closing ---
+                  (forward-line 1)
+                  (insert "\n" section-header "\n\n" project-entry "\n"))
+              ;; No frontmatter, insert at beginning
+              (goto-char (point-min))
+              (insert section-header "\n\n" project-entry "\n\n")))
+          (save-buffer))))))
+
+(add-hook 'projectile-after-switch-project-hook #'zettelkasten-log-project-switch)
+
 ;; Wikilink support for Obsidian compatibility
 (defun zettelkasten-insert-wikilink ()
   "Insert a title-based wikilink for Obsidian compatibility."
