@@ -322,6 +322,16 @@ Uses file-based context which persists even after buffers are closed."
 (defvar zettelkasten-directory "~/org/"
   "Root directory for the Markdown Zettelkasten vault.")
 
+(defun zettelkasten-daily-file-template (&optional org-roam-p)
+  "Return the template string for a daily file.
+If ORG-ROAM-P is non-nil, return template with org-roam %<...> placeholders.
+Otherwise, return template with current date evaluated."
+  (let ((title (if org-roam-p "%<%Y-%m-%d>" (format-time-string "%Y-%m-%d")))
+        (date (if org-roam-p "%<%Y-%m-%d>" (format-time-string "%Y-%m-%d")))
+        (heading (if org-roam-p "%<%A, %B %d, %Y>" (format-time-string "%A, %B %d, %Y"))))
+    (format "---\ntitle: \"%s\"\ndate: %s\ntags: [daily]\n---\n\n# %s\n\n## Tasks\n\n- [ ] \n\n## Notes\n\n"
+            title date heading)))
+
 ;; org-roam configuration for Zettelkasten
 (after! org-roam
   ;; Enable md-roam before configuring org-roam
@@ -365,9 +375,9 @@ Uses file-based context which persists even after buffers are closed."
   ;; Daily notes
   (setq org-roam-dailies-directory "daily/"
         org-roam-dailies-capture-templates
-        '(("d" "default" plain "%?"
+        `(("d" "default" plain "%?"
            :target (file+head "%<%y%m%d>.md"
-                              "---\ntitle: \"%<%Y-%m-%d>\"\ndate: %<%Y-%m-%d>\ntags: [daily]\n---\n\n# %<%A, %B %d, %Y>\n\n## Tasks\n\n- [ ] \n\n## Notes\n\n")
+                              ,(zettelkasten-daily-file-template t))
            :unnarrowed t))))
 
 ;; Inbox workflow for task management
@@ -473,8 +483,7 @@ Upserts: updates existing section for project or inserts new one."
       ;; Ensure daily file exists (create with template if not)
       (unless (file-exists-p daily-file)
         (with-temp-file daily-file
-          (insert (format "---\ntitle: \"%s\"\ndate: %s\ntags: [daily]\n---\n\n# %s\n\n## Tasks\n\n- [ ] \n\n## Notes\n\n"
-                          today today (format-time-string "%A, %B %d, %Y")))))
+          (insert (zettelkasten-daily-file-template))))
       ;; Upsert commits into daily file
       (with-current-buffer (find-file-noselect daily-file)
         (goto-char (point-min))
@@ -503,19 +512,18 @@ Upserts: updates existing section for project or inserts new one."
 
 (defun zettelkasten-log-project-switch ()
   "Log current project to daily file on project switch.
-Upserts: only adds project if not already listed."
+Upserts: only adds project if not already listed.
+Projects section is appended to the bottom of the file."
   (when-let* ((root (projectile-project-root))
               (project-name (projectile-project-name)))
-    (let* ((today (format-time-string "%Y-%m-%d"))
-           (daily-file (concat zettelkasten-directory "daily/"
+    (let* ((daily-file (concat zettelkasten-directory "daily/"
                                (format-time-string "%y%m%d") ".md"))
            (section-header "## Projects")
-           (project-entry (format "- [[%s]]" project-name)))
+           (project-entry (format "- [%s](%s)" project-name root)))
       ;; Ensure daily file exists
       (unless (file-exists-p daily-file)
         (with-temp-file daily-file
-          (insert (format "---\ntitle: \"%s\"\ndate: %s\ntags: [daily]\n---\n\n# %s\n\n## Tasks\n\n- [ ] \n\n## Notes\n\n"
-                          today today (format-time-string "%A, %B %d, %Y")))))
+          (insert (zettelkasten-daily-file-template))))
       ;; Upsert project into daily file
       (with-current-buffer (find-file-noselect daily-file)
         (goto-char (point-min))
@@ -523,18 +531,20 @@ Upserts: only adds project if not already listed."
         (unless (search-forward project-entry nil t)
           (goto-char (point-min))
           (if (search-forward section-header nil t)
-              ;; Add to existing Projects section
-              (progn
+              ;; Add to existing Projects section (at end of section)
+              (let ((section-end (save-excursion
+                                   (forward-line 1)
+                                   (if (re-search-forward "^## " nil t)
+                                       (match-beginning 0)
+                                     (point-max)))))
+                (goto-char section-end)
+                (skip-chars-backward "\n \t")
                 (end-of-line)
                 (insert "\n" project-entry))
-            ;; Create new Projects section after frontmatter
-            (if (search-forward "---" nil t)  ; skip first ---
-                (when (search-forward "---" nil t)  ; find closing ---
-                  (forward-line 1)
-                  (insert "\n" section-header "\n\n" project-entry "\n"))
-              ;; No frontmatter, insert at beginning
-              (goto-char (point-min))
-              (insert section-header "\n\n" project-entry "\n\n")))
+            ;; Create new Projects section at the bottom
+            (goto-char (point-max))
+            (unless (bolp) (insert "\n"))
+            (insert "\n" section-header "\n\n" project-entry "\n"))
           (save-buffer))))))
 
 (add-hook 'projectile-after-switch-project-hook #'zettelkasten-log-project-switch)
