@@ -194,27 +194,125 @@
   (setq gemini-cli-program "gemini"
         gemini-cli-terminal-backend 'vterm))
 
-;; Helper functions for AI tools
-(defun my/gptel-context-list ()
-  "Display current gptel contexts."
+;; Helper functions for AI tools - Context Management
+(defun gptel-context-list ()
+  "Display current gptel contexts in a buffer."
   (interactive)
-  (let ((output ""))
-    (if gptel-context--alist
-        (progn
-          (setq output (format "Found %d contexts:\n" (length gptel-context--alist)))
-          (dolist (context gptel-context--alist)
-            (let* ((buffer (car context))
-                   (overlays (plist-get (cdr context) :overlays))
-                   (buffer-name (buffer-name buffer)))
-              (setq output (concat output (format "Buffer: %s\n" buffer-name)))
+  (if (not gptel-context)
+      (message "No gptel contexts.")
+    (with-current-buffer (get-buffer-create "*gptel-context*")
+      (read-only-mode -1)
+      (erase-buffer)
+      (insert "=== gptel Context ===\n\n")
+      (let ((total-chars 0))
+        (dolist (context gptel-context)
+          (let* ((source (car context))
+                 (overlays (plist-get (cdr context) :overlays))
+                 (source-name (cond ((bufferp source) (buffer-name source))
+                                    ((stringp source) (file-name-nondirectory source))
+                                    (t "Unknown"))))
+            (insert (format "📄 %s\n" source-name))
+            (cond
+             ;; File-based context (string path)
+             ((stringp source)
+              (if (file-exists-p source)
+                  (let ((chars (nth 7 (file-attributes source))))
+                    (setq total-chars (+ total-chars (or chars 0)))
+                    (insert (format "   (file: %d chars)\n" (or chars 0))))
+                (insert "   (file not found)\n")))
+             ;; Buffer with valid overlays
+             ((and overlays (bufferp source) (buffer-live-p source))
               (dolist (overlay overlays)
-                (setq output (concat output (format "  Region: %d-%d (%d chars)\n"
-                                                   (overlay-start overlay)
-                                                   (overlay-end overlay)
-                                                   (- (overlay-end overlay) (overlay-start overlay)))))))))
-      (setq output "No gptel contexts found."))
-    (message "%s" output)
-    output))
+                (when (overlay-buffer overlay)
+                  (let ((chars (- (overlay-end overlay) (overlay-start overlay))))
+                    (setq total-chars (+ total-chars chars))
+                    (insert (format "   Lines %d-%d (%d chars)\n"
+                                    (with-current-buffer source
+                                      (line-number-at-pos (overlay-start overlay)))
+                                    (with-current-buffer source
+                                      (line-number-at-pos (overlay-end overlay)))
+                                    chars))))))
+             ;; Buffer closed or overlays invalid
+             (t
+              (insert "   (buffer closed - context lost)\n")))))
+        (insert (format "\n─────────────────────\nTotal: %d chars (~%d tokens)\n"
+                        total-chars (/ total-chars 4))))
+      (read-only-mode 1)
+      (goto-char (point-min))
+      (display-buffer (current-buffer)))))
+
+(defun gptel-context-clear ()
+  "Clear all gptel contexts."
+  (interactive)
+  (gptel-context-remove-all)
+  (message "Cleared all gptel contexts."))
+
+(defun gptel-context-add-buffer ()
+  "Add current buffer to gptel context.
+Uses file-based context for file-visiting buffers (persists after buffer close),
+or overlay-based context for non-file buffers."
+  (interactive)
+  (if-let ((file (buffer-file-name)))
+      (progn
+        (gptel-add-file file)
+        (message "Added file %s to context." (file-name-nondirectory file)))
+    (gptel-add (point-min) (point-max))
+    (message "Added buffer %s to context (will be lost if buffer is closed)." (buffer-name))))
+
+(defun gptel-context-add-project ()
+  "Add key project files to gptel context.
+Uses file-based context which persists even after buffers are closed."
+  (interactive)
+  (let* ((root (projectile-project-root))
+         (files-added 0))
+    (unless root
+      (user-error "Not in a project"))
+    ;; Add common project files if they exist
+    (dolist (file '("README.md" "README.org" "README"
+                    "pyproject.toml" "setup.py" "package.json"
+                    "Cargo.toml" "go.mod" "Makefile"))
+      (let ((path (expand-file-name file root)))
+        (when (file-exists-p path)
+          (gptel-add-file path)
+          (setq files-added (1+ files-added)))))
+    (message "Added %d project files to context." files-added)))
+
+(defun gptel-context-add-related ()
+  "Add files related to current buffer (imports, requires) to context.
+Uses file-based context which persists even after buffers are closed."
+  (interactive)
+  (let ((files (gptel--get-related-files)))
+    (if (not files)
+        (message "No related files found.")
+      (dolist (file files)
+        (when (file-exists-p file)
+          (gptel-add-file file)))
+      (message "Added %d related files to context." (length files)))))
+
+(defun gptel--get-related-files ()
+  "Get list of files related to current buffer based on imports."
+  (let ((files nil)
+        (root (or (projectile-project-root) default-directory)))
+    (save-excursion
+      (goto-char (point-min))
+      (cond
+       ;; Python imports
+       ((derived-mode-p 'python-mode)
+        (while (re-search-forward "^\\(?:from\\|import\\) \\([a-zA-Z0-9_.]+\\)" nil t)
+          (let* ((module (match-string 1))
+                 (path (concat root (replace-regexp-in-string "\\." "/" module) ".py")))
+            (when (file-exists-p path)
+              (push path files)))))
+       ;; JavaScript/TypeScript imports
+       ((derived-mode-p 'js-mode 'typescript-mode 'js2-mode)
+        (while (re-search-forward "\\(?:import\\|require\\)[^'\"]*['\"]\\([^'\"]+\\)['\"]" nil t)
+          (let* ((module (match-string 1))
+                 (path (expand-file-name module root)))
+            (dolist (ext '("" ".js" ".ts" ".jsx" ".tsx"))
+              (let ((full-path (concat path ext)))
+                (when (file-exists-p full-path)
+                  (push full-path files)))))))))
+    (delete-dups files)))
 
 ;;; ============================================================================
 ;;; ZETTELKASTEN (MARKDOWN-BASED NOTE SYSTEM)
