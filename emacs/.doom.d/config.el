@@ -560,7 +560,7 @@ Upserts: updates existing section for project or inserts new one."
        :desc "Send to LLM" "s" #'gptel-send
        :desc "Open agentic chat" "a" #'gptel-agent
        :desc "Project agent" "p" #'gptel-agent-project
-       :desc "Claude Code IDE" "A" #'claude-code-ide
+       :desc "Claude Code IDE" "C" #'claude-code-ide
        :desc "Menu" "m" #'gptel-menu
        :desc "Tools menu" "t" #'gptel-tools
        :desc "Rewrite region" "r" #'gptel-rewrite
