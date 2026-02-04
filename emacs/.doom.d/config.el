@@ -442,6 +442,65 @@ Uses file-based context which persists even after buffers are closed."
       (save-buffer))
     (message "Archived to %s" (file-name-nondirectory archive-file))))
 
+(defun zettelkasten-capture-git-commits ()
+  "Capture today's git commits from current project to daily file.
+Upserts: updates existing section for project or inserts new one."
+  (interactive)
+  (let* ((root (projectile-project-root))
+         (project-name (when root (projectile-project-name)))
+         (today (format-time-string "%Y-%m-%d"))
+         (daily-file (concat zettelkasten-directory "daily/"
+                             (format-time-string "%y%m%d") ".md"))
+         (section-header (format "## Commits - %s" project-name))
+         commits commit-text)
+    (unless root
+      (user-error "Not in a project"))
+    ;; Get today's commits
+    (setq commits
+          (string-trim
+           (shell-command-to-string
+            (format "cd %s && git log --oneline --after='%s 00:00:00' --before='%s 23:59:59' 2>/dev/null"
+                    (shell-quote-argument root) today today))))
+    (if (string-empty-p commits)
+        (message "No commits found for today in %s" project-name)
+      ;; Build commit text
+      (setq commit-text
+            (concat section-header "\n\n"
+                    (mapconcat (lambda (c) (format "- %s" c))
+                               (split-string commits "\n" t)
+                               "\n")
+                    "\n"))
+      ;; Ensure daily file exists (create with template if not)
+      (unless (file-exists-p daily-file)
+        (with-temp-file daily-file
+          (insert (format "---\ntitle: \"%s\"\ndate: %s\ntags: [daily]\n---\n\n# %s\n\n## Tasks\n\n- [ ] \n\n## Notes\n\n"
+                          today today (format-time-string "%A, %B %d, %Y")))))
+      ;; Upsert commits into daily file
+      (with-current-buffer (find-file-noselect daily-file)
+        (goto-char (point-min))
+        (if (search-forward section-header nil t)
+            ;; Update existing section
+            (let ((section-start (line-beginning-position))
+                  (section-end (save-excursion
+                                 (forward-line 1)
+                                 (if (re-search-forward "^## " nil t)
+                                     (line-beginning-position)
+                                   (point-max)))))
+              (delete-region section-start section-end)
+              (goto-char section-start)
+              (insert commit-text "\n")
+              (message "Updated %d commits for %s"
+                       (length (split-string commits "\n" t))
+                       project-name))
+          ;; Insert new section at end
+          (goto-char (point-max))
+          (unless (bolp) (insert "\n"))
+          (insert "\n" commit-text)
+          (message "Captured %d commits from %s"
+                   (length (split-string commits "\n" t))
+                   project-name))
+        (save-buffer)))))
+
 ;; Wikilink support for Obsidian compatibility
 (defun zettelkasten-insert-wikilink ()
   "Insert a title-based wikilink for Obsidian compatibility."
@@ -536,4 +595,5 @@ Uses file-based context which persists even after buffers are closed."
         :desc "Quick task" "q" #'zettelkasten-capture-to-inbox
         :desc "Toggle checkbox" "x" #'zettelkasten-toggle-checkbox
         :desc "Review tasks" "R" #'zettelkasten-review-tasks
-        :desc "Sync database" "s" #'org-roam-db-sync)))
+        :desc "Sync database" "s" #'org-roam-db-sync
+        :desc "Capture git commits" "g" #'zettelkasten-capture-git-commits)))
