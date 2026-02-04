@@ -97,7 +97,7 @@
     (gptel-make-ollama "Ollama"
       :host "localhost:11434"
       :stream t
-      :models '(qwen2.5-coder:32b
+      :models '(qwen2.5-coder:7b
                 llama3.2:latest))
     "Ollama backend for local models.")
 
@@ -123,8 +123,8 @@
     "Switch to local Ollama backend."
     (interactive)
     (setq gptel-backend gptel-backend--ollama
-          gptel-model 'qwen2.5:32b-instruct)
-    (message "Switched to Ollama (qwen2.5:32b-instruct)")))
+          gptel-model 'qwen2.5-coder:7b)
+    (message "Switched to Ollama (qwen2.5-coder:7b)"))
 
 ;; gptel-agent for agentic capabilities
 (use-package! gptel-agent
