@@ -101,14 +101,20 @@
                 llama3.2:latest))
     "Ollama backend for local models.")
 
-  (defvar gptel-backend--anthropic
-    (gptel-make-anthropic "Anthropic"
-      :key (gptel-api-key-from-auth-source "api.anthropic.com")
-      :stream t
-      :models '(claude-sonnet-4-20250514
-                claude-opus-4-20250514
-                claude-haiku-3-5-20241022))
-    "Anthropic backend for Claude API.")
+  (defvar gptel-backend--anthropic nil
+    "Anthropic backend for Claude API. Initialized lazily.")
+
+  (defun gptel--init-anthropic-backend ()
+    "Initialize Anthropic backend on first use."
+    (unless gptel-backend--anthropic
+      (setq gptel-backend--anthropic
+            (gptel-make-anthropic "Anthropic"
+              :key (gptel-api-key-from-auth-source "api.anthropic.com")
+              :stream t
+              :models '(claude-sonnet-4-20250514
+                        claude-opus-4-20250514
+                        claude-haiku-3-5-20241022))))
+    gptel-backend--anthropic)
 
   ;; Core gptel configuration
   (setq gptel-model 'claude-sonnet-4
@@ -138,7 +144,7 @@
   (defun gptel-use-anthropic ()
     "Switch to Anthropic Claude API backend."
     (interactive)
-    (setq gptel-backend gptel-backend--anthropic
+    (setq gptel-backend (gptel--init-anthropic-backend)
           gptel-model 'claude-sonnet-4-20250514)
     (message "Switched to Anthropic (claude-sonnet-4)")))
 
