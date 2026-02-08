@@ -30,6 +30,33 @@
 
 (add-hook 'hack-local-variables-hook 'run-local-vars-mode-hook)
 
+;; Vault configuration (defined early, used by neotree and zettelkasten sections)
+(defvar zettelkasten-directory "~/org/"
+  "Root directory for the Markdown Zettelkasten vault.")
+
+;;; ============================================================================
+;;; NEOTREE
+;;; ============================================================================
+
+;; Reverse-sort files in daily notes directory (newest first)
+;; file-truename needed: neotree resolves symlinks, ~/org/ is a symlink
+(after! neotree
+  (defvar neo-reverse-sort-directories
+    (list (file-truename (expand-file-name "daily/" zettelkasten-directory))
+          (file-truename (expand-file-name "notes/" zettelkasten-directory)))
+    "Directories where neotree should sort files in reverse alphabetical order.")
+
+  (defun neo-filepath-sort-reverse-for-directories (a b)
+    "Sort A and B alphabetically, but reverse in `neo-reverse-sort-directories'."
+    (if (seq-some (lambda (dir)
+                    (and (string-prefix-p dir a)
+                         (string-prefix-p dir b)))
+                  neo-reverse-sort-directories)
+        (string> (downcase a) (downcase b))
+      (string< (downcase a) (downcase b))))
+
+  (setq neo-filepath-sort-function #'neo-filepath-sort-reverse-for-directories))
+
 ;;; ============================================================================
 ;;; DEVELOPMENT TOOLS
 ;;; ============================================================================
@@ -339,10 +366,6 @@ Uses file-based context which persists even after buffers are closed."
 ;;; ============================================================================
 ;;; ZETTELKASTEN (MARKDOWN-BASED NOTE SYSTEM)
 ;;; ============================================================================
-
-;; Vault configuration
-(defvar zettelkasten-directory "~/org/"
-  "Root directory for the Markdown Zettelkasten vault.")
 
 (defun zettelkasten-daily-file-template (&optional org-roam-p)
   "Return the template string for a daily file.
