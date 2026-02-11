@@ -1,3 +1,21 @@
+# Homebrew - initialize before instant prompt to avoid console output warnings
+export HOMEBREW_NO_ANALYTICS=1
+eval $(/opt/homebrew/bin/brew shellenv)
+
+# Pyenv - initialize before instant prompt to avoid console output warnings
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+if [ -n "$(which pyenv)" ]; then
+  eval "$(pyenv init - -zsh)"
+  eval "$(pyenv virtualenv-init -)"
+  export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+fi
+
+# Direnv - initialize before instant prompt to avoid console output warnings
+if [ -n "$(which direnv)" ]; then
+  eval "$(direnv hook $(basename $SHELL))"
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -112,29 +130,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Homebrew
-# - Homebrew: https://formulae.brew.sh/
-export HOMEBREW_NO_ANALYTICS=1
-eval $(/opt/homebrew/bin/brew shellenv)
-
-# Pyenv
-# - pyenv: https://github.com/pyenv/pyenv
-# - pyenv-virtualenv: https://github.com/pyenv/pyenv-virtualenv
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-if [ -n "$(which pyenv)" ]; then
-  eval "$(pyenv init - -zsh)"
-  eval "$(pyenv virtualenv-init -)"
-  export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-fi
-
-# Direnv
-# - direnv: https://direnv.net/
-if [ -n "$(which direnv)" ]; then
-  eval "$(direnv hook $(basename $SHELL))"
-  # export DIRENV_WARN_TIMEOUT=100s
-fi
 
 # Emacs
 # - Doom emacs: https://github.com/doomemacs/doomemacs
