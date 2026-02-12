@@ -5,7 +5,7 @@
 Stow the following:
 
 ``` sh
-$ stow pip
+$ stow -t $HOME pip
 ```
 
 # Mac
