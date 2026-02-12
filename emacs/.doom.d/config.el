@@ -10,6 +10,12 @@
 ;; Prefer newer changes
 (setq load-prefer-newer t)
 
+;; Ensure ~/.local/bin is on PATH (GUI Emacs doesn't inherit full shell PATH)
+(let ((local-bin (concat (getenv "HOME") "/.local/bin")))
+  (unless (string-match-p local-bin (or (getenv "PATH") ""))
+    (setenv "PATH" (concat local-bin ":" (getenv "PATH"))))
+  (add-to-list 'exec-path local-bin))
+
 ;; User identification (from git config)
 (setq user-full-name (string-trim (shell-command-to-string "git config user.name"))
       user-mail-address (string-trim (shell-command-to-string "git config user.email")))
