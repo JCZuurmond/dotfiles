@@ -220,9 +220,15 @@
 (use-package! claude-code-ide
   :commands (claude-code-ide claude-code-ide-menu)
   :config
-  (setq claude-code-ide-terminal-backend 'vterm
+  (setq claude-code-ide-cli-path "claude"
+        claude-code-ide-terminal-backend 'vterm
         claude-code-ide-window-side 'right
         claude-code-ide-window-width 90)
+
+  ;; Unset CLAUDECODE env var so Claude doesn't refuse to start
+  ;; when Emacs was launched from within a Claude Code terminal session
+  (setenv "CLAUDECODE" nil)
+
   (claude-code-ide-emacs-tools-setup))
 
 ;; MCP (Model Context Protocol) integration
