@@ -409,7 +409,7 @@ Otherwise, return template with current date evaluated."
     (let ((slug (downcase (replace-regexp-in-string
                            "[^a-zA-Z0-9]+" "-"
                            (replace-regexp-in-string "^-\\|-$" "" title)))))
-      (format-time-string (concat "%Y%m%d%H%M-" slug))))
+      (format-time-string (concat "%y%m%d-" slug))))
 
   (cl-defmethod org-roam-node-slug ((node org-roam-node))
     "Generate a timestamped slug for NODE."
