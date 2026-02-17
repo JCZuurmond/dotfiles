@@ -130,7 +130,8 @@
     (gptel-make-ollama "Ollama"
       :host "localhost:11434"
       :stream t
-      :models '(qwen2.5-coder:7b
+      :models '(qwen3-coder:30b
+                qwen2.5-coder:7b
                 llama3.2:latest))
     "Ollama backend for local models.")
 
@@ -171,8 +172,8 @@
     "Switch to local Ollama backend."
     (interactive)
     (setq gptel-backend gptel-backend--ollama
-          gptel-model 'qwen2.5-coder:7b)
-    (message "Switched to Ollama (qwen2.5-coder:7b)"))
+          gptel-model 'qwen3-coder:30b)
+    (message "Switched to Ollama (qwen3-coder:30b)"))
 
   (defun gptel-use-anthropic ()
     "Switch to Anthropic Claude API backend."
