@@ -1,4 +1,8 @@
 {
+  "attribution": {
+    "commit": "Co-Authored-By: Claude <noreply@anthropic.com>",
+    "pr": ""
+  },
   "permissions": {
     "allow": [
       "Read(~/.claude/settings.json)",
@@ -15,9 +19,5 @@
     ]
   },
   "effortLevel": "medium",
-  "teammateMode": "tmux",
-  "attribution": {
-    "commit": "Co-Authored-By: Claude <noreply@anthropic.com>",
-    "pr": ""
-  }
+  "teammateMode": "tmux"
 }
