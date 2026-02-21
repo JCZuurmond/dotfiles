@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(~/.claude/settings.json)",
+      "Read(~/.claude/skills/summarize-updates/**)",
+      "Read(~/org/notes/**)",
+      "Write(/Users/cor/org/notes/*.md)",
+      "WebFetch(*)",
+      "Bash(bash ~/.claude/skills/*/scripts/*)",
+      "Bash(cat ~/.claude/skills/*/preferred-shows.json)",
+      "Bash(grep -l \"source:\" ~/org/notes/*.md)",
+      "Bash(mkdir -p ~/org/notes)",
+      "Bash(date +%y%m%d)",
+      "Bash(git:*)"
+    ]
+  },
+  "effortLevel": "medium",
+  "teammateMode": "tmux",
+  "attribution": {
+    "commit": "Co-Authored-By: Claude <noreply@anthropic.com>",
+    "pr": ""
+  }
+}
