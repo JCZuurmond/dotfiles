@@ -18,6 +18,10 @@
       "Bash(git:*)"
     ]
   },
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
   "effortLevel": "medium",
-  "teammateMode": "tmux"
+  "teammateMode": "tmux",
+  "model": "sonnet"
 }
