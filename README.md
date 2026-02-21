@@ -1,11 +1,29 @@
 # dotfiles
-'Stow' the directories to use the settings
 
-## Stow
-Stow the following:
+## Setup on a new machine
 
-``` sh
-$ stow -t $HOME pip
+1. Clone the repo:
+```sh
+git clone https://github.com/JCZuurmond/dotfiles.git ~/github/JCZuurmond/dotfiles
+cd ~/github/JCZuurmond/dotfiles
+```
+
+2. Use [GNU Stow](https://www.gnu.org/software/stow/) to symlink config directories into `$HOME`:
+```sh
+stow -t $HOME <directory>
+```
+
+For example:
+```sh
+stow -t $HOME zsh
+stow -t $HOME git
+stow -t $HOME claude
+```
+
+3. For Claude Code, symlink manually since `~/.claude/` contains non-stowable runtime files:
+```sh
+ln -s ~/github/JCZuurmond/dotfiles/claude/CLAUDE.md ~/.claude/CLAUDE.md
+ln -s ~/github/JCZuurmond/dotfiles/claude/settings.json ~/.claude/settings.json
 ```
 
 # Mac
