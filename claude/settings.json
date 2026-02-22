@@ -13,16 +13,22 @@
       "Read(~/org/notes/**)",
       "Write(/Users/cor/org/notes/*.md)",
       "WebFetch(*)",
-      "Bash(bash ~/.claude/skills/*/scripts/*)",
-      "Bash(cat ~/.claude/skills/*/preferred-shows.json)",
-      "Bash(grep -l \"source:\" ~/org/notes/*.md)",
+      "Bash(bash ~/.claude/skills/*/scripts/*.sh *)",
+      "Bash(grep -l * ~/org/notes/*.md*)",
+      "Bash(grep -rl * ~/org/notes/*.md*)",
       "Bash(mkdir -p ~/org/notes)",
       "Bash(date +%y%m%d)",
-      "Bash(git:*)"
+      "Bash(wc -w /tmp/podcast-capture/*)",
+      "Bash(mkdir -p /tmp/podcast-capture)",
+      "Bash(cat ~/.claude/skills/*/preferred-shows.json)",
+      "Bash(grep -l \"source:\" ~/org/notes/*.md)",
+      "Bash(git:*)",
+      "Read(/tmp/podcast-capture/*)",
+      "Read(~/.claude/projects/*/tool-results/*)",
+      "Read(~/.claude/skills/capture-note-from-podcast/preferred-shows.json)",
+      "Write(~/.claude/skills/capture-note-from-podcast/preferred-shows.json)",
+      "Edit(~/.claude/skills/capture-note-from-podcast/preferred-shows.json)"
     ]
-  },
-  "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
   "effortLevel": "medium",
   "teammateMode": "tmux",
