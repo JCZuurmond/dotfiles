@@ -1,6 +1,8 @@
 {
   "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "ANTHROPIC_BASE_URL": "http://localhost:4000",
+    "DISABLE_PROMPT_CACHING": "1"
   },
   "attribution": {
     "commit": "Co-Authored-By: Claude <noreply@anthropic.com>",
@@ -31,6 +33,5 @@
     ]
   },
   "effortLevel": "medium",
-  "teammateMode": "tmux",
-  "model": "sonnet"
+  "teammateMode": "tmux"
 }
