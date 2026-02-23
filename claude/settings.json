@@ -9,27 +9,54 @@
     "pr": ""
   },
   "permissions": {
+    "deny": [
+      "Bash(rm -rf *)"
+    ],
     "allow": [
+      "_comment: claude config",
       "Read(~/.claude/settings.json)",
-      "Read(~/.claude/skills/summarize-updates/**)",
+      "Read(~/.claude/projects/*/tool-results/*)",
+
+      "_comment: git (non-destructive)",
+      "Bash(git:status)",
+      "Bash(git:diff*)",
+      "Bash(git:log*)",
+      "Bash(git:add *)",
+      "Bash(git:commit *)",
+      "Bash(git:push)",
+      "Bash(git:push -u *)",
+      "Bash(git:branch *)",
+      "Bash(git:checkout *)",
+      "Bash(git:stash*)",
+      "Bash(git:fetch*)",
+      "Bash(git:pull*)",
+      "Bash(git:merge *)",
+      "Bash(git:rebase *)",
+      "Bash(git:tag *)",
+      "Bash(git:remote *)",
+
+      "_comment: notes (org/obsidian)",
       "Read(~/org/notes/**)",
       "Write(/Users/cor/org/notes/*.md)",
-      "WebFetch(*)",
-      "Bash(bash ~/.claude/skills/*/scripts/*.sh *)",
-      "Bash(grep -l * ~/org/notes/*.md*)",
-      "Bash(grep -rl * ~/org/notes/*.md*)",
-      "Bash(mkdir -p ~/org/notes)",
-      "Bash(date +%y%m%d)",
-      "Bash(wc -w /tmp/podcast-capture/*)",
-      "Bash(mkdir -p /tmp/podcast-capture)",
-      "Bash(cat ~/.claude/skills/*/preferred-shows.json)",
       "Bash(grep -l \"source:\" ~/org/notes/*.md)",
-      "Bash(git:*)",
-      "Read(/tmp/podcast-capture/*)",
-      "Read(~/.claude/projects/*/tool-results/*)",
-      "Read(~/.claude/skills/capture-note-from-podcast/preferred-shows.json)",
-      "Write(~/.claude/skills/capture-note-from-podcast/preferred-shows.json)",
-      "Edit(~/.claude/skills/capture-note-from-podcast/preferred-shows.json)"
+      "Bash(mkdir -p ~/org/notes)",
+
+      "_comment: skills - summarize-updates",
+      "Read(~/.claude/skills/summarize-updates/**)",
+      "Bash(bash ~/.claude/skills/summarize-updates/scripts/*.sh *)",
+
+      "_comment: skills - capture-note",
+      "Bash(bash ~/.claude/skills/capture-note/scripts/*.sh *)",
+      "Read(~/.claude/skills/capture-notepreferred-shows.json)",
+      "Write(~/.claude/skills/capture-note/preferred-shows.json)",
+      "Edit(~/.claude/skills/capture-note/preferred-shows.json)",
+      "Bash(cat ~/.claude/skills/capture-note/preferred-shows.json)",
+      "Read(/tmp/claude/podcast-capture/*)",
+      "Bash(wc -w /tmp/claude/podcast-capture/*)",
+      "Bash(mkdir -p /tmp/claude/podcast-capture)",
+
+      "_comment: utility",
+      "Bash(date +%y%m%d)"
     ]
   },
   "sandbox": {
