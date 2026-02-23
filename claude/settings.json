@@ -32,6 +32,14 @@
       "Edit(~/.claude/skills/capture-note-from-podcast/preferred-shows.json)"
     ]
   },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "excludedCommands": ["docker", "colima"],
+    "network": {
+      "allowLocalBinding": true
+    }
+  },
   "effortLevel": "medium",
   "teammateMode": "tmux"
 }
