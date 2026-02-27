@@ -9,14 +9,10 @@
     "pr": ""
   },
   "permissions": {
-    "deny": [
-      "Bash(rm -rf *)"
-    ],
     "allow": [
       "_comment: claude config",
       "Read(~/.claude/settings.json)",
       "Read(~/.claude/projects/*/tool-results/*)",
-
       "_comment: git (non-destructive)",
       "Bash(git:status)",
       "Bash(git:diff*)",
@@ -34,17 +30,14 @@
       "Bash(git:rebase *)",
       "Bash(git:tag *)",
       "Bash(git:remote *)",
-
       "_comment: notes (org/obsidian)",
       "Read(~/org/notes/**)",
       "Write(/Users/cor/org/notes/*.md)",
       "Bash(grep -l \"source:\" ~/org/notes/*.md)",
       "Bash(mkdir -p ~/org/notes)",
-
       "_comment: skills - summarize-updates",
       "Read(~/.claude/skills/summarize-updates/**)",
       "Bash(bash ~/.claude/skills/summarize-updates/scripts/*.sh *)",
-
       "_comment: skills - capture-note",
       "Bash(bash ~/.claude/skills/capture-note/scripts/*.sh *)",
       "Read(~/.claude/skills/capture-notepreferred-shows.json)",
@@ -54,18 +47,25 @@
       "Read(/tmp/claude/podcast-capture/*)",
       "Bash(wc -w /tmp/claude/podcast-capture/*)",
       "Bash(mkdir -p /tmp/claude/podcast-capture)",
-
       "_comment: utility",
-      "Bash(date +%y%m%d)"
+      "Bash(date +%y%m%d)",
+      "Bash(curl http://localhost*)",
+      "Bash(curl https://localhost*)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)"
     ]
   },
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
-    "excludedCommands": ["docker", "colima"],
     "network": {
       "allowLocalBinding": true
-    }
+    },
+    "excludedCommands": [
+      "docker",
+      "colima"
+    ]
   },
   "effortLevel": "medium",
   "teammateMode": "tmux"
