@@ -241,14 +241,26 @@
    `(("duckduckgo" . (:command "uvx" :args ("duckduckgo-mcp-server")))
      ("fetch" . (:command "uvx" :args ("mcp-server-fetch")))
      ("filesystem" . (:command "npx"
-                      :args ("-y" "@modelcontextprotocol/server-filesystem" ,(getenv "HOME"))
-                      :roots (,(getenv "HOME"))))
-     ("sequential-thinking" . (:command "npx" :args ("-y" "@modelcontextprotocol/server-sequential-thinking")))
-     ("github" . (:command "npx" :args ("-y" "@modelcontextprotocol/server-github")))
+                      :args ("-y" "@modelcontextprotocol/server-filesystem"
+                             ,(expand-file-name "~/org/"))
+                      :roots (,(expand-file-name "~/org/"))))
      ("memory" . (:command "npx" :args ("-y" "@modelcontextprotocol/server-memory")))))
   :config
   (require 'mcp-hub)
-  (mcp-hub-start-all-server))
+  (mcp-hub-start-all-server)
+
+  ;; Restart filesystem server scoped to current project on project switch
+  (defun config/mcp-filesystem-follow-project ()
+    "Restart filesystem MCP server scoped to current projectile project root."
+    (when-let ((root (projectile-project-root)))
+      (when (mcp--server-running-p "filesystem")
+        (mcp-stop-server "filesystem"))
+      (mcp-connect-server "filesystem"
+                          :command "npx"
+                          :args (list "-y" "@modelcontextprotocol/server-filesystem" root)
+                          :roots (list root))))
+
+  (add-hook 'projectile-after-switch-project-hook #'config/mcp-filesystem-follow-project))
 
 ;; Gemini CLI integration (OAuth-based, no API key needed)
 (use-package! gemini-cli
