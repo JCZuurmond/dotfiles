@@ -10,11 +10,12 @@
 ;; Prefer newer changes
 (setq load-prefer-newer t)
 
-;; Ensure ~/.local/bin is on PATH (GUI Emacs doesn't inherit full shell PATH)
-(let ((local-bin (concat (getenv "HOME") "/.local/bin")))
-  (unless (string-match-p local-bin (or (getenv "PATH") ""))
-    (setenv "PATH" (concat local-bin ":" (getenv "PATH"))))
-  (add-to-list 'exec-path local-bin))
+;; Ensure ~/.local/bin and ~/.bun/bin are on PATH (GUI Emacs doesn't inherit full shell PATH)
+(dolist (extra-bin (list (concat (getenv "HOME") "/.local/bin")
+                         (concat (getenv "HOME") "/.bun/bin")))
+  (unless (string-match-p extra-bin (or (getenv "PATH") ""))
+    (setenv "PATH" (concat extra-bin ":" (getenv "PATH"))))
+  (add-to-list 'exec-path extra-bin))
 
 ;; User identification (from git config)
 (setq user-full-name (string-trim (shell-command-to-string "git config user.name"))
